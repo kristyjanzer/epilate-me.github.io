@@ -48,9 +48,9 @@ body {
 		// }
 	}
 
-	&.lock {
-		overflow: hidden;
-	}
+	// &.lock {
+	// 	overflow: hidden;
+	// }
 }
 
 img {
@@ -197,7 +197,7 @@ button {
 		display: none;
 	}
 
-	&__search-icon {
+	&__search-mobile {
 		display: none;
 	}
 }
@@ -299,8 +299,63 @@ button {
 	}
 }
 
-.header-button-menu {
+.header-button-menu,
+.header-button-menu-body {
 	display: none;
+}
+
+.search-mobile {
+	&__input {
+		padding: 20px;
+		border: 2px solid rgba(0, 19, 96, 0.5);
+		border-radius: 16px;
+		background: #E5E5E5;
+		position: absolute;
+		top: 50px;
+		left: 0;
+		width: 100%;
+		min-height: 134px;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	&__button {
+		color: $white;
+		font-size: 14px;
+		border-radius: 40px;
+		background-color: $accent;
+		padding: 4px 10px;
+		min-height: 32px;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: max-content;
+		min-width: 128px;
+		margin-left: auto;
+	}
+
+	.search {
+		background-color: $white;
+		border: 2px solid rgba(0, 19, 97, 0.6);
+		border-radius: 8px;
+		width: 100%;
+
+		&__icon {
+			svg {
+				width: 24px;
+				height: 24px;
+
+				path {
+					fill: $accent;
+				}
+			}
+		}
+
+		&__input {
+			color: $accent;
+		}
+	}
 }
 
 
@@ -333,7 +388,7 @@ button {
 				-webkit-box-sizing: border-box;
 				box-sizing: border-box;
 				position: absolute;
-				top: 0;
+				top: 2px;
 				right: 0;
 				transition: .5s;
 			}
@@ -350,24 +405,18 @@ button {
 			}
 		}
 
-		&__body {
-			z-index: 2;
-			position: fixed;
-			width: 100%;
-			min-height: 218px;
-			border-radius: 0px 0px 16px 16px;
-			top: 58px;
-			left: 0;
-			background-color: #E8EDF3;
-			overflow: auto;
-			transform: translateX(100%);
-			transition: all .5s ease;
+    }
 
-			&.active {
-				transform: translateX(0);
-				display: flex;
-				flex-direction: column;
-			}
+	.header-button-menu-body {
+		z-index: 2;
+		width: 100%;
+		min-height: 218px;
+		border-radius: 0px 0px 16px 16px;
+		background-color: #E8EDF3;
+
+		&.active {
+			display: flex;
+			flex-direction: column;
 		}
 
 		&__socials {
@@ -376,10 +425,13 @@ button {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			gap: 10px;
 		}
-    }
+	}
 
 	.socials {
+		gap: 14px;
+
 		&__link {
 			svg path {
 				fill: $black;
@@ -415,7 +467,7 @@ button {
 				opacity: 1;
 				width: 14px;
 				height: 14px;
-				top: 0;
+				top: 1px;
 				right: 4px;
 			}
 
@@ -434,7 +486,7 @@ button {
 
 			&__logo,
 			&__calendar,
-			&__search-icon {
+			&__search-mobile {
 				svg path {
 					fill: $accent;
 				}
@@ -447,7 +499,6 @@ button {
 		min-height: auto;
 
 		&__geo,
-		&__search,
 		&__button,
 		&__menu {
 			display: none;
@@ -473,7 +524,7 @@ button {
 			}
 		}
 
-		&__search-icon {
+		&__search-mobile {
 			display: block;
 			margin: auto;
 
@@ -496,6 +547,18 @@ button {
 			font-size: 16px;
 		}
 	}
+
+	.search-mobile {
+		&__input {
+			display: none;
+
+			&.active {
+				display: flex;
+			}
+		}
+	}
+
+	
 }
 
 
