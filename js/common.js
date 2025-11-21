@@ -22,6 +22,7 @@ $(function() {
 
     $(".header-top__socials").clone().appendTo(".header-button-menu__socials");
     $(".header-top__phone").clone().appendTo(".header-button-menu__socials");
+    $(".main-menu").clone().appendTo(".header-button-menu__main-menu");
 
 });
 
