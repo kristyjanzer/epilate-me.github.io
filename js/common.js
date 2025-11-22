@@ -91,6 +91,65 @@ $(function() {
           }
         ]
     });
+
+    // Two-Level Slider
+    $('.two-level-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: true,
+        responsive: [
+          {
+            breakpoint: 1300,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+            },
+          },
+          {
+            breakpoint: 1000,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            },
+          }
+        ]
+    });
+
+    // Main Section Slider
+    $('.areas-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: true,
+        // variableWidth: true,
+        responsive: [
+          {
+            breakpoint: 1100,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            },
+          }
+        ]
+    });
 });
 
 
