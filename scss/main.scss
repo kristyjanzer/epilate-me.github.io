@@ -191,7 +191,7 @@ button {
 	&__wrap {
 		display: flex;
 		flex-direction: column;
-		gap: 26px;
+		gap: 10px;
 		position: relative;
 	}
 
@@ -366,6 +366,44 @@ button {
 
 .header-slider {
 	min-height: 100%;
+
+	&__item {
+		min-height: 637px;
+		padding: 225px 0 60px;
+		position: relative;
+	}
+
+	&__image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+
+		img {
+			object-fit: cover;
+			object-position: 65% center;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__info {
+		position: relative;
+		max-width: 563px;
+	}
+
+	&__title {
+		font-size: 70px;
+	}
+
+	&__subtitle {
+		margin-top: 24px;
+		font-size: 24px;
+	}
+
 }
 
 .slick-list {
@@ -373,11 +411,9 @@ button {
 }
 
 .slick-slide {
-	img {
-		min-height: 590px;
-    	object-fit: cover;
-		object-position: 70% center;
-	}
+	// > div {
+	// 	min-height: 590px;
+	// }
 }
 
 .slick-dots {
@@ -626,6 +662,11 @@ button {
 		bottom: 40px;
 	}
 
+	.header-slider {
+		&__item {
+			min-height: 590px;
+		}
+	}
 	
 }
 
