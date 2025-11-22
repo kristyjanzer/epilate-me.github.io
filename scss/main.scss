@@ -19,13 +19,13 @@
 }
 
 ::selection {
-	background-color: $accent;
+	background-color: $primary;
 	color: $white;
 }
 
 body {
 	font-size: 16px;
-	font-weight: 400;
+	font-weight: 500;
 	min-width: 320px;
 	position: relative;
 	line-height: 1.2;
@@ -34,6 +34,7 @@ body {
 	color: $white;
 	padding: 0;
 	margin: 0;
+	background-color: #1B243A;
 
 	input, textarea {
 		border: #666 1px solid;
@@ -110,7 +111,7 @@ button {
 	font-size: 16px;
 	font-family: $default-font;
 	cursor: pointer;
-	background-color: $primary;
+	background-color: $accent;
 	color: $text;
 	transition: .3s all ease;
 	display: inline-block;
@@ -329,7 +330,7 @@ button {
 		color: $white;
 		font-size: 14px;
 		border-radius: 40px;
-		background-color: $accent;
+		background-color: $primary;
 		padding: 4px 10px;
 		min-height: 32px;
 		text-align: center;
@@ -353,13 +354,13 @@ button {
 				height: 24px;
 
 				path {
-					fill: $accent;
+					fill: $primary;
 				}
 			}
 		}
 
 		&__input {
-			color: $accent;
+			color: $primary;
 		}
 	}
 }
@@ -404,15 +405,31 @@ button {
 		font-size: 24px;
 	}
 
+	.slick-dots {
+		bottom: 48px;
+
+		li {
+			width: 12px;
+			height: 12px;
+		}
+	}
+
 }
 
 .slick-list {
 	font-size: 0;
 }
 
+.slick-list {
+	overflow: hidden;
+    margin: 0 -16px;
+}
+
 .slick-slide {
-	// > div {
-	// 	min-height: 590px;
+	margin: 0 8px;
+
+	// &:not(:last-child) {
+	// 	margin-right: 16px;
 	// }
 }
 
@@ -421,7 +438,7 @@ button {
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	bottom: 48px;
+	bottom: -66px;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 1;
@@ -429,8 +446,8 @@ button {
 	li {
 		position: relative;
 		display: inline-block;
-		width: 12px;
-		height: 12px;
+		width: 10px;
+		height: 10px;
 		margin-right: 10px;
 		padding: 0;
 		cursor: pointer;
@@ -458,9 +475,62 @@ button {
 	}
 }
 
+main {
+	padding: 70px 0;
+}
 
+section {
+	padding: 35px 0;
 
+	&:first-child {
+		padding-top: 0;
+	}
+}
 
+.title {
+	font-size: 48px;
+	line-height: 110%;
+
+	&__accent {
+		color: $accent;
+	}
+
+	& + h3,
+	& + .subtitle {
+		margin-top: 24px;
+	}
+}
+
+.subtitle {
+	font-size: 24px;
+	line-height: 130%;
+}
+
+.main-sect {
+	&__slider {
+		margin-top: 40px;
+	}
+
+	&__wrap {
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.3);
+		padding: 32px;
+	}
+}
+
+.main-sect-slider {
+	&__item {
+		border-radius: 12px;
+		overflow: hidden;
+		height: 228px;
+	}
+
+	&__image {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+}
 
 
 
@@ -588,7 +658,7 @@ button {
 			&__calendar,
 			&__search-mobile {
 				svg path {
-					fill: $accent;
+					fill: $primary;
 				}
 			}
 		}
@@ -643,7 +713,7 @@ button {
 		max-width: 100%;
 
 		&__link {
-			color: $accent;
+			color: $primary;
 			font-size: 16px;
 		}
 	}
@@ -658,13 +728,42 @@ button {
 		}
 	}
 
-	.slick-dots {
-		bottom: 40px;
-	}
 
 	.header-slider {
 		&__item {
 			min-height: 590px;
+			padding-top: 92px;
+		}
+
+		&__title {
+			font-size: 32px;
+		}
+
+		&__subtitle {
+			font-size: 16px;
+		}
+		
+		.slick-dots {
+			bottom: 40px;
+		}
+	}
+
+	main {
+		padding: 40px 0;
+	}
+
+	.title {
+		font-size: 28px;
+	}
+
+	.subtitle {
+		font-size: 16px;
+		line-height: 120%;
+	}
+
+	.main-sect {
+		&__wrap {
+			padding: 20px;
 		}
 	}
 	

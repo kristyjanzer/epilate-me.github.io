@@ -59,18 +59,37 @@ $(function() {
         slidesToScroll: 1,
         dots: true,
         arrows: false,
+        infinite: true
+    });
+
+    // Main Section Slider
+    $('.main-sect-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
         infinite: true,
-        // responsive: [
-        //   {
-        //     breakpoint: 1400,
-        //       settings: {
-        //         dots: true,
-        //         arrows: false,
-        //         slidesToShow: 1,
-        //         slidesToScroll: 1,
-        //     },
-        //   }
-        // ]
+        responsive: [
+          {
+            breakpoint: 1100,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
+                dots: true,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                variableWidth: true
+            },
+          }
+        ]
     });
 });
 
