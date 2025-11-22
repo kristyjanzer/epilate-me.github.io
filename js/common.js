@@ -86,7 +86,7 @@ $(function() {
                 arrows: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                variableWidth: true
+                // variableWidth: true
             },
           }
         ]
