@@ -678,15 +678,19 @@ section {
 }
 
 .equipment-slider-content {
+	&__item {
+		display: flex;
+	}
+	
 	&__row {
 		background-color: #e8edf3;
 		border-radius: 24px;
 		overflow: hidden;
-		min-height: 320px;
 		padding: 32px;
 		display: flex;
 		align-items: center;
 		gap: 40px;
+		height: 100%;
 	}
 
 	&__info {
@@ -716,7 +720,7 @@ section {
 	}
 
 	&__image {
-		max-width: 148px;
+		max-width: 160px;
 		width: 100%;
 	}
 
