@@ -625,13 +625,13 @@ section {
 	}
 }
 
-.filter-slider {
+.clinics-slider {
 	&__content {
 		margin-top: 40px;
 	}
 }
 
-.filter-slider-nav {
+.clinics-slider-nav {
 	&__list {
 		display: flex;
 		align-items: center;
@@ -654,7 +654,7 @@ section {
 	}
 }
 
-.filter-slider-content {
+.clinics-slider-content {
 	position: relative;
 
 	&__item {
@@ -666,6 +666,75 @@ section {
 
 	&__image {
 		width: 100%;
+		max-height: 230px;
+
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.slick-slide {
+		height: auto;
+
+		> div {
+			display: flex;
+			min-height: 100%;
+		}
+	}
+
+	.slick-track {
+		display: flex;
+	}
+
+	&__row {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__column {
+		padding: 28px 32px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__info {
+		flex: 1 1 auto;
+	}
+
+	&__connect {
+		margin-top: 20px;
+
+		.phone {
+			&__icon {
+				svg path {
+					fill: $black;
+				}
+			}
+			&__text {
+				color: $black;
+			}
+		}
+	}
+
+	&__button {
+		margin-top: 20px;
+	}
+
+	&__title {
+		color: $black;
+		font-size: 24px;
+		line-height: 120%;
+	}
+
+	&__address {
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 140%;
+		color: $black;
+		margin-top: 20px;
 	}
 }
 
@@ -673,80 +742,6 @@ section {
 	&__slider {
 		margin-top: 40px;
     	margin-bottom: 40px;
-	}
-
-	.filter-slider-content {
-		.slick-slide {
-			height: auto;
-
-			> div {
-				display: flex;
-				min-height: 100%;
-			}
-		}
-
-		.slick-track {
-			display: flex;
-		}
-
-		&__row {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
-
-		&__column {
-			padding: 28px 32px;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-		}
-
-		&__info {
-			flex: 1 1 auto;
-		}
-
-		&__connect {
-			margin-top: 20px;
-
-			.phone {
-				&__icon {
-					svg path {
-						fill: $black;
-					}
-				}
-				&__text {
-					color: $black;
-				}
-			}
-		}
-
-		&__button {
-			margin-top: 20px;
-		}
-
-		&__title {
-			color: $black;
-			font-size: 24px;
-			line-height: 120%;
-		}
-
-		&__address {
-			font-size: 16px;
-			font-weight: 400;
-			line-height: 140%;
-			color: $black;
-			margin-top: 20px;
-		}
-
-		&__image {
-			max-height: 230px;
-
-			img {
-				height: 100%;
-				object-fit: cover;
-			}
-		}
 	}
 }
 
@@ -1018,7 +1013,7 @@ section {
 		}
 	}
 
-	.filter-slider-nav {
+	.clinics-slider-nav {
 		&__list {
 			gap: 10px 6px;
 		}
@@ -1028,24 +1023,22 @@ section {
 		}
 	}
 
-	.clinics {
-		.filter-slider-content {
-			&__column {
-				padding: 28px 16px;
-			}
+	.clinics-slider-content {
+		&__column {
+			padding: 28px 16px;
+		}
 
-			&__title {
-				font-size: 22px;
-			}
+		&__title {
+			font-size: 22px;
+		}
 
-			&__address {
-				font-size: 14px;
-			}
+		&__address {
+			font-size: 14px;
+		}
 
-			&__connect {
-				.phone__text {
-					font-size: 16px;
-				}
+		&__connect {
+			.phone__text {
+				font-size: 16px;
 			}
 		}
 	}
