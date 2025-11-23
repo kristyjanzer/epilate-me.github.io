@@ -73,20 +73,13 @@ $(function() {
           {
             breakpoint: 1100,
               settings: {
-                dots: true,
-                arrows: false,
                 slidesToShow: 2,
-                slidesToScroll: 1,
             },
           },
           {
             breakpoint: 700,
               settings: {
-                dots: true,
-                arrows: false,
                 slidesToShow: 1,
-                slidesToScroll: 1,
-                // variableWidth: true
             },
           }
         ]
@@ -103,34 +96,25 @@ $(function() {
           {
             breakpoint: 1300,
               settings: {
-                dots: true,
-                arrows: false,
                 slidesToShow: 3,
-                slidesToScroll: 1,
             },
           },
           {
             breakpoint: 1000,
               settings: {
-                dots: true,
-                arrows: false,
                 slidesToShow: 2,
-                slidesToScroll: 1,
             },
           },
           {
             breakpoint: 700,
               settings: {
-                dots: true,
-                arrows: false,
                 slidesToShow: 1,
-                slidesToScroll: 1,
             },
           }
         ]
     });
 
-    // Main Section Slider
+    // Areas Slider
     $('.areas-slider').slick({
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -142,15 +126,154 @@ $(function() {
           {
             breakpoint: 1100,
               settings: {
-                dots: true,
-                arrows: false,
+                slidesToShow: 3,
+            },
+          },
+          {
+            breakpoint: 900,
+              settings: {
+                slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
                 slidesToShow: 1,
-                slidesToScroll: 1,
             },
           }
         ]
     });
+
+
+    // Filter Slider
+    const slider = $('.filter-slider-content__items');
+    const filterButtons = document.querySelectorAll('.filter-slider-nav__button');
+
+    try {
+        slider.slick({
+            arrows: false,
+            dots: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: false,
+            responsive: [
+                { 
+                    breakpoint: 1100, 
+                    settings: { 
+                        slidesToShow: 2
+                    } 
+                },
+                { 
+                    breakpoint: 900, 
+                    settings: { 
+                        slidesToShow: 2 
+                    } 
+                },
+                { 
+                    breakpoint: 700, 
+                    settings: { 
+                        slidesToShow: 1
+                    } 
+                }
+            ]
+        });
+        // Принудительное обновление после инициализации
+        slider.slick('setPosition');
+        slider.slick('refresh');
+    } catch (initError) {
+        console.error('Ошибка инициализации Slick:', initError);
+        return;
+    }
+
+
+    // const applyFilter = (category) => {
+    //     slider.slick('slickUnfilter');
+        
+    //     if (category) {
+    //         slider.slick('slickFilter', function() {
+    //             return $(this).find('.filter-slider-content__item').attr('data-category') === category;
+    //         });
+    //     }
+    // };
+
+    // filterButtons.forEach(btn => {
+    //     btn.addEventListener('click', () => {
+    //         filterButtons.forEach(b => b.classList.remove('filter-slider-nav__button--active'));
+            
+    //         btn.classList.add('filter-slider-nav__button--active');
+            
+    //         const category = btn.dataset.filter;
+            
+    //         applyFilter(category);
+    //     });
+    // });
+
+    // const defaultButton = document.querySelector('[data-filter="moscow"]');
+    // if (defaultButton) {
+    //     defaultButton.classList.add('filter-slider-nav__button--active');
+    //     applyFilter('moscow');
+    // }
+
+    const applyFilter = (category) => {
+        try {
+        if (!slider.hasClass('slick-initialized')) {
+            console.warn('Слайдер не инициализирован!');
+            return;
+        }
+
+        slider.slick('slickUnfilter');
+
+        if (category) {
+            slider.slick('slickFilter', function() {
+            const item = $(this).find('.filter-slider-content__item');
+            return item.attr('data-category') === category;
+            });
+        }
+
+        slider.slick('setPosition');
+        slider.slick('refresh');
+
+        const visibleSlides = slider.find('.slick-slide:not(.slick-cloned)').filter((i, el) => {
+            return $(el).find('.filter-slider-content__item').length > 0;
+        });
+
+        if (visibleSlides.length === 0) {
+            console.warn('Нет видимых слайдов для категории:', category);
+            slider.slick('slickUnfilter');
+            slider.slick('refresh');
+        }
+        } catch (filterError) {
+        console.error('Ошибка фильтрации:', filterError);
+
+        try {
+            slider.slick('slickUnfilter');
+            slider.slick('refresh');
+        } catch (recoveryError) {
+            console.error('Не удалось восстановить слайдер:', recoveryError);
+        }
+        }
+    };
+
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('filter-slider-nav__button--active'));
+        btn.classList.add('filter-slider-nav__button--active');
+        const category = btn.dataset.filter;
+        applyFilter(category);
+        });
+    });
+
+    if (filterButtons.length > 0) {
+        const firstButton = filterButtons[0];
+        firstButton.classList.add('filter-slider-nav__button--active');
+        const initialCategory = firstButton.dataset.filter;
+        applyFilter(initialCategory);
+    }
+        
 });
+
+
 
 
 
