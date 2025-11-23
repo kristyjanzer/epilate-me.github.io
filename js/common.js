@@ -144,7 +144,6 @@ $(function() {
         ]
     });
 
-
     // Clinics Slider
     const slider = $('.clinics-slider-content__items');
     const filterButtons = document.querySelectorAll('.clinics-slider-nav__button');
@@ -208,6 +207,59 @@ $(function() {
         applyFilter('moscow');
     }
         
+
+
+    // Equipment Slider
+    const sliderE = $('.equipment-slider-content__items');
+    const filterButtonsE = document.querySelectorAll('.equipment-slider-nav__button');
+
+    sliderE.slick({
+        arrows: false,
+        dots: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: false,
+        adaptiveHeight: true,
+        responsive: [
+            { 
+                breakpoint: 1100, 
+                settings: { 
+                    slidesToShow: 1
+                } 
+            },
+        ]
+    });
+
+    sliderE.slick('setPosition');
+    sliderE.slick('refresh');
+
+    const applyFilterE = (categoryE) => {
+        sliderE.slick('slickUnfilter');
+        
+        if (categoryE) {
+            sliderE.slick('slickFilter', function() {
+                return $(this).find('.equipment-slider-content__item').attr('data-category') === categoryE;
+            });
+        }
+    };
+
+    filterButtonsE.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtonsE.forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
+            
+            btn.classList.add('equipment-slider-nav__button--active');
+            
+            const categoryE = btn.dataset.filter;
+            
+            applyFilterE(categoryE);
+        });
+    });
+
+    const defaultButtonE = document.querySelector('[data-filter="alexandrite"]');
+    if (defaultButtonE) {
+        defaultButtonE.classList.add('equipment-slider-nav__button--active');
+        applyFilterE('alexandrite');
+    }
 });
 
 

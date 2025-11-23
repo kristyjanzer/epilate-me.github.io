@@ -435,10 +435,6 @@ button {
 .slick-slide {
 	margin: 0 8px;
 
-	> div {
-		font-size: 0;
-	}
-
 	// &:not(:last-child) {
 	// 	margin-right: 16px;
 	// }
@@ -625,6 +621,126 @@ section {
 	}
 }
 
+.equipment-slider-nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+
+	&__list {
+		display: flex;
+		align-items: center;
+		border-radius: 48px;
+		background: #CDD5DF;
+		padding: 6px;
+		min-height: 60px;
+	}
+
+	&__button {
+		font-size: 18px;
+		border-radius: 48px;
+		padding: 13px 28px;
+		color: rgba(0, 19, 97, 0.6);
+		text-align: center;
+		
+		&--active {
+			color: $white;
+			border: 4px solid $white;
+			background: #7B85AE;
+		}
+	}
+}
+
+.equipment-certificate {
+	border: 2px solid $accent;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	&__icon {
+		width: 28px;
+		height: 28px;
+	}
+
+	&__text {
+		color: $accent;
+		font-size: 18px;
+	}
+}
+
+.equipment-slider {
+	&__content {
+		margin-top: 40px;
+	}
+}
+
+.equipment-slider-content {
+	&__row {
+		background-color: #e8edf3;
+		border-radius: 24px;
+		overflow: hidden;
+		min-height: 320px;
+		padding: 32px;
+		display: flex;
+		align-items: center;
+		gap: 40px;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title {
+		color: $primary;
+		font-size: 24px;
+		line-height: 120%;
+
+		& + p {
+			margin-top: 24px;
+		}
+	}
+
+	&__text {
+		font-size: 16px;
+		color: $black;
+		line-height: 140%;
+		max-width: 315px;
+
+		& + & {
+			margin-top: 20px;
+		}
+	}
+
+	&__image {
+		max-width: 148px;
+		width: 100%;
+	}
+
+	.slick-slide {
+		height: auto;
+
+		> div {
+			display: flex;
+			min-height: 100%;
+		}
+	}
+
+	.slick-track {
+		display: flex;
+	}
+}
+
+.clinics {
+	&__slider {
+		margin-top: 40px;
+    	margin-bottom: 40px;
+	}
+}
+
 .clinics-slider {
 	&__content {
 		margin-top: 40px;
@@ -738,12 +854,6 @@ section {
 	}
 }
 
-.clinics {
-	&__slider {
-		margin-top: 40px;
-    	margin-bottom: 40px;
-	}
-}
 
 
 
@@ -1042,6 +1152,27 @@ section {
 			}
 		}
 	}
+
+	.equipment-slider-content {
+		&__text {
+			max-width: 100%;
+		}
+	}
+
+	.equipment-certificate {
+		&__text {
+			font-size: 14px;
+		}
+	}
+
+	.equipment-slider-nav {
+		flex-direction: column;
+
+		&__button {
+			font-size: 14px;
+			padding: 10px;
+		}
+	}
 	
 	
 }
@@ -1064,6 +1195,16 @@ section {
 	.two-level-slider {
 		&__row {
 			grid-auto-rows: minmax(242px, auto);
+		}
+	}
+
+	.equipment-slider-content {
+		&__row {
+			flex-direction: column;
+		}
+		
+		&__text {
+			max-width: 100%;
 		}
 	}
 }
