@@ -948,199 +948,77 @@ section {
 	}
 }
 
+.faq {
+	&__accordion-menu {
+		margin-top: 40px;
+	}
 
-.accordion-menu__item:not(:last-child) {
-	border-bottom: 1px solid rgba(119,119,119,.1);
-}
-
-.accordion-menu__link {
-	padding: 20px 65px 25px 0;
-	font-size: 16px;
-	line-height: 22px;
-	color: #474747;
-	cursor: pointer;
-	display: block;
-	position: relative;
-}
-
-.accordion-menu__icon {
-	position: absolute;
-	transition: all .5s ease;
-	top: 12px;
-	right: 5px;
-	left: auto;
-	width: 40px;
-	height: 40px;
-	background-image: url('../img/chevron-down.svg');
-}
-
-.accordion-menu__item.open .accordion-menu__icon {
-	transform: rotate(180deg);
-}
-
-.accordion-menu__content {
-	display: none;
-	padding-bottom: 20px;
-}
-
-.accordion-menu__text {
-	font-size: 16px;
-	line-height: 22px;
-	color: #777777;
-}
-
-
-
-.bookmakers {
-	&__block {
-		margin-top: 45px;
+	&__accordion-menu-button {
+		margin-top: 40px;
 	}
 }
 
-.bookmakers-block {
-	position: relative;
-
-	&__content {
-		margin-top: 10px;
-	}
-
-	&__button {
-		min-width: 232px;
-		margin: 53px auto 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 8px;
-
-		&.hide {
-			.bookmakers-block__button-icon {
-				transform: rotate(180deg);
-			}
-		}
-		
-		&-text {
-			font-size: 18px;
-			font-weight: 600;
-			color: #333333;
-		}
-	}
-}
-
-.bookmakers-block-head {
-	min-height: 50px;
-	background-color: #D9D9D9;
-	border-radius: 8px;
-
-	&__list {
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		padding: 14px;
-	}
+.accordion-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 
 	&__item {
-		font-weight: 600;
-		font-size: 18px;
-		line-height: 130%;
-		color: #333333;
-		width: 18%;
-	}
-}
-
-.bookmakers-block-list {
-	&__item {
-		border-radius: 8px;
-		box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.15);
-		background: rgb(254, 254, 254);
-		padding: 40px 50px;
-
-		&-row {
-			display: flex;
-			align-items: flex-start;
-			justify-content: space-between;
-
-			> div {
-				width: 20%;
-			}
-		}
-		
-		&--accent {
-			border: 2px solid rgba(63, 56, 206, 0.9);
-		}
-
-		&:not(:first-child) {
-			margin-top: 18px;
-		}
+		border-radius: 16px;
+		background: rgba(205, 213, 223, 0.8);
 
 		&--hidden {
 			display: none;
 		}
 	}
 
-	&__logo {
-		max-width: 200px;
-		font-size: 0;
-	}
-
-	&__rating {
+	&__top {
 		display: flex;
-		flex-direction: column;
-		gap: 20px;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		padding: 32px 40px 32px 40px;
 
-		&-title {
-			font-size: 18px;
-			font-weight: 600;
-		}
+		&.active .accordion-menu__icon {
+			transform: rotate(-45deg);
 
-		&-box {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-
-		&-stars {
-			font-size: 0;
-		}
-
-		&-number {
-			font-size: 24px;
-			color: $black;
+			svg path,
+			svg rect {
+				stroke: #333333;
+			}
 		}
 	}
 
-	&__advantages-item {
-		font-size: 18px;
+	&__link {
+		font-size: 24px;
 		color: $black;
+		cursor: pointer;
+		display: block;
 		position: relative;
-
-		&::before {
-			content: '';
-			width: 11px;
-			height: 11px;
-			position: absolute;
-			left: -20px;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-
-		&--plus {
-			&::before {
-				background: url('../img/plus.svg') no-repeat 50%;
-				background-size: contain;
-			}
-		}
-
-		&--minus {
-			&::before {
-				background: url('../img/minus.svg') no-repeat 50%;
-				background-size: contain;
-			}
-		}
 	}
 
-	&__button {
-		min-width: 193px;
+	&__icon {
+		transition: all .5s ease;
+		width: 50px;
+		height: 50px;
 	}
+
+	&__content {
+		display: none;
+		padding: 0 90px 32px 40px;
+	}
+
+	&__text {
+		color: $black;
+		font-size: 18px;
+		line-height: 120%;
+	}
+}
+
+.accordion-menu-button {
+	min-width: max-content;
+	min-height: 40px;
+	padding: 8px 38px;
 }
 
 
@@ -1470,29 +1348,37 @@ section {
 		}
 	}
 
-	.bookmakers-block-list {
-		&__item {
-			padding: 30px;
+	.accordion-menu {
+		&__top {
+			padding: 20px 10px;
+		}
 
-			&-row {
-				flex-direction: column;
-				gap: 30px;
-	
-				> div {
-					width: 100%;
-				}
+		&__link {
+			font-size: 22px;
+		}
+
+		&__icon {
+			width: 32px;
+			height: 32px;
+
+			svg {
+				width: 32px;
+				height: 32px;
 			}
+
+			top: 18px;
+			right: 10px;
 		}
 
-		&__logo {
-			max-width: 130px;
+		&__content {
+			padding: 0px 10px 32px 10px;
 		}
 
-		&__advantages {
-			margin-left: 20px;
+		&__text {
+			font-size: 14px;
 		}
 	}
-	
+
 	
 }
 

@@ -378,61 +378,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Accordion
 let Accordion = function (el, multiple) {
   this.el = el || {};
-  // more then one submenu open?
+  // more than one submenu open?
   this.multiple = multiple || false;
 
-  let accordionMenuLink = this.el.find('.accordion-menu__link');
-  accordionMenuLink.on('click',
-    { el: this.el, multiple: this.multiple },
-    this.dropdown);
+  let accordionMenuLink = this.el.find('.accordion-menu__top');
+  accordionMenuLink.on('click', {
+    el: this.el,
+    multiple: this.multiple
+  }, this.dropdown);
 };
 
 Accordion.prototype.dropdown = function (e) {
   let $el = e.data.el,
-    $this = $(this),
-    //this is the ul.accordion-menu__content
-    $next = $this.next();
+      $this = $(this),                    // .accordion-menu__link (кликнутая ссылка)
+      $next = $this.next();           // .accordion-menu__content (контент под ссылкой)
 
+  // 1. Переключаем класс open у ссылки-триггера
+  $this.toggleClass('active');
+
+  // 2. Переключаем слайд и класс active у контента
   $next.slideToggle();
-  $this.parent().toggleClass('open');
+  $next.toggleClass('open');
 
   if (!e.data.multiple) {
-    //show only one menu at the same time
-    $el.find('.accordion-menu__content').not($next).slideUp().parent().removeClass('open');
-  }
-}
+    // Закрываем все остальные элементы, если режим single
+    $el.find('.accordion-menu__top')
+      .not($this)                        // все ссылки, кроме текущей
+      .removeClass('active');            // убираем open у них
 
+    $el.find('.accordion-menu__content')
+      .not($next)                       // весь контент, кроме текущего
+      .slideUp()                       // сворачиваем
+      .removeClass('open');          // убираем active
+  }
+};
+
+// Инициализация аккордеона (только один открытый элемент одновременно)
 let accordion = new Accordion($('.accordion-menu'), false);
 
 
 
+
+
 // Show all button
-$('.bookmakers-block__button').click(function (e) {
+$('.accordion-menu-button').click(function (e) {
   e.preventDefault();
   e.returnValue = false;
   
-  let length_before_toggle = $('.bookmakers-block-list__item:hidden').length;
+  let length_before_toggle = $('.accordion-menu__item:hidden').length;
   
-  $('.bookmakers-block-list__item:hidden').slice(0, 10).toggle();
+  $('.accordion-menu__item:hidden').slice(0, 10).toggle();
   
-  if ($('.bookmakers-block-list__item:hidden').length == 0) {
+  if ($('.accordion-menu__item:hidden').length == 0) {
     if (length_before_toggle == 0) {
-      $('.bookmakers-block-list__item--hidden').toggle();
+      $('.accordion-menu__item--hidden').toggle();
       
       $('html, body').animate({
-        scrollTop: $('.bookmakers-block').offset().top
+        scrollTop: $('.accordion-menu').offset().top
       }, 'slow');
       
-      $('.bookmakers-block__button-text').text("Показать еще");
-      $('.bookmakers-block__button').removeClass('hide');
+      $('.accordion-menu-button__text').text("Смотреть все");
+      $('.accordion-menu-button').removeClass('hide');
     } else {
-      $('.bookmakers-block__button-text').text("Скрыть");
-      $('.bookmakers-block__button').addClass('hide');
+      $('.accordion-menu-button__text').text("Скрыть");
+      $('.accordion-menu-button').addClass('hide');
     }
   } else {
-    $('.bookmakers-block__button-text').text("Показать еще");
+    $('.accordion-menu-button__text').text("Смотреть все");
   }
 });
