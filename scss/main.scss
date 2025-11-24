@@ -207,7 +207,7 @@ button {
 	}
 
 	&.active {
-		padding: 10px 0;
+		padding: 15px 0 10px;
 		background-color: $white;
 
 		.header-top {
@@ -1150,7 +1150,7 @@ section {
 		border-radius: 0px 0px 16px 16px;
 		background-color: #E8EDF3;
 		position: absolute;
-		top: 58px;
+		top: 59px;
 
 		&.active {
 			display: flex;
@@ -1269,6 +1269,48 @@ section {
 			svg {
 				width: 14px;
 				height: 14px;
+			}
+		}
+
+		&.active {
+			padding: 20px 0;
+
+			.header-top {
+				&__calendar {
+					svg {
+						path {
+							fill: $black;
+						}
+					}
+				}
+			}
+
+			.search-mobile {
+				&__icon {
+					svg {
+						path {
+							fill: $black;
+						}
+					}
+				}
+			}
+
+			.header-button-menu {
+				&__icon {
+					&::before {
+						background: linear-gradient(to bottom, transparent calc(50% - 1px), $black 0 calc(50% + 1px), transparent 0);
+					}
+
+					&::after {
+						background: linear-gradient(to bottom, transparent calc(50% - 1px), $black 0 calc(50% + 1px), transparent 0), linear-gradient(to right, transparent calc(50% - 1px), $black 0 calc(50% + 1px), transparent 0);
+					}
+
+					&::before,
+					&::after {
+						border: 0 solid $black;
+						border-width: 2px 0;
+					}
+				}
 			}
 		}
 	}
