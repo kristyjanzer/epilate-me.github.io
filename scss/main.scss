@@ -461,6 +461,7 @@ button {
 		background-color: $white;
 		border-radius: 50%;
 		opacity: 0.6;
+		outline: none;
 
 		&.slick-active {
 			background-color: $white;
@@ -842,7 +843,8 @@ section {
 .equipment,
 .licenses,
 .experts,
-.clinics {
+.clinics,
+.reviews {
 	&__slider {
 		margin-top: 40px;
 		margin-bottom: 40px;
@@ -872,6 +874,63 @@ section {
 	}
 }
 
+.reviews-slider {
+	&__info {
+		flex: 1 1 auto;
+	}
+	
+	&__item {
+		background-color: #e8edf3;
+    	border-radius: 24px;
+		padding: 32px;
+		display: flex;
+		flex-direction: column;
+		height: 100%;	
+	}
+
+	&__name {
+		color: $black;
+		font-size: 24px;
+
+		& + p,
+		& + .reviews__text {
+			margin-top: 16px;
+		}
+	}
+
+	&__text {
+		color: $black;
+		font-size: 16px;
+	}
+
+	&__note {
+		margin-top: 20px;
+	}
+
+	&__subway {
+		font-size: 16px;
+		color: $primary;
+	}
+
+	&__stars {
+		margin-top: 10px;
+	}
+}
+
+.stars {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	&__icon {
+		height: 15px;
+	}
+
+	&__number {
+		font-size: 18px;
+		color: $accent;
+	}
+}
 
 
 

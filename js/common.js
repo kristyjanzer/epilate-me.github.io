@@ -318,6 +318,36 @@ $(function() {
           }
         ]
     });
+
+    // Reviews Slider
+    $('.reviews-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: true,
+        adaptiveHeight: true,
+        responsive: [
+          {
+            breakpoint: 1100,
+              settings: {
+                slidesToShow: 3,
+            },
+          },
+          {
+            breakpoint: 900,
+              settings: {
+                slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
+                slidesToShow: 1,
+            },
+          }
+        ]
+    });
 });
 
 
