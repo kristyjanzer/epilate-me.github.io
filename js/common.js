@@ -351,10 +351,8 @@ window.addEventListener('scroll', function() {
 
     if (scrollPosition > 50) {
         headerTop.classList.add('active');
-        headerTop.style.background = 'white';
     } else {
         headerTop.classList.remove('active');
-        headerTop.style.background = 'rgba(255, 255, 255, 0.2)';
     }
 });
 

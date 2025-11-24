@@ -207,7 +207,18 @@ button {
 	}
 
 	&.active {
-		padding: 15px 0;
+		padding: 10px 0;
+		background-color: $white;
+
+		.header-top {
+			&__wrap {
+				gap: 5px;
+			}
+
+			&__info {
+				justify-content: flex-end;
+			}
+		}
 
 		.logo {
 			max-width: 200px;
@@ -218,9 +229,59 @@ button {
 		}
 
 		.main-menu {
+			max-width: 390px;
+
 			&__link {
-				font-size: 16px;
+				font-size: 15px;
 				color: $primary;
+			}
+		}
+
+		.search {
+			border: 2px solid $primary;
+			height: 30px;
+			width: 160px;
+
+			&__icon {
+				width: 14px;
+				height: 14px;
+
+				svg {
+					width: 14px;
+					height: 14px;
+
+					path {
+						fill: $black;
+					}
+				}
+			}
+		}
+
+		.socials {
+			&__link {
+				svg {
+					width: 20px;
+					height: 20px;
+
+					path {
+						fill: $black;
+					}
+				}
+			}
+		}
+
+		.phone {
+			&__tel {
+				color: $black;
+				font-size: 16px;
+			}
+
+			&__icon {
+				svg {
+					path {
+						fill: $black;
+					}
+				}
 			}
 		}
 	}
@@ -310,7 +371,7 @@ button {
 	align-items: center;
 	gap: 6px;
 
-	&__text {
+	&__tel {
 		font-size: 18px;
 		font-weight: 500;
 		color: $white;
@@ -827,7 +888,7 @@ section {
 					fill: $black;
 				}
 			}
-			&__text {
+			&__tel {
 				color: $black;
 			}
 		}
@@ -1117,7 +1178,7 @@ section {
 	}
 
 	.phone {
-		&__text {
+		&__tel {
 			color: $black;
 		}
 
@@ -1323,7 +1384,7 @@ section {
 		}
 
 		&__connect {
-			.phone__text {
+			.phone__tel {
 				font-size: 16px;
 			}
 		}
