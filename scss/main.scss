@@ -875,6 +875,19 @@ section {
 }
 
 .reviews-slider {
+	.slick-track {
+		display: flex;
+	}
+	
+	.slick-slide {
+		height: auto;
+
+		> div {
+		   display: flex;
+		   min-height: 100%;
+	   }
+	}
+	
 	&__info {
 		flex: 1 1 auto;
 	}
@@ -883,6 +896,9 @@ section {
 		background-color: #e8edf3;
     	border-radius: 24px;
 		padding: 32px;
+	}
+	
+	&__wrap {
 		display: flex;
 		flex-direction: column;
 		height: 100%;	

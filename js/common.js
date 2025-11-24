@@ -321,7 +321,7 @@ $(function() {
 
     // Reviews Slider
     $('.reviews-slider').slick({
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         dots: true,
         arrows: false,
@@ -330,12 +330,6 @@ $(function() {
         responsive: [
           {
             breakpoint: 1100,
-              settings: {
-                slidesToShow: 3,
-            },
-          },
-          {
-            breakpoint: 900,
               settings: {
                 slidesToShow: 2,
             },
