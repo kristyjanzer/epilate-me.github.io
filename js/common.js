@@ -208,7 +208,6 @@ $(function() {
     }
         
 
-
     // Equipment Slider
     const sliderE = $('.equipment-slider-content__items');
     const filterButtonsE = document.querySelectorAll('.equipment-slider-nav__button');
@@ -260,6 +259,65 @@ $(function() {
         defaultButtonE.classList.add('equipment-slider-nav__button--active');
         applyFilterE('alexandrite');
     }
+
+
+    // Licenses Slider
+    $('.licenses-slider').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: true,
+        responsive: [
+          {
+            breakpoint: 1100,
+              settings: {
+                slidesToShow: 3,
+            },
+          },
+          {
+            breakpoint: 900,
+              settings: {
+                slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
+                slidesToShow: 1,
+            },
+          }
+        ]
+    });
+
+    // Experts Slider
+    $('.experts-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: true,
+        responsive: [
+          {
+            breakpoint: 1100,
+              settings: {
+                slidesToShow: 3,
+            },
+          },
+          {
+            breakpoint: 900,
+              settings: {
+                slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 700,
+              settings: {
+                slidesToShow: 1,
+            },
+          }
+        ]
+    });
 });
 
 

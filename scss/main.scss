@@ -606,20 +606,6 @@ section {
 	}
 }
 
-.areas {
-	&__slider {
-		margin-top: 40px;
-		margin-bottom: 40px;
-	}
-}
-
-
-.equipment {
-	&__slider {
-		margin-top: 40px;
-    	margin-bottom: 40px;
-	}
-}
 
 .equipment-slider-nav {
 	display: flex;
@@ -738,12 +724,6 @@ section {
 	}
 }
 
-.clinics {
-	&__slider {
-		margin-top: 40px;
-    	margin-bottom: 40px;
-	}
-}
 
 .clinics-slider {
 	&__content {
@@ -858,7 +838,39 @@ section {
 	}
 }
 
+.areas,
+.equipment,
+.licenses,
+.experts,
+.clinics {
+	&__slider {
+		margin-top: 40px;
+		margin-bottom: 40px;
+	}
+}
 
+.experts-slider {
+	&__image {
+		border-radius: 30px;
+		overflow: hidden;
+	}
+
+	&__name {
+		font-size: 24px;
+		margin-top: 20px;
+	}
+
+	&__profession {
+		font-size: 16px;
+		margin-top: 20px;
+	}
+
+	&__subway {
+		font-size: 16px;
+		color: $accent;
+		margin-top: 20px;
+	}
+}
 
 
 
@@ -1175,6 +1187,17 @@ section {
 		&__button {
 			font-size: 14px;
 			padding: 10px;
+		}
+	}
+
+	.experts-slider {
+		&__name {
+			font-size: 22px;
+		}
+
+		&__profession,
+		&__subway {
+			font-size: 14px;
 		}
 	}
 	
