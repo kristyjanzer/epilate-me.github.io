@@ -4,14 +4,28 @@ $(function() {
     const header = document.querySelector('.header');
     const burgerMenu = header?.querySelector('.header-button-menu');
     const burgerBody = header?.querySelector('.header-button-menu-body');
+    const searchMobileInput = document.querySelector('.search-mobile__input');
 
     if (burgerMenu && burgerBody) {
       burgerMenu.addEventListener('click', (e) => {
         e.stopPropagation();
+        
+        if (searchMobileInput && searchMobileInput.classList.contains('active')) {
+          searchMobileInput.classList.remove('active');
+        }
+        
         header.classList.toggle('header-menu-open');
         burgerBody.classList.toggle('active');
       });
     }
+
+    if (searchMobileInput) {
+      searchMobileInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchMobileInput.classList.toggle('active');
+      });
+    }
+
 
     
 
