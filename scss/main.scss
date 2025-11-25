@@ -155,7 +155,7 @@ button {
 .header-top {
 	background: rgba(255, 255, 255, 0.2);
 	padding: 32px 0 15px;
-	transition: all .3s ease;
+	transition: all .5s ease;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -182,7 +182,7 @@ button {
 	&__info {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 		width: 45%;
 		gap: 32px;
 	}
@@ -290,6 +290,7 @@ button {
 .logo {
 	max-width: 316px;
 	font-size: 0;
+	transition: all .5s ease;
 
 	svg {
 		width: 100%;
@@ -319,6 +320,7 @@ button {
 	justify-content: space-between;
 	max-width: 468px;
 	width: 100%;
+	transition: all .5s ease;
 
 	&__link {
 		color: $white;
@@ -337,13 +339,14 @@ button {
 	height: 40px;
     padding-right: 45px;
 	position: relative;
+	transition: width .5s ease;
 
 	&__input {
 		border: 0px;
 		background-color: transparent;
 		width: 98%;
 		outline: none;
-		transition: all 0.3s ease;
+		transition: all 0.5s ease;
 		font-size: 16px;
 		height: 100%;
 		color: $white;
@@ -364,12 +367,14 @@ button {
 	display: flex;
 	align-items: center;
 	gap: 16px;
+	transition: all .5s ease;
 }
 
 .phone {
 	display: flex;
 	align-items: center;
 	gap: 6px;
+	transition: all .5s ease;
 
 	&__tel {
 		font-size: 18px;
@@ -1194,6 +1199,10 @@ section {
 	}
 
 	.header-menu-open {
+		.header-button-menu-body.active {
+			position: fixed;
+		}
+
 		.header-button-menu__icon {
 			&::before {
 				transform: scale(0);
@@ -1227,6 +1236,15 @@ section {
 			&__search-mobile {
 				svg path {
 					fill: $primary;
+				}
+			}
+
+			&.active {
+				.header-button-menu__icon {
+					&::after,
+					&::before {
+						border: 0 solid $white;
+					}
 				}
 			}
 		}
@@ -1285,6 +1303,10 @@ section {
 				}
 			}
 
+			.search {
+				width: 100%;
+			}
+
 			.search-mobile {
 				&__icon {
 					svg {
@@ -1311,6 +1333,10 @@ section {
 						border-width: 2px 0;
 					}
 				}
+			}
+
+			.logo {
+				max-width: 158px;
 			}
 		}
 	}
