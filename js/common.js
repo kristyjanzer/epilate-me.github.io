@@ -271,6 +271,97 @@ $(function() {
     }
 
 
+
+    // Clinics and Equipment Sliders
+    // const initSlider = (selector, settings) => {
+    //     const $slider = $(selector);
+        
+    //     $slider.slick(settings);
+    //     $slider.slick('setPosition');
+    //     $slider.slick('refresh');
+        
+    //     return $slider;
+    // };
+
+    // const applyFilter = ($slider, category, itemSelector, categoryAttr = 'data-category') => {
+    //     $slider.slick('slickUnfilter');
+        
+    //     if (category) {
+    //         $slider.slick('slickFilter', function() {
+    //             return $(this).find(itemSelector).attr(categoryAttr) === category;
+    //         });
+    //     }
+    // };
+
+    // const setupFilterButtons = (buttonSelector, slider, itemSelector, defaultCategory) => {
+    //     const filterButtons = document.querySelectorAll(buttonSelector);
+        
+    //     filterButtons.forEach(btn => {
+    //         btn.addEventListener('click', () => {
+    //             filterButtons.forEach(b => b.classList.remove('clinics-slider-nav__button--active', 'equipment-slider-nav__button--active'));
+                
+    //             btn.classList.add(
+    //                 btn.classList.contains('clinics-slider-nav__button') 
+    //                     ? 'clinics-slider-nav__button--active'
+    //                     : 'equipment-slider-nav__button--active'
+    //             );
+                
+    //             const category = btn.dataset.filter;
+    //             applyFilter(slider, category, itemSelector);
+    //         });
+    //     });
+        
+    //     const defaultButton = document.querySelector(`[data-filter="${defaultCategory}"]`);
+    //     if (defaultButton) {
+    //         defaultButton.classList.add(
+    //             defaultButton.classList.contains('clinics-slider-nav__button')
+    //                 ? 'clinics-slider-nav__button--active'
+    //                 : 'equipment-slider-nav__button--active'
+    //         );
+    //         applyFilter(slider, defaultCategory, itemSelector);
+    //     }
+    // };
+
+    // const clinicsSlider = initSlider('.clinics-slider-content__items', {
+    //     arrows: false,
+    //     dots: true,
+    //     slidesToShow: 3,
+    //     slidesToScroll: 1,
+    //     infinite: false,
+    //     responsive: [
+    //         { breakpoint: 1100, settings: { slidesToShow: 2 } },
+    //         { breakpoint: 900,  settings: { slidesToShow: 2 } },
+    //         { breakpoint: 700,  settings: { slidesToShow: 1 } }
+    //     ]
+    // });
+
+    // setupFilterButtons(
+    //     '.clinics-slider-nav__button',
+    //     clinicsSlider,
+    //     '.clinics-slider-content__item',
+    //     'moscow'
+    // );
+
+    // const equipmentSlider = initSlider('.equipment-slider-content__items', {
+    //     arrows: false,
+    //     dots: true,
+    //     slidesToShow: 2,
+    //     slidesToScroll: 1,
+    //     infinite: true,
+    //     adaptiveHeight: true,
+    //     responsive: [
+    //         { breakpoint: 1000, settings: { slidesToShow: 1 } }
+    //     ]
+    // });
+
+    // setupFilterButtons(
+    //     '.equipment-slider-nav__button',
+    //     equipmentSlider,
+    //     '.equipment-slider-content__item',
+    //     'alexandrite'
+    // );
+
+
     // Licenses Slider
     $('.licenses-slider').slick({
         slidesToShow: 6,
