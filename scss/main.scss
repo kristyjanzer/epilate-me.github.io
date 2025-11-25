@@ -258,7 +258,7 @@ button {
 		}
 
 		.socials {
-			&__link {
+			&__icon {
 				svg {
 					width: 20px;
 					height: 20px;
@@ -1101,6 +1101,80 @@ section {
 }
 
 
+.footer {
+	&__wrap {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		padding: 60px 0;
+	}
+
+	&__about {
+		max-width: 350px;
+	}
+
+	&__info {
+		// width: 100%;
+	}
+
+	.phone {
+		&__tel {
+			font-size: 32px;
+		}
+
+		&__icon {
+			gap: 16px;
+
+			svg {
+				width: 24px;
+				height: 24px;
+
+				path {
+					fill: rgba(255, 255, 255, 0.5);
+				}
+			}
+		}
+	}
+
+	&__logo {
+		max-width: 300px;
+	}
+
+	&__socials {
+		margin-top: 12px;
+	}
+
+	.socials {
+		display: flex;
+		justify-content: flex-end;
+
+		&__icon {
+			svg path {
+				fill: rgba(255, 255, 255, 0.8);
+			}
+		}
+	}
+
+	&__descr {
+		font-size: 16px;
+		color: $white;
+		margin-top: 47px;
+	}
+}
+
+// .footer {
+// 	&__wrap {
+// 		padding: 60px 0;
+// 	}
+
+// 	&__row {
+// 		display: flex;
+// 		align-items: center;
+// 		justify-content: space-between;
+// 	}
+
+// }
+
 
 
 /************* Media *****************************/
@@ -1175,7 +1249,7 @@ section {
 	.socials {
 		gap: 14px;
 
-		&__link {
+		&__icon {
 			svg path {
 				fill: $black;
 			}
