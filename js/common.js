@@ -1,21 +1,17 @@
 $(function() {
 
     // Burger Menu
-    const header = document.querySelector(".header");
-    const burgerMenu = document.querySelector(".header .header-button-menu");
-    const burgerBody = document.querySelector(".header .header-button-menu-body");
+    const header = document.querySelector('.header');
+    const burgerMenu = header?.querySelector('.header-button-menu');
+    const burgerBody = header?.querySelector('.header-button-menu-body');
 
-    burgerMenu.addEventListener("click", (e) => {
-    e.stopPropagation();
-
-    header.classList.toggle("header-menu-open");
-    burgerBody.classList.toggle("active");
-
-        if (document.querySelector('.header-menu-more.active')) {
-            header.classList.add("header-menu-open");
-            burgerBody.classList.add("active");
-        }
-    });
+    if (burgerMenu && burgerBody) {
+      burgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        header.classList.toggle('header-menu-open');
+        burgerBody.classList.toggle('active');
+      });
+    }
 
     
 

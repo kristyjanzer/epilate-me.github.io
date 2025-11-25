@@ -414,9 +414,8 @@ display: none;
 }
 
 .header-button-menu-body {
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.5s ease, visibility 0.5s ease;
+	clip-path: inset(0 0 0 0);
+  	transition: clip-path 0.6s ease-in-out;
 }
 
 .search-mobile {
@@ -1341,19 +1340,16 @@ section {
 
 	.header-button-menu-body {
 		z-index: 2;
+		position: fixed;
 		width: 100%;
 		border-radius: 0px 0px 16px 16px;
 		background-color: #E8EDF3;
-		position: absolute;
 		top: 60px;
 
-		&.active {
-			display: flex;
-			flex-direction: column;
-			opacity: 1;
-        	visibility: visible;
+		&:not(.active) {
+			clip-path: inset(0 0 100% 0);
 		}
-
+		
 		&__socials {
 			background-color: #D7D7D7;
 			padding: 20px;
@@ -1361,6 +1357,19 @@ section {
 			align-items: center;
 			justify-content: space-between;
 			gap: 10px;
+		}
+
+		.phone {
+			&__tel {
+				color: $black;
+			}
+
+			&__icon {
+				svg path {
+					fill: $black;
+				}
+			}
+
 		}
 	}
 
