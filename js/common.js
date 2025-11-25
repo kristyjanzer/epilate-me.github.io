@@ -217,11 +217,11 @@ $(function() {
         dots: true,
         slidesToShow: 2,
         slidesToScroll: 1,
-        infinite: false,
+        infinite: true,
         adaptiveHeight: true,
         responsive: [
             { 
-                breakpoint: 1100, 
+                breakpoint: 1000, 
                 settings: { 
                     slidesToShow: 1
                 } 
