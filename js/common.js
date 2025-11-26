@@ -63,6 +63,7 @@ $(function() {
     }
 
 
+
     // Content Ranks Slider
     $('.header-slider').slick({
         slidesToShow: 1,
@@ -443,6 +444,8 @@ $(function() {
           }
         ]
     });
+
+
 });
 
 
@@ -560,3 +563,187 @@ $('.accordion-menu-button').click(function (e) {
     $('.accordion-menu-button__text').text("Смотреть все");
   }
 });
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const submenuContainer = document.querySelector('.header-submenu');
+//   let activeMenuItem = null;
+//   let activeSubmenu = null;
+
+//   // Основной обработчик кликов
+//   document.addEventListener('click', function(e) {
+//     const item = e.target.closest('.main-menu__item');
+//     if (!item) return;
+
+//     if (e.target.tagName === 'A') {
+//       e.preventDefault();
+//     }
+
+//     toggleMainSubmenu(item);
+//   });
+
+//   function toggleMainSubmenu(item) {
+//     // Если кликнули на активный пункт — закрываем
+//     if (activeMenuItem === item) {
+//       closeActiveMenu();
+//       return;
+//     }
+
+//     // Закрываем предыдущее меню
+//     if (activeMenuItem) {
+//       closeActiveMenu();
+//     }
+
+//     // Открываем новое меню
+//     openMenu(item);
+//   }
+
+//   function openMenu(item) {
+//     activeMenuItem = item;
+//     activeSubmenu = item.querySelector('.main-submenu');
+
+//     if (!activeSubmenu) return;
+
+//     // 1. Добавляем классы активному пункту
+//     item.classList.add('active');
+
+//     // 2. Перемещаем подменю в контейнер
+//     submenuContainer.innerHTML = '';
+//     submenuContainer.appendChild(activeSubmenu);
+//     submenuContainer.style.maxHeight = activeSubmenu.scrollHeight + 'px';
+
+//     // 3. Добавляем класс активному подменю ПОСЛЕ перемещения
+//     activeSubmenu.classList.add('active');
+//   }
+
+//   function closeActiveMenu() {
+//     if (!activeMenuItem || !activeSubmenu) return;
+
+//     // 1. Убираем классы
+//     activeMenuItem.classList.remove('active');
+//     activeSubmenu.classList.remove('active');
+
+//     // 2. Возвращаем подменю на место
+//     activeMenuItem.appendChild(activeSubmenu);
+
+//     // 3. Очищаем контейнер
+//     submenuContainer.style.maxHeight = '0px';
+//     submenuContainer.innerHTML = '';
+
+//     // 4. Сбрасываем ссылки
+//     activeMenuItem = null;
+//     activeSubmenu = null;
+//   }
+
+//   // Обработчик для вложенных подменю (уровень 2+)
+//   document.addEventListener('click', function(e) {
+//     const nestedItem = e.target.closest('.main-submenu__item');
+//     if (!nestedItem) return;
+
+//     toggleNestedSubmenu(nestedItem);
+//   });
+
+//   function toggleNestedSubmenu(item) {
+//     const isDirectChild = item.parentElement.classList.contains('main-submenu')
+//       && !item.parentElement.classList.contains('main-submenu--level-2');
+
+//     const nestedSubmenu = item.querySelector('.main-submenu--level-2');
+
+//     if (isDirectChild) {
+//       const isActive = item.classList.contains('active');
+
+//       if (isActive) {
+//         item.classList.remove('active');
+//         if (nestedSubmenu) nestedSubmenu.classList.remove('active');
+//       } else {
+//         // Закрываем другие активные в этом же меню
+//         const parentMenu = item.closest('.main-submenu');
+//         parentMenu.querySelectorAll('.main-submenu__item.active').forEach(activeItem => {
+//           activeItem.classList.remove('active');
+//           const activeNested = activeItem.querySelector('.main-submenu--level-2');
+//           if (activeNested) activeNested.classList.remove('active');
+//         });
+
+//         // Открываем текущее
+//         item.classList.add('active');
+//         if (nestedSubmenu) nestedSubmenu.classList.add('active');
+//       }
+//     } else if (nestedSubmenu) {
+//       // Для уровня 2+
+//       if (item.classList.contains('active')) {
+//         nestedSubmenu.classList.remove('active');
+//       } else {
+//         nestedSubmenu.classList.add('active');
+//       }
+//     }
+//   }
+// });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Функция: закрыть все открытые подменю
+  function closeAllSubmenus() {
+    document.querySelectorAll('.main-menu__submenu--open').forEach(submenu => {
+      submenu.classList.remove('main-menu__submenu--open');
+    });
+  }
+
+  // Обработчик клика по пункту меню
+  function handleMenuItemClick(e, item) {
+    // 1. Если кликнули по ссылке внутри пункта — не открываем подменю
+    if (e.target.tagName === 'A') return;
+
+    // 2. Ищем подменю (любого уровня) внутри текущего пункта
+    const submenu = item.querySelector('.main-menu__submenu');
+    if (!submenu) return; // Если подменю нет — выходим
+
+    // 3. Если подменю уже открыто — закрываем (toggle)
+    if (submenu.classList.contains('main-menu__submenu--open')) {
+      submenu.classList.remove('main-menu__submenu--open');
+      return;
+    }
+
+    // 4. Закрываем все другие подменю (включая вложенные уровни)
+    closeAllSubmenus();
+
+    // 5. Открываем текущее подменю
+    submenu.classList.add('main-menu__submenu--open');
+  }
+
+  // Назначаем обработчики на все пункты меню (включая подменю 2‑го уровня)
+  const allMenuItems = document.querySelectorAll('.main-menu__item, .main-submenu__item');
+  allMenuItems.forEach(item => {
+    item.addEventListener('click', e => handleMenuItemClick(e, item));
+
+
+    // Поддержка клавиатуры (Enter/Space)
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleMenuItemClick(e, item);
+      }
+    });
+  });
+
+  // Закрываем подменю при клике вне меню
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.header-top__menu')) {
+      closeAllSubmenus();
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

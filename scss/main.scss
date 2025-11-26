@@ -153,6 +153,7 @@ button {
 	background-size: cover;
 	background-position: top center;
 	position: relative;
+	transition: all .5s ease;
 }
 
 .header-top {
@@ -317,37 +318,160 @@ button {
 // 	}
 // }
 
+// .main-menu {
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: space-between;
+// 	max-width: 468px;
+// 	width: 100%;
+// 	transition: all .5s ease;
+
+// 	&__link {
+// 		color: $white;
+// 		font-size: 18px;
+// 		font-weight: 500;
+// 	}
+
+// 	&__item {
+// 		position: relative;
+// 		display: flex;
+// 		align-items: center;
+// 		gap: 2px;
+
+// 		&:hover {
+// 			&::before {
+// 				content: '';
+// 				position: absolute;
+// 				bottom: -25px;
+// 				left: 0;
+// 				width: 100%;
+// 				height: 4px;
+// 				background-color: $primary;
+// 				z-index: 10;
+// 			}
+// 		}
+// 	}
+
+// 	&__icon {
+// 		font-size: 0;
+
+// 		svg {
+// 			width: 20px;
+// 			height: 20px;
+
+// 			path {
+// 				fill: $white;
+// 			}
+// 		}
+// 	}
+// }
+
+// /* Для подпунктов с вложенным меню */
+// .main-submenu__item.active + .main-submenu,
+// .main-submenu__item.active ~ .main-submenu {
+//   display: block !important;
+// }
+
+// /* Для визуальной обратной связи */
+// .main-submenu__item.active {
+//   background-color: #e0e0e0; /* Подсветка активного пункта */
+//   font-weight: bold;
+// }
+
+// /* Исходное скрытие всех подменю */
+// .main-submenu {
+//   display: none;
+// }
+
+// .header-submenu {
+// 	width: 100%;
+// 	background-color: #f8f8f8;
+// 	border-top: 1px solid #e0e0e0;
+// 	display: none;
+// 	position: fixed;
+// 	transition: all .5s ease;
+// 	z-index: 100;
+
+// 	&.active {
+// 		display: block;
+
+// 	}
+
+// 	> .main-submenu {
+// 		display: flex;
+// 		flex-direction: column;
+// 		width: 100%;
+// 	}
+// }
+
 .main-menu {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	max-width: 468px;
 	width: 100%;
-	transition: all .5s ease;
-
-	&__link {
-		color: $white;
-		font-size: 18px;
-		font-weight: 500;
-	}
-
-	&__item {
-		position: relative;
-
-		&:hover {
-			&::before {
-				content: '';
-				position: absolute;
-				bottom: -25px;
-				left: 0;
-				width: 100%;
-				height: 4px;
-				background-color: $primary;
-				z-index: 10;
-			}
-		}
-	}
 }
+
+.main-submenu {
+  display: none;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.main-submenu--level-2 {
+  padding-left: 1rem;
+}
+
+.main-submenu.active {
+  display: block;
+}
+
+.main-submenu__item.active {
+  background-color: #e0e0e0; /* Пример подсветки активного пункта */
+}
+
+.main-menu__item[data-menu-id].active .main-submenu {
+  display: block;
+}
+
+
+
+.main-menu__item.active > .main-menu__link {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.main-submenu__item.active > .main-menu__link {
+  background-color: #e9f0ff;
+  border-left: 3px solid #0056b3;
+}
+
+.header-submenu {
+  width: 100%;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  border-top: 1px solid #ddd;
+  margin-top: 5px;
+}
+/* Скрываем подменю по умолчанию */
+.main-menu__submenu {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Класс для открытого подменю */
+.main-menu__submenu--open {
+  display: block;
+}
+
+/* Стили для пунктов подменю */
+.main-submenu__item {
+  padding: 10px 15px;
+}
+
+
+
+
 
 .search {
 	width: 205px;
@@ -1316,7 +1440,7 @@ section {
 		color: $black;
 		cursor: pointer;
 
-		&:hover {
+		&.active {
 			color: $primary;
 
 			&::before {
@@ -1338,6 +1462,16 @@ section {
 				width: 100%;
 			}
 		}
+
+		&:has(.child-nav) .parent-nav__text::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 10px;
+			height: 10px;
+			background-color: red;
+		}
 	}
 }
 
@@ -1349,7 +1483,7 @@ section {
 		background-color: #f0c7c7;
 		width: 33.333%;
 
-		&:hover {
+		&.active {
 			.grandchild-nav {
 				display: block;
 				transform-origin: left;
