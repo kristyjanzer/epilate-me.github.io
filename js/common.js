@@ -682,58 +682,83 @@ $('.accordion-menu-button').click(function (e) {
 // });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Функция: закрыть все открытые подменю
-  function closeAllSubmenus() {
-    document.querySelectorAll('.main-menu__submenu--open').forEach(submenu => {
-      submenu.classList.remove('main-menu__submenu--open');
-    });
-  }
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Функция закрытия подменю (кроме указанных в исключениях)
+//   function closeAllSubmenus(exceptIds) {
+//     document.querySelectorAll('.main-menu__submenu--open, .main-submenu--level-2.main-menu__submenu--open')
+//       .forEach(submenu => {
+//         const id = submenu.getAttribute('data-submenu-id');
+//         if (!exceptIds.includes(id)) {
+//           submenu.classList.remove('main-menu__submenu--open');
+//         }
+//       });
+//   }
 
-  // Обработчик клика по пункту меню
-  function handleMenuItemClick(e, item) {
-    // 1. Если кликнули по ссылке внутри пункта — не открываем подменю
-    if (e.target.tagName === 'A') return;
+//   // Обработчик клика по пункту меню
+//   function handleMenuItemClick(e, item) {
+//     e.stopPropagation(); // Останавливаем «пузырьковый» эффект
 
-    // 2. Ищем подменю (любого уровня) внутри текущего пункта
-    const submenu = item.querySelector('.main-menu__submenu');
-    if (!submenu) return; // Если подменю нет — выходим
+//     if (e.target.tagName === 'A') return; // Игнорируем клики по ссылкам
 
-    // 3. Если подменю уже открыто — закрываем (toggle)
-    if (submenu.classList.contains('main-menu__submenu--open')) {
-      submenu.classList.remove('main-menu__submenu--open');
-      return;
-    }
+//     // Определяем тип пункта (родительский или дочерний)
+//     const isSubmenuItem = item.closest('.main-submenu__item');
+//     const submenu = isSubmenuItem
+//       ? item.querySelector('.main-submenu--level-2')
+//       : item.querySelector('.main-menu__submenu');
 
-    // 4. Закрываем все другие подменю (включая вложенные уровни)
-    closeAllSubmenus();
+//     if (!submenu) return; // Если подменю нет — выходим
 
-    // 5. Открываем текущее подменю
-    submenu.classList.add('main-menu__submenu--open');
-  }
+//     const currentId = submenu.getAttribute('data-submenu-id');
+//     const parentId = item.getAttribute('data-parent-id') || item.getAttribute('data-menu-id');
 
-  // Назначаем обработчики на все пункты меню (включая подменю 2‑го уровня)
-  const allMenuItems = document.querySelectorAll('.main-menu__item, .main-submenu__item');
-  allMenuItems.forEach(item => {
-    item.addEventListener('click', e => handleMenuItemClick(e, item));
+//     // Формируем список исключений (какие подменю не закрывать)
+//     const exceptIds = [];
+//     if (isSubmenuItem) {
+//       // Для дочернего пункта сохраняем открытыми: родительское и текущее подменю
+//       exceptIds.push(parentId, currentId);
+//     } else {
+//       // Для родительского пункта — только текущее подменю
+//       exceptIds.push(currentId);
+//     }
+
+//     // Логика открытия/закрытия
+//     if (submenu.classList.contains('main-menu__submenu--open')) {
+//       // Если подменю уже открыто — закрываем
+//       submenu.classList.remove('main-menu__submenu--open');
+//       console.log('Закрыто:', submenu.getAttribute('data-submenu-id'));
+//     } else {
+//       // Иначе: закрываем все, кроме исключённых, и открываем текущее
+//       closeAllSubmenus(exceptIds);
+//       submenu.classList.add('main-menu__submenu--open');
+//       console.log('Открыто:', submenu.getAttribute('data-submenu-id'));
+//     }
+//   }
+
+//   // Назначаем обработчики на все пункты меню
+//   const allMenuItems = document.querySelectorAll('.main-menu__item, .main-submenu__item');
+//   allMenuItems.forEach(item => {
+//     item.addEventListener('click', e => handleMenuItemClick(e, item));
+
+//     // Поддержка клавиатуры (Enter/Space)
+//     item.addEventListener('keydown', e => {
+//       if (e.key === 'Enter' || e.key === ' ') {
+//         e.preventDefault();
+//         handleMenuItemClick(e, item);
+//       }
+//     });
+//   });
+
+//   // Закрываем все подменю при клике вне меню
+//   document.addEventListener('click', e => {
+//     if (!e.target.closest('.header-top__menu')) {
+//       document.querySelectorAll('.main-menu__submenu--open, .main-submenu--level-2.main-menu__submenu--open')
+//         .forEach(submenu => submenu.classList.remove('main-menu__submenu--open'));
+//     }
+//   });
+// });
 
 
-    // Поддержка клавиатуры (Enter/Space)
-    item.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        handleMenuItemClick(e, item);
-      }
-    });
-  });
 
-  // Закрываем подменю при клике вне меню
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.header-top__menu')) {
-      closeAllSubmenus();
-    }
-  });
-});
 
 
 
