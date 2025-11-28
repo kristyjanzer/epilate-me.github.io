@@ -1,30 +1,151 @@
 $(function() {
 
-    // Burger Menu
-    // const header = document.querySelector('.header');
-    // const burgerMenu = header?.querySelector('.header-button-menu');
-    // const burgerBody = header?.querySelector('.header-button-menu-body');
-    // const searchMobileInput = document.querySelector('.search-mobile__input');
+    $(function () {
+  // === Элементы ===
+  const mainMenu = document.querySelector('.main-menu');
+  const desktopContainer = document.querySelector('.header-top__menu');
+  const mobileContainer = document.querySelector('.header-button-menu-body__main-menu');
+  const header = document.querySelector('.header');
+  const burgerMenu = header?.querySelector('.header-button-menu');
+  const burgerBody = header?.querySelector('.header-button-menu-body');
+  const searchMobileIcon = document.querySelector('.search-mobile__icon');
+  const searchMobileInput = document.querySelector('.search-mobile__input');
 
-    // if (burgerMenu && burgerBody) {
-    //   burgerMenu.addEventListener('click', (e) => {
-    //     e.stopPropagation();
-        
-    //     if (searchMobileInput && searchMobileInput.classList.contains('active')) {
-    //       searchMobileInput.classList.remove('active');
-    //     }
-        
-    //     header.classList.toggle('header-menu-open');
-    //     burgerBody.classList.toggle('active');
-    //   });
-    // }
+  // === Функция: очистить состояние меню ===
+  function clearMenuState() {
+    if (mainMenu) {
+      mainMenu.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
+        .forEach(el => el.classList.remove('open'));
+    }
+  }
 
-    // if (searchMobileInput) {
-    //   searchMobileInput.addEventListener('click', (e) => {
-    //     e.stopPropagation();
-    //     searchMobileInput.classList.toggle('active');
-    //   });
-    // }
+  // === Функция: закрыть поиск ===
+  function closeSearch() {
+    if (searchMobileInput) {
+      searchMobileInput.classList.remove('active');
+    }
+  }
+
+  // === Функция: закрыть всё (меню + поиск) ===
+  function closeAll() {
+    if (header) {
+      header.classList.remove('header-menu-open');
+    }
+    if (burgerBody) {
+      burgerBody.classList.remove('active');
+    }
+    closeSearch();
+    clearMenuState();
+  }
+
+  // === Перенос меню ===
+  function isMobile() {
+    return window.innerWidth <= 1100;
+  }
+
+  function moveMenu() {
+    if (!mainMenu || !desktopContainer || !mobileContainer) return;
+    if (isMobile()) {
+      if (!mobileContainer.contains(mainMenu)) {
+        mobileContainer.appendChild(mainMenu);
+      }
+    } else {
+      if (!desktopContainer.contains(mainMenu)) {
+        desktopContainer.appendChild(mainMenu);
+      }
+    }
+  }
+
+  if (mainMenu && desktopContainer && mobileContainer) {
+    moveMenu();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(moveMenu, 250);
+    });
+  }
+
+  // === Обработка кликов по меню ===
+  document.addEventListener('click', function(e) {
+    const base = e.target.closest('.main-menu__base');
+    if (!base) return;
+
+    const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
+    if (!item) return;
+
+    e.stopPropagation();
+
+    const isRoot = item.classList.contains('main-menu__item');
+    const isSub = item.classList.contains('main-submenu__item');
+    const isSubSub = item.classList.contains('main-sub-submenu__item');
+
+    if (isRoot) {
+      if (item.classList.contains('open')) {
+        item.classList.remove('open');
+      } else {
+        clearMenuState();
+        item.classList.add('open');
+      }
+    } else if (isSub || isSubSub) {
+      const parentUl = item.parentElement;
+      if (parentUl) {
+        parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
+          .forEach(sibling => {
+            if (sibling !== item) sibling.classList.remove('open');
+          });
+      }
+      item.classList.toggle('open');
+    }
+  }, true);
+
+  // Не закрывать меню при клике внутри подменю
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.main-submenu, .main-sub-submenu')) {
+      e.stopPropagation();
+    }
+  }, true);
+
+  // === Бургер: открывает/закрывает меню, закрывает поиск ===
+  if (burgerMenu) {
+    burgerMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeSearch(); // 🔥 Закрываем поиск при открытии меню
+      header?.classList.toggle('header-menu-open');
+      burgerBody?.classList.toggle('active');
+    });
+  }
+
+  // === Поиск: открывает/закрывает поиск, закрывает меню ===
+  if (searchMobileIcon) {
+    searchMobileIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (header?.classList.contains('header-menu-open')) {
+        closeAll(); // Закрываем всё, если меню было открыто
+      } else {
+        searchMobileInput?.classList.toggle('active');
+        if (searchMobileInput?.classList.contains('active')) {
+          searchMobileInput.focus();
+        }
+      }
+    });
+  }
+
+  if (searchMobileInput) {
+    searchMobileInput.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  // === Закрыть всё при клике вне ===
+  document.addEventListener('click', (e) => {
+    const isInsideBurger = e.target.closest('.header-button-menu, .header-button-menu-body');
+    const isInsideSearch = e.target.closest('.search-mobile');
+
+    if (!isInsideBurger && !isInsideSearch) {
+      closeAll();
+    }
+  });
+});
 
 
   // === Клонируем соцсети и телефон в ОДИН блок ===
@@ -478,126 +599,11 @@ if (mobileSocialsContainer) {
         ]
     });
 
-    // === Mobile Menu: перемещение и обработка ===
-// === MAIN MENU: перенос + управление состоянием ===
-const mainMenu = document.querySelector('.main-menu');
-const desktopContainer = document.querySelector('.header-top__menu');
-const mobileContainer = document.querySelector('.header-button-menu-body__main-menu');
-const header = document.querySelector('.header');
-const burgerMenu = header?.querySelector('.header-button-menu');
-const burgerBody = header?.querySelector('.header-button-menu-body');
 
-// Функция для очистки состояния меню
-function clearMenuState() {
-  if (!mainMenu) return;
-  mainMenu.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
-    .forEach(el => el.classList.remove('open'));
-}
-
-// Функция для определения, мобильное ли устройство
-function isMobile() {
-  return window.innerWidth <= 1100;
-}
-
-// Переместить меню в нужный контейнер
-function moveMenu() {
-  if (!mainMenu || !desktopContainer || !mobileContainer) return;
-
-  if (isMobile()) {
-    if (!mobileContainer.contains(mainMenu)) {
-      mobileContainer.appendChild(mainMenu);
-    }
-  } else {
-    if (!desktopContainer.contains(mainMenu)) {
-      desktopContainer.appendChild(mainMenu);
-    }
-  }
-}
-
-// Инициализация
-if (mainMenu && desktopContainer && mobileContainer) {
-  moveMenu();
-
-  // Ресайз
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(moveMenu, 250);
-  });
-
-  // Закрытие меню при клике вне (в т.ч. на десктопе)
-  document.addEventListener('click', function(e) {
-  const base = e.target.closest('.main-menu__base');
-  if (!base) {
-    clearMenuState();
-    return;
-  }
-
-  const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
-  if (!item) return;
-
-  e.stopPropagation();
-
-  const isRoot = item.classList.contains('main-menu__item');
-  const isSub = item.classList.contains('main-submenu__item');
-  const isSubSub = item.classList.contains('main-sub-submenu__item');
-
-  if (isRoot) {
-    if (item.classList.contains('open')) {
-      // Повторный клик — закрыть
-      item.classList.remove('open');
-    } else {
-      // Открыть новый
-      clearMenuState();
-      item.classList.add('open');
-    }
-  } else if (isSub || isSubSub) {
-    const parentUl = item.parentElement;
-    if (parentUl) {
-      parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
-        .forEach(sibling => {
-          if (sibling !== item) sibling.classList.remove('open');
-        });
-    }
-    item.classList.toggle('open');
-  }
-}, true);
-
-  // Не закрывать при клике внутри подменю
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('.main-submenu, .main-sub-submenu')) {
-      e.stopPropagation();
-    }
-  }, true);
-}
-
-// === Закрытие мобильного меню ===============
-if (burgerMenu && burgerBody && header) {
-  // Открытие/закрытие по бургеру
-  burgerMenu.addEventListener('click', (e) => {
-    e.stopPropagation();
-    header.classList.toggle('header-menu-open');
-    burgerBody.classList.toggle('active');
-    
-    if (!header.classList.contains('header-menu-open')) {
-      clearMenuState();
-    }
-  });
-
-  // Закрытие по клику вне
-  document.addEventListener('click', (e) => {
-    const isInsideMenu = e.target.closest('.header-button-menu, .header-button-menu-body');
-    if (!isInsideMenu && header.classList.contains('header-menu-open')) {
-      header.classList.remove('header-menu-open');
-      burgerBody.classList.remove('active');
-      clearMenuState();
-    }
-  });
-}
 
 });
 
-
+// Header-Top Scroll
 window.addEventListener('scroll', function() {
     const headerTop = document.querySelector('.header-top');
     const scrollPosition = window.scrollY;
@@ -610,33 +616,33 @@ window.addEventListener('scroll', function() {
 });
 
 
-// Search Button
-document.addEventListener('DOMContentLoaded', () => {
-    const searchMobile = document.querySelector('.search-mobile__icon');
-    const searchElement = document.querySelector('.search-mobile__input');
+// // Search Button
+// document.addEventListener('DOMContentLoaded', () => {
+//     const searchMobile = document.querySelector('.search-mobile__icon');
+//     const searchElement = document.querySelector('.search-mobile__input');
 
-    searchMobile?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        searchElement?.classList.toggle('active');
+//     searchMobile?.addEventListener('click', (e) => {
+//         e.stopPropagation();
+//         searchElement?.classList.toggle('active');
     
-        if (searchElement?.classList.contains('active')) {
-            searchElement.focus();
-        }
-    });
+//         if (searchElement?.classList.contains('active')) {
+//             searchElement.focus();
+//         }
+//     });
 
-    searchElement?.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
+//     searchElement?.addEventListener('click', (e) => {
+//         e.stopPropagation();
+//     });
 
-    document.addEventListener('click', (e) => {
-    const isIcon = e.target === searchMobile;
-    const isInput = e.target === searchElement || searchElement?.contains(e.target);
+//     document.addEventListener('click', (e) => {
+//     const isIcon = e.target === searchMobile;
+//     const isInput = e.target === searchElement || searchElement?.contains(e.target);
 
-        if (!isIcon && !isInput) {
-            searchElement?.classList.remove('active');
-        }
-    });
-});
+//         if (!isIcon && !isInput) {
+//             searchElement?.classList.remove('active');
+//         }
+//     });
+// });
 
 
 
