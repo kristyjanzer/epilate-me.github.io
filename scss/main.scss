@@ -331,11 +331,15 @@ button {
   	position: static;
 
 	&.open {
-		.main-submenu {
+		> .main-submenu {
 			display: flex;
 			transform-origin: top;
 			animation: dropdown 0.2s ease-out;
 		}
+	}
+
+	> .main-submenu {
+		display: none;
 	}
   }
 
@@ -381,9 +385,10 @@ button {
 
 .main-sub-submenu { 
   position: absolute;
+  background: red !important;
   top: 0;
   height: 100%;
-  display: none;
+//   display: none;
   left: 33.33333333%;
   width: 33.33333333%;
 
@@ -399,6 +404,8 @@ button {
 	}
   }
 }
+
+
 
 // .main-menu {
 // 	display: flex;
@@ -1729,36 +1736,69 @@ section {
 		}
 	}
 
-	.main-sub-submenu { 
-		position: static;
-		display: block;
-		width: 100%;
-		max-height: 0px;
-		transform-origin: top;
-		transform: scaleY(0);
-		transition: max-height 0.1s;
+	// .main-sub-submenu { 
+	// 	position: static;
+	// 	display: block;
+	// 	width: 100%;
+	// 	max-height: 0px;
+	// 	transform-origin: top;
+	// 	transform: scaleY(0);
+	// 	transition: max-height 0.1s;
 
-		&__item {
-			&:hover {
-				> .main-menu__link { 
-					background-color: transparent;
-				}
-			}
-		}
+	// 	&__item {
+	// 		&:hover {
+	// 			> .main-menu__link { 
+	// 				background-color: transparent;
+	// 			}
+	// 		}
+	// 	}
 
-		.main-menu__link {
-			padding-left: 60px;
+	// 	.main-menu__link {
+	// 		padding-left: 60px;
 
-			~ .main-sub-submenu .main-menu__link {
-				padding-left: 80px;
-			}
-		}
+	// 		~ .main-sub-submenu .main-menu__link {
+	// 			padding-left: 80px;
+	// 		}
+	// 	}
 
-		&:hover {
-			max-height: 500px;
-    		transform: scaleY(1);
-		}
-	}
+	// 	&:hover {
+	// 		max-height: 500px;
+    // 		transform: scaleY(1);
+	// 	}
+	// }
+
+	/* Отменяем absolute-позиционирование */
+// .main-submenu,
+// .main-sub-submenu {
+//   position: static !important;
+//   width: 100% !important;
+//   left: auto !important;
+//   top: auto !important;
+// }
+
+/* Скрываем все подменю */
+.main-submenu,
+  .main-sub-submenu {
+    display: block;
+    position: static !important;
+    width: 100% !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+/* Показываем, если родительский <li> открыт */
+.main-menu__item.open > .main-submenu,
+  .main-submenu__item.open > .main-sub-submenu,
+  .main-sub-submenu__item.open > .main-sub-submenu {
+    max-height: 500px;
+  }
+
+  /* Отступы */
+  .main-submenu .main-menu__link { padding-left: 40px; }
+  .main-sub-submenu .main-menu__link { padding-left: 60px; }
+  .main-sub-submenu .main-sub-submenu .main-menu__link { padding-left: 80px; }
+
 
 	.main-submenu {
 		flex-direction: column;
@@ -1774,21 +1814,21 @@ section {
 		&__item {
 			width: auto;
 			
-			.main-submenu {
+			.main-submenu__item {
 				display: none;
 			}
 
 			&.open {
-				.main-submenu {
+				.main-submenu__item {
 					display: block;
 				}
 			}
 		}
 
-		.re:hover ~ .main-sub-submenu {
-			max-height: 500px;
-    		animation: dropdown 0.3s forwards;
-		}
+		// .re:hover ~ .main-sub-submenu {
+		// 	max-height: 500px;
+    	// 	animation: dropdown 0.3s forwards;
+		// }
 	}
 
 	.search-mobile {
@@ -2077,11 +2117,11 @@ section {
 
 @media (min-width: 951px) {
 
-  .main-submenu li:hover > .re ~ .main-sub-submenu { /* не трогать */
-    display: block;
-    transform-origin: left;
-    animation: flyout 0.2s ease-out;
-  }
+//   .main-submenu li:hover > .re ~ .main-sub-submenu { /* не трогать */
+//     display: block;
+//     transform-origin: left;
+//     animation: flyout 0.2s ease-out;
+//   }
 
 }
 

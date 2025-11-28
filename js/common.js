@@ -27,40 +27,74 @@ $(function() {
     }
 
 
+    // === Клонирование соцсетей и телефона (безопасно) ===
+  // === Клонируем соцсети и телефон в ОДИН блок ===
+const socials = document.querySelector('.header-top__socials');
+const phone = document.querySelector('.header-top__phone');
+const mobileSocialsContainer = document.querySelector('.header-button-menu-body__socials');
+
+if (mobileSocialsContainer) {
+  // Очищаем контейнер, чтобы избежать дублей при повторном открытии
+  mobileSocialsContainer.innerHTML = '';
+
+  // Клонируем соцсети
+  if (socials) {
+    const socialsClone = socials.cloneNode(true);
+    socialsClone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    mobileSocialsContainer.appendChild(socialsClone);
+  }
+
+  // Клонируем телефон
+  if (phone) {
+    const phoneClone = phone.cloneNode(true);
+    phoneClone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    mobileSocialsContainer.appendChild(phoneClone);
+  }
+}
+
+  // === Клонирование поиска ===
+  const search = document.querySelector('.search');
+  const searchTarget = document.querySelector('.search-mobile__input');
+  if (search && searchTarget && !searchTarget.querySelector('.search')) {
+    const searchClone = search.cloneNode(true);
+    searchClone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    searchTarget.insertAdjacentElement('afterbegin', searchClone);
+  }
+
     
 
     // Clone Elements
-    const socials = document.querySelector('.header-top__socials');
-    const socialsTarget = document.querySelector('.header-button-menu-body__socials');
+    // const socials = document.querySelector('.header-top__socials');
+    // const socialsTarget = document.querySelector('.header-button-menu-body__socials');
     
-    if (socials && socialsTarget) {
-        const clone = socials.cloneNode(true);
-        socialsTarget.appendChild(clone);
-    }
+    // if (socials && socialsTarget) {
+    //     const clone = socials.cloneNode(true);
+    //     socialsTarget.appendChild(clone);
+    // }
 
-    const phone = document.querySelector('.header-top__phone');
-    const phoneTarget = document.querySelector('.header-button-menu-body__socials');
+    // const phone = document.querySelector('.header-top__phone');
+    // const phoneTarget = document.querySelector('.header-button-menu-body__socials');
 
-    if (phone && phoneTarget) {
-        const clone = phone.cloneNode(true);
-        phoneTarget.appendChild(clone);
-    }
+    // if (phone && phoneTarget) {
+    //     const clone = phone.cloneNode(true);
+    //     phoneTarget.appendChild(clone);
+    // }
 
-    const mainMenu = document.querySelector('.main-menu');
-    const mainMenuTarget = document.querySelector('.header-button-menu-body__main-menu');
+    // const mainMenu = document.querySelector('.main-menu');
+    // const mainMenuTarget = document.querySelector('.header-button-menu-body__main-menu');
 
-    if (mainMenu && mainMenuTarget) {
-        const clone = mainMenu.cloneNode(true);
-        mainMenuTarget.appendChild(clone);
-    }
+    // if (mainMenu && mainMenuTarget) {
+    //     const clone = mainMenu.cloneNode(true);
+    //     mainMenuTarget.appendChild(clone);
+    // }
 
-    const search = document.querySelector('.search');
-    const searchTarget = document.querySelector('.search-mobile__input');
+    // const search = document.querySelector('.search');
+    // const searchTarget = document.querySelector('.search-mobile__input');
 
-    if (search && searchTarget) {
-        const clone = search.cloneNode(true);
-        searchTarget.insertAdjacentElement('afterbegin', clone);
-    }
+    // if (search && searchTarget) {
+    //     const clone = search.cloneNode(true);
+    //     searchTarget.insertAdjacentElement('afterbegin', clone);
+    // }
 
 
 
@@ -445,6 +479,73 @@ $(function() {
         ]
     });
 
+    // === Mobile Menu: перемещение и обработка ===
+const mainMenu = document.querySelector('.main-menu');
+const desktopContainer = document.querySelector('.header-top__menu');
+const mobileContainer = document.querySelector('.header-button-menu-body__main-menu');
+
+if (mainMenu && desktopContainer && mobileContainer) {
+  // Функция для определения, мобильное ли устройство
+  function isMobile() {
+    return window.innerWidth <= 1100;
+  }
+
+  // Переместить меню в нужный контейнер
+  function moveMenu() {
+    if (isMobile()) {
+      if (!mobileContainer.contains(mainMenu)) {
+        mobileContainer.appendChild(mainMenu);
+      }
+    } else {
+      if (!desktopContainer.contains(mainMenu)) {
+        desktopContainer.appendChild(mainMenu);
+      }
+    }
+  }
+
+  // Изначальное перемещение
+  moveMenu();
+
+  // При ресайзе
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(moveMenu, 250);
+  });
+
+  // Обработка кликов (делегирование)
+  document.addEventListener('click', function(e) {
+    const base = e.target.closest('.main-menu__base');
+    if (!base) {
+      // Закрыть всё
+      document.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
+        .forEach(el => el.classList.remove('open'));
+      return;
+    }
+
+    const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
+    if (!item) return;
+
+    e.stopPropagation();
+
+    // Для корневого уровня — закрыть другие
+    if (item.classList.contains('main-menu__item')) {
+      document.querySelectorAll('.main-menu__item')
+        .forEach(other => {
+          if (other !== item) other.classList.remove('open');
+        });
+    }
+
+    item.classList.toggle('open');
+  }, true);
+
+  // Не закрывать при клике внутри подменю
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.main-submenu, .main-sub-submenu')) {
+      e.stopPropagation();
+    }
+  }, true);
+}
 
 });
 
@@ -567,52 +668,5 @@ $('.accordion-menu-button').click(function (e) {
 
 
 // Multi-menu
-document.addEventListener('DOMContentLoaded', function () {
-  // Обработчик кликов по всему документу
-  document.addEventListener('click', function (e) {
-    // 1. Клик по ".main-menu__base" — переключить пункт
-    const base = e.target.closest('.main-menu__base');
-    if (base) {
-      const item = base.closest('.main-menu__item');
-      if (!item) return;
-
-      e.stopPropagation(); // не закрывать меню при клике на него
-
-      if (item.classList.contains('open')) {
-        item.classList.remove('open');
-      } else {
-        item.classList.add('open');
-      }
-      return;
-    }
-
-    // 2. Клик по обычной ссылке — ничего не делать (или закрыть, если хочешь)
-    // (по умолчанию — не трогаем)
-
-    // 3. Клик вне меню — закрыть всё
-    document.querySelectorAll('.main-menu__item.open').forEach(el => {
-      el.classList.remove('open');
-    });
-  });
-
-  // 4. Клик внутри любого подменю — не закрывать
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('.main-submenu')) {
-      e.stopPropagation();
-    }
-  }, true);
-});
-
-
-
-
-
-
-
-
-
-
-
-
 
 
