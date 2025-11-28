@@ -233,12 +233,28 @@ button {
 		}
 
 		.main-menu {
-			max-width: 450px;
-
 			&__link {
 				font-size: 15px;
 				color: $primary;
 			}
+
+			&__icon svg path {
+				fill: $primary;
+			}
+
+			.main-submenu {
+				.main-menu__link {
+					color: rgba(0, 19, 97, .7);
+
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+		}
+
+		.main-submenu {
+			top: 50px;
 		}
 
 		.search {
@@ -291,6 +307,46 @@ button {
 	}
 }
 
+.main-menu-open {
+	background-color: $white;
+
+	.logo,
+	.search__icon {
+		svg path {
+			fill: $primary;
+		}
+	} 
+
+	.search {
+		border: 2px solid $primary;
+	}
+
+	.socials__icon,
+	.phone__icon {
+		svg path {
+			fill: $black;
+		}
+	}
+
+	.phone__tel {
+		color: $black;
+	}
+
+	.main-menu {
+		&__link {
+			color: $primary;
+		}
+
+		&__item {
+			> .main-menu__link .main-menu__icon {
+				svg path {
+					fill: $primary;
+				}
+			}
+		}
+	}
+}
+
 .logo {
 	max-width: 316px;
 	font-size: 0;
@@ -319,87 +375,117 @@ button {
 // }
 
 .main-menu { 
-  display: flex;
-  align-items: center;
-  gap: 42px;
-  width: 100%;
-  transition: all .5s ease;
-  position: relative;
+	display: flex;
+	align-items: center;
+	gap: 42px;
+	width: 100%;
+	transition: all .5s ease;
+	position: relative;
 
-  &__item {
-	cursor: pointer;
-  	position: static;
+	&__item {
+		cursor: pointer;
+		position: static;
 
-	&.open {
+		&.open {
+			> .main-submenu {
+				display: flex;
+				transform-origin: top;
+				animation: dropdown 0.2s ease-out;
+				
+				.main-menu__icon {
+					svg {
+						path {
+							fill: rgba(0, 19, 97, 0.7);
+						}
+					}
+				}
+			}
+
+		}
+
 		> .main-submenu {
-			display: flex;
-			transform-origin: top;
-			animation: dropdown 0.2s ease-out;
+			display: none;
 		}
 	}
 
-	> .main-submenu {
-		display: none;
+	&__link {
+		// padding: 20px;
+		color: $white;
+		transition: background 0.2s, color 0.2s;
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		text-decoration: none;
 	}
-  }
 
-  &__link {
-	// padding: 20px;
-	color: $white;
-	transition: background 0.2s, color 0.2s;
-	position: relative;
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	text-decoration: none;
-  }
+	&__icon {
+		font-size: 0;
 
-  &__icon {
-	font-size: 0;
-  }
+		svg {
+			width: 20px;
+			height: 20px;
+
+			path {
+				fill: $white;
+			}
+		}
+	}
 }
 
 .main-submenu {
 	position: absolute;
-	top: 100%;
+	top: 55px;
 	left: 0;
 	width: 100%;
 	display: none;
-	background: #ffffff;
+	background: #E8EDF3;
+	border-radius: 0 0 16px 16px;
 	z-index: 10;
 	flex-direction: column;
 
 	.main-menu__link {
-		padding-left: 40px;
-		color: $primary;
+		color: rgba(0, 19, 97, 0.7);
 		
 		&:hover {
-			color: #136a73;
+			color: $primary;
+
+			.main-menu__icon {
+				svg {
+					path {
+						fill: $primary;
+					}
+				}
+			}
 		}
 	}
 
 	&__item {
-		width: 33.33333333%;
+		width: 210px;
+		padding: 20px;
 	}
 }
 
 .main-sub-submenu { 
   position: absolute;
-  background: red !important;
   top: 0;
   height: 100%;
   display: none;
-  left: 33.33333333%;
-  width: 33.33333333%;
+  left: 210px;
+  width: 210px;
 
   & & {
 	left: 100%;
   }
 
   &__item {
+	transform-origin: left;
+	animation: flyout 0.2s ease-out;
+	padding: 20px;
+
 	&:hover {
 		> .main-menu__link {
-    		color: #136a73;		
+    		color: $primary;		
 		}
 	}
   }
@@ -407,9 +493,8 @@ button {
 
 .main-submenu__item.open > .main-sub-submenu,
 .main-sub-submenu__item.open > .main-sub-submenu {
-  display: block; /* или flex — как у тебя */
+  display: block;
 }
-
 
 
 // .main-menu {
@@ -460,22 +545,6 @@ button {
 // 	}
 // }
 
-// /* Для подпунктов с вложенным меню */
-// .main-submenu__item.active + .main-submenu,
-// .main-submenu__item.active ~ .main-submenu {
-//   display: block !important;
-// }
-
-// /* Для визуальной обратной связи */
-// .main-submenu__item.active {
-//   background-color: #e0e0e0; /* Подсветка активного пункта */
-//   font-weight: bold;
-// }
-
-// /* Исходное скрытие всех подменю */
-// .main-submenu {
-//   display: none;
-// }
 
 .search {
 	width: 205px;
@@ -1726,7 +1795,6 @@ section {
 		align-items: flex-start;
 		max-width: 100%;
 		flex-direction: column;
-		// overflow-x: hidden;
 		transition: left 0.3s;
 		gap: 10px;
 
@@ -1772,38 +1840,23 @@ section {
 	// 	}
 	// }
 
-	/* Отменяем absolute-позиционирование */
-// .main-submenu,
-// .main-sub-submenu {
-//   position: static !important;
-//   width: 100% !important;
-//   left: auto !important;
-//   top: auto !important;
-// }
+	.main-submenu,
+	.main-sub-submenu {
+		display: block;
+		position: static !important;
+		width: 100% !important;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease;
+	}
 
-/* Скрываем все подменю */
-.main-submenu,
-  .main-sub-submenu {
-    display: block;
-    position: static !important;
-    width: 100% !important;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
+	.main-menu__item.open > .main-submenu,
+	.main-submenu__item.open > .main-sub-submenu,
+	.main-sub-submenu__item.open > .main-sub-submenu {
+		max-height: 500px;
+	}
 
-/* Показываем, если родительский <li> открыт */
-.main-menu__item.open > .main-submenu,
-  .main-submenu__item.open > .main-sub-submenu,
-  .main-sub-submenu__item.open > .main-sub-submenu {
-    max-height: 500px;
-  }
-
-  /* Отступы */
-  .main-submenu .main-menu__link { padding-left: 40px; }
-  .main-sub-submenu .main-menu__link { padding-left: 60px; }
-  .main-sub-submenu .main-sub-submenu .main-menu__link { padding-left: 80px; }
-
+  	.main-sub-submenu .main-sub-submenu .main-menu__link { padding-left: 80px; }
 
 	.main-submenu {
 		flex-direction: column;
@@ -1830,10 +1883,21 @@ section {
 			}
 		}
 
-		// .re:hover ~ .main-sub-submenu {
-		// 	max-height: 500px;
-    	// 	animation: dropdown 0.3s forwards;
-		// }
+		.main-menu__link {
+			padding-left: 40px;
+		}
+	}
+
+	.main-sub-submenu {
+		.main-menu__link {
+			padding-left: 60px;
+		}
+
+		& & {
+			.main-menu__link  {
+				padding-left: 80px;
+			}
+		}
 	}
 
 	.search-mobile {
@@ -2117,17 +2181,6 @@ section {
 			grid-template-columns: 1fr;
 		}
 	}
-}
-
-
-@media (min-width: 951px) {
-
-//   .main-submenu li:hover > .re ~ .main-sub-submenu { /* не трогать */
-//     display: block;
-//     transform-origin: left;
-//     animation: flyout 0.2s ease-out;
-//   }
-
 }
 
 
