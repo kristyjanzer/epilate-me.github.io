@@ -388,7 +388,7 @@ button {
   background: red !important;
   top: 0;
   height: 100%;
-//   display: none;
+  display: none;
   left: 33.33333333%;
   width: 33.33333333%;
 
@@ -403,6 +403,11 @@ button {
 		}
 	}
   }
+}
+
+.main-submenu__item.open > .main-sub-submenu,
+.main-sub-submenu__item.open > .main-sub-submenu {
+  display: block; /* или flex — как у тебя */
 }
 
 

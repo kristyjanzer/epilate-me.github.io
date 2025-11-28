@@ -1,33 +1,32 @@
 $(function() {
 
     // Burger Menu
-    const header = document.querySelector('.header');
-    const burgerMenu = header?.querySelector('.header-button-menu');
-    const burgerBody = header?.querySelector('.header-button-menu-body');
-    const searchMobileInput = document.querySelector('.search-mobile__input');
+    // const header = document.querySelector('.header');
+    // const burgerMenu = header?.querySelector('.header-button-menu');
+    // const burgerBody = header?.querySelector('.header-button-menu-body');
+    // const searchMobileInput = document.querySelector('.search-mobile__input');
 
-    if (burgerMenu && burgerBody) {
-      burgerMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
+    // if (burgerMenu && burgerBody) {
+    //   burgerMenu.addEventListener('click', (e) => {
+    //     e.stopPropagation();
         
-        if (searchMobileInput && searchMobileInput.classList.contains('active')) {
-          searchMobileInput.classList.remove('active');
-        }
+    //     if (searchMobileInput && searchMobileInput.classList.contains('active')) {
+    //       searchMobileInput.classList.remove('active');
+    //     }
         
-        header.classList.toggle('header-menu-open');
-        burgerBody.classList.toggle('active');
-      });
-    }
+    //     header.classList.toggle('header-menu-open');
+    //     burgerBody.classList.toggle('active');
+    //   });
+    // }
 
-    if (searchMobileInput) {
-      searchMobileInput.addEventListener('click', (e) => {
-        e.stopPropagation();
-        searchMobileInput.classList.toggle('active');
-      });
-    }
+    // if (searchMobileInput) {
+    //   searchMobileInput.addEventListener('click', (e) => {
+    //     e.stopPropagation();
+    //     searchMobileInput.classList.toggle('active');
+    //   });
+    // }
 
 
-    // === Клонирование соцсетей и телефона (безопасно) ===
   // === Клонируем соцсети и телефон в ОДИН блок ===
 const socials = document.querySelector('.header-top__socials');
 const phone = document.querySelector('.header-top__phone');
@@ -480,64 +479,89 @@ if (mobileSocialsContainer) {
     });
 
     // === Mobile Menu: перемещение и обработка ===
+// === MAIN MENU: перенос + управление состоянием ===
 const mainMenu = document.querySelector('.main-menu');
 const desktopContainer = document.querySelector('.header-top__menu');
 const mobileContainer = document.querySelector('.header-button-menu-body__main-menu');
+const header = document.querySelector('.header');
+const burgerMenu = header?.querySelector('.header-button-menu');
+const burgerBody = header?.querySelector('.header-button-menu-body');
 
-if (mainMenu && desktopContainer && mobileContainer) {
-  // Функция для определения, мобильное ли устройство
-  function isMobile() {
-    return window.innerWidth <= 1100;
-  }
+// Функция для очистки состояния меню
+function clearMenuState() {
+  if (!mainMenu) return;
+  mainMenu.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
+    .forEach(el => el.classList.remove('open'));
+}
 
-  // Переместить меню в нужный контейнер
-  function moveMenu() {
-    if (isMobile()) {
-      if (!mobileContainer.contains(mainMenu)) {
-        mobileContainer.appendChild(mainMenu);
-      }
-    } else {
-      if (!desktopContainer.contains(mainMenu)) {
-        desktopContainer.appendChild(mainMenu);
-      }
+// Функция для определения, мобильное ли устройство
+function isMobile() {
+  return window.innerWidth <= 1100;
+}
+
+// Переместить меню в нужный контейнер
+function moveMenu() {
+  if (!mainMenu || !desktopContainer || !mobileContainer) return;
+
+  if (isMobile()) {
+    if (!mobileContainer.contains(mainMenu)) {
+      mobileContainer.appendChild(mainMenu);
+    }
+  } else {
+    if (!desktopContainer.contains(mainMenu)) {
+      desktopContainer.appendChild(mainMenu);
     }
   }
+}
 
-  // Изначальное перемещение
+// Инициализация
+if (mainMenu && desktopContainer && mobileContainer) {
   moveMenu();
 
-  // При ресайзе
+  // Ресайз
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(moveMenu, 250);
   });
 
-  // Обработка кликов (делегирование)
+  // Закрытие меню при клике вне (в т.ч. на десктопе)
   document.addEventListener('click', function(e) {
-    const base = e.target.closest('.main-menu__base');
-    if (!base) {
-      // Закрыть всё
-      document.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
-        .forEach(el => el.classList.remove('open'));
-      return;
+  const base = e.target.closest('.main-menu__base');
+  if (!base) {
+    clearMenuState();
+    return;
+  }
+
+  const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
+  if (!item) return;
+
+  e.stopPropagation();
+
+  const isRoot = item.classList.contains('main-menu__item');
+  const isSub = item.classList.contains('main-submenu__item');
+  const isSubSub = item.classList.contains('main-sub-submenu__item');
+
+  if (isRoot) {
+    if (item.classList.contains('open')) {
+      // Повторный клик — закрыть
+      item.classList.remove('open');
+    } else {
+      // Открыть новый
+      clearMenuState();
+      item.classList.add('open');
     }
-
-    const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
-    if (!item) return;
-
-    e.stopPropagation();
-
-    // Для корневого уровня — закрыть другие
-    if (item.classList.contains('main-menu__item')) {
-      document.querySelectorAll('.main-menu__item')
-        .forEach(other => {
-          if (other !== item) other.classList.remove('open');
+  } else if (isSub || isSubSub) {
+    const parentUl = item.parentElement;
+    if (parentUl) {
+      parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
+        .forEach(sibling => {
+          if (sibling !== item) sibling.classList.remove('open');
         });
     }
-
     item.classList.toggle('open');
-  }, true);
+  }
+}, true);
 
   // Не закрывать при клике внутри подменю
   document.addEventListener('click', function(e) {
@@ -545,6 +569,30 @@ if (mainMenu && desktopContainer && mobileContainer) {
       e.stopPropagation();
     }
   }, true);
+}
+
+// === Закрытие мобильного меню ===============
+if (burgerMenu && burgerBody && header) {
+  // Открытие/закрытие по бургеру
+  burgerMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+    header.classList.toggle('header-menu-open');
+    burgerBody.classList.toggle('active');
+    
+    if (!header.classList.contains('header-menu-open')) {
+      clearMenuState();
+    }
+  });
+
+  // Закрытие по клику вне
+  document.addEventListener('click', (e) => {
+    const isInsideMenu = e.target.closest('.header-button-menu, .header-button-menu-body');
+    if (!isInsideMenu && header.classList.contains('header-menu-open')) {
+      header.classList.remove('header-menu-open');
+      burgerBody.classList.remove('active');
+      clearMenuState();
+    }
+  });
 }
 
 });
