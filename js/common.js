@@ -566,198 +566,42 @@ $('.accordion-menu-button').click(function (e) {
 
 
 
+// Multi-menu
+document.addEventListener('DOMContentLoaded', function () {
+  // Обработчик кликов по всему документу
+  document.addEventListener('click', function (e) {
+    // 1. Клик по ".main-menu__base" — переключить пункт
+    const base = e.target.closest('.main-menu__base');
+    if (base) {
+      const item = base.closest('.main-menu__item');
+      if (!item) return;
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   const submenuContainer = document.querySelector('.header-submenu');
-//   let activeMenuItem = null;
-//   let activeSubmenu = null;
+      e.stopPropagation(); // не закрывать меню при клике на него
 
-//   // Основной обработчик кликов
-//   document.addEventListener('click', function(e) {
-//     const item = e.target.closest('.main-menu__item');
-//     if (!item) return;
+      if (item.classList.contains('open')) {
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+      }
+      return;
+    }
 
-//     if (e.target.tagName === 'A') {
-//       e.preventDefault();
-//     }
+    // 2. Клик по обычной ссылке — ничего не делать (или закрыть, если хочешь)
+    // (по умолчанию — не трогаем)
 
-//     toggleMainSubmenu(item);
-//   });
+    // 3. Клик вне меню — закрыть всё
+    document.querySelectorAll('.main-menu__item.open').forEach(el => {
+      el.classList.remove('open');
+    });
+  });
 
-//   function toggleMainSubmenu(item) {
-//     // Если кликнули на активный пункт — закрываем
-//     if (activeMenuItem === item) {
-//       closeActiveMenu();
-//       return;
-//     }
-
-//     // Закрываем предыдущее меню
-//     if (activeMenuItem) {
-//       closeActiveMenu();
-//     }
-
-//     // Открываем новое меню
-//     openMenu(item);
-//   }
-
-//   function openMenu(item) {
-//     activeMenuItem = item;
-//     activeSubmenu = item.querySelector('.main-submenu');
-
-//     if (!activeSubmenu) return;
-
-//     // 1. Добавляем классы активному пункту
-//     item.classList.add('active');
-
-//     // 2. Перемещаем подменю в контейнер
-//     submenuContainer.innerHTML = '';
-//     submenuContainer.appendChild(activeSubmenu);
-//     submenuContainer.style.maxHeight = activeSubmenu.scrollHeight + 'px';
-
-//     // 3. Добавляем класс активному подменю ПОСЛЕ перемещения
-//     activeSubmenu.classList.add('active');
-//   }
-
-//   function closeActiveMenu() {
-//     if (!activeMenuItem || !activeSubmenu) return;
-
-//     // 1. Убираем классы
-//     activeMenuItem.classList.remove('active');
-//     activeSubmenu.classList.remove('active');
-
-//     // 2. Возвращаем подменю на место
-//     activeMenuItem.appendChild(activeSubmenu);
-
-//     // 3. Очищаем контейнер
-//     submenuContainer.style.maxHeight = '0px';
-//     submenuContainer.innerHTML = '';
-
-//     // 4. Сбрасываем ссылки
-//     activeMenuItem = null;
-//     activeSubmenu = null;
-//   }
-
-//   // Обработчик для вложенных подменю (уровень 2+)
-//   document.addEventListener('click', function(e) {
-//     const nestedItem = e.target.closest('.main-submenu__item');
-//     if (!nestedItem) return;
-
-//     toggleNestedSubmenu(nestedItem);
-//   });
-
-//   function toggleNestedSubmenu(item) {
-//     const isDirectChild = item.parentElement.classList.contains('main-submenu')
-//       && !item.parentElement.classList.contains('main-submenu--level-2');
-
-//     const nestedSubmenu = item.querySelector('.main-submenu--level-2');
-
-//     if (isDirectChild) {
-//       const isActive = item.classList.contains('active');
-
-//       if (isActive) {
-//         item.classList.remove('active');
-//         if (nestedSubmenu) nestedSubmenu.classList.remove('active');
-//       } else {
-//         // Закрываем другие активные в этом же меню
-//         const parentMenu = item.closest('.main-submenu');
-//         parentMenu.querySelectorAll('.main-submenu__item.active').forEach(activeItem => {
-//           activeItem.classList.remove('active');
-//           const activeNested = activeItem.querySelector('.main-submenu--level-2');
-//           if (activeNested) activeNested.classList.remove('active');
-//         });
-
-//         // Открываем текущее
-//         item.classList.add('active');
-//         if (nestedSubmenu) nestedSubmenu.classList.add('active');
-//       }
-//     } else if (nestedSubmenu) {
-//       // Для уровня 2+
-//       if (item.classList.contains('active')) {
-//         nestedSubmenu.classList.remove('active');
-//       } else {
-//         nestedSubmenu.classList.add('active');
-//       }
-//     }
-//   }
-// });
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   // Функция закрытия подменю (кроме указанных в исключениях)
-//   function closeAllSubmenus(exceptIds) {
-//     document.querySelectorAll('.main-menu__submenu--open, .main-submenu--level-2.main-menu__submenu--open')
-//       .forEach(submenu => {
-//         const id = submenu.getAttribute('data-submenu-id');
-//         if (!exceptIds.includes(id)) {
-//           submenu.classList.remove('main-menu__submenu--open');
-//         }
-//       });
-//   }
-
-//   // Обработчик клика по пункту меню
-//   function handleMenuItemClick(e, item) {
-//     e.stopPropagation(); // Останавливаем «пузырьковый» эффект
-
-//     if (e.target.tagName === 'A') return; // Игнорируем клики по ссылкам
-
-//     // Определяем тип пункта (родительский или дочерний)
-//     const isSubmenuItem = item.closest('.main-submenu__item');
-//     const submenu = isSubmenuItem
-//       ? item.querySelector('.main-submenu--level-2')
-//       : item.querySelector('.main-menu__submenu');
-
-//     if (!submenu) return; // Если подменю нет — выходим
-
-//     const currentId = submenu.getAttribute('data-submenu-id');
-//     const parentId = item.getAttribute('data-parent-id') || item.getAttribute('data-menu-id');
-
-//     // Формируем список исключений (какие подменю не закрывать)
-//     const exceptIds = [];
-//     if (isSubmenuItem) {
-//       // Для дочернего пункта сохраняем открытыми: родительское и текущее подменю
-//       exceptIds.push(parentId, currentId);
-//     } else {
-//       // Для родительского пункта — только текущее подменю
-//       exceptIds.push(currentId);
-//     }
-
-//     // Логика открытия/закрытия
-//     if (submenu.classList.contains('main-menu__submenu--open')) {
-//       // Если подменю уже открыто — закрываем
-//       submenu.classList.remove('main-menu__submenu--open');
-//       console.log('Закрыто:', submenu.getAttribute('data-submenu-id'));
-//     } else {
-//       // Иначе: закрываем все, кроме исключённых, и открываем текущее
-//       closeAllSubmenus(exceptIds);
-//       submenu.classList.add('main-menu__submenu--open');
-//       console.log('Открыто:', submenu.getAttribute('data-submenu-id'));
-//     }
-//   }
-
-//   // Назначаем обработчики на все пункты меню
-//   const allMenuItems = document.querySelectorAll('.main-menu__item, .main-submenu__item');
-//   allMenuItems.forEach(item => {
-//     item.addEventListener('click', e => handleMenuItemClick(e, item));
-
-//     // Поддержка клавиатуры (Enter/Space)
-//     item.addEventListener('keydown', e => {
-//       if (e.key === 'Enter' || e.key === ' ') {
-//         e.preventDefault();
-//         handleMenuItemClick(e, item);
-//       }
-//     });
-//   });
-
-//   // Закрываем все подменю при клике вне меню
-//   document.addEventListener('click', e => {
-//     if (!e.target.closest('.header-top__menu')) {
-//       document.querySelectorAll('.main-menu__submenu--open, .main-submenu--level-2.main-menu__submenu--open')
-//         .forEach(submenu => submenu.classList.remove('main-menu__submenu--open'));
-//     }
-//   });
-// });
-
-
+  // 4. Клик внутри любого подменю — не закрывать
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.main-submenu')) {
+      e.stopPropagation();
+    }
+  }, true);
+});
 
 
 
