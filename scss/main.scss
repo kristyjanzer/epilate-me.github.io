@@ -1935,7 +1935,7 @@ section {
 	.main-menu__item.open > .main-submenu,
 	.main-submenu__item.open > .main-sub-submenu,
 	.main-sub-submenu__item.open > .main-sub-submenu {
-		max-height: 500px;
+		max-height: 1000px;
 	}
 
   	.main-sub-submenu .main-sub-submenu .main-menu__link { padding-left: 80px; }
