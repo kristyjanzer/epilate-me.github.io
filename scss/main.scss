@@ -1669,6 +1669,11 @@ section {
 			}
 
 		}
+
+		&__main-menu {
+			max-height: 450px;
+    		overflow-y: scroll;
+		}
 	}
 
 	.socials {
