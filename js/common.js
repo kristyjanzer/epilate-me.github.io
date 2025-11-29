@@ -12,13 +12,12 @@ $(function() {
 
   // === Функция: очистить состояние меню ===
   function clearMenuState() {
-    if (mainMenu) {
-      mainMenu.querySelectorAll('.main-menu__item, .main-submenu__item, .main-sub-submenu__item')
-        .forEach(el => el.classList.remove('open'));
-    }
-
-    updateHeaderMenuState();
-  }
+  // Убираем 'open' со всех уровней
+  document.querySelectorAll(
+    '.main-menu__item, .main-submenu__item, .main-sub-submenu__item'
+  ).forEach(el => el.classList.remove('open'));
+  updateHeaderMenuState();
+}
 
   // === Функция: закрыть поиск ===
   function closeSearch() {
@@ -68,45 +67,49 @@ $(function() {
 
   // === Обработка кликов по меню ===
   document.addEventListener('click', function(e) {
-    const base = e.target.closest('.main-menu__base');
-    if (!base) {
+  const base = e.target.closest('.main-menu__base');
+  if (!base) {
+    clearMenuState();
+    updateHeaderMenuState(); 
+    return;
+  }
+
+  const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
+  if (!item) return;
+
+  e.stopPropagation();
+
+  const isRoot = item.classList.contains('main-menu__item');
+  const isSub = item.classList.contains('main-submenu__item');
+  const isSubSub = item.classList.contains('main-sub-submenu__item');
+
+  if (isRoot) {
+    // Для корневого пункта: подменю — это .main-menu__submenu > .main-submenu
+    if (item.classList.contains('open')) {
+      item.classList.remove('open');
+    } else {
       clearMenuState();
-      updateHeaderMenuState(); 
-      return;
+      item.classList.add('open');
     }
-
-    const item = base.closest('.main-menu__item, .main-submenu__item, .main-sub-submenu__item');
-    if (!item) return;
-
-    e.stopPropagation();
-
-    const isRoot = item.classList.contains('main-menu__item');
-    const isSub = item.classList.contains('main-submenu__item');
-    const isSubSub = item.classList.contains('main-sub-submenu__item');
-
-    if (isRoot) {
-      if (item.classList.contains('open')) {
-        item.classList.remove('open');
-      } else {
-        clearMenuState();
-        item.classList.add('open');
-      }
-      updateHeaderMenuState(); 
-    } else if (isSub || isSubSub) {
-      const parentUl = item.parentElement;
-      if (parentUl) {
-        parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
-          .forEach(sibling => {
-            if (sibling !== item) sibling.classList.remove('open');
-          });
-      }
-      item.classList.toggle('open');
+    updateHeaderMenuState(); 
+  } else if (isSub || isSubSub) {
+    // Для вложенных пунктов — подменю находится непосредственно внутри как .main-sub-submenu
+    const parentUl = item.parentElement;
+    if (parentUl) {
+      parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
+        .forEach(sibling => {
+          if (sibling !== item) sibling.classList.remove('open');
+        });
     }
+    item.classList.toggle('open');
+  }
   }, true);
 
+
   // Не закрывать меню при клике внутри подменю
+  // Запрет закрытия при клике внутри подменю
   document.addEventListener('click', function(e) {
-    if (e.target.closest('.main-submenu, .main-sub-submenu')) {
+    if (e.target.closest('.main-menu__submenu, .main-submenu, .main-sub-submenu')) {
       e.stopPropagation();
     }
   }, true);

@@ -260,6 +260,10 @@ button {
 				}
 			}
 
+			&__submenu {
+				top: 100px;
+			}
+
 			.main-submenu {
 				.main-menu__link {
 					color: rgba(0, 19, 97, .7);
@@ -273,10 +277,6 @@ button {
 			.main-sub-submenu .main-menu__link {
 				color: #333;
 			}
-		}
-
-		.main-submenu {
-			top: 39px;
 		}
 
 		.search {
@@ -409,7 +409,7 @@ button {
 		position: relative;
 
 		&.open {
-			> .main-submenu {
+			.main-submenu {
 				display: flex;
 				transform-origin: top;
 				animation: dropdown 0.2s ease-out;
@@ -491,19 +491,32 @@ button {
 			}
 		}
 	}
+
+	&__submenu {
+		position: fixed;
+		top: 137px;
+		left: 0;
+		background: #e8edf3;
+		width: 100%;
+		border-radius: 0 0 16px 16px;
+		overflow: hidden auto;
+		transition: all .3s ease;
+	}
 }
 
 .main-submenu {
-	position: absolute;
-	top: 45px;
-	left: 0;
-	width: max-content;
+	// position: absolute;
+	// top: 45px;
+	// left: 0;
+	// width: max-content;
+	position: relative;
+	width: 100%;
 	display: none;
-	background: #E8EDF3;
-	// border-radius: 0 0 16px 16px;
 	z-index: 10;
 	flex-direction: column;
-	padding: 18px;
+	max-width: 1300px;
+    margin: 0 auto;
+    padding: 18px 110px 30px;
 
 	.main-menu__link {
 		color: rgba(0, 19, 97, 0.7);
@@ -531,11 +544,11 @@ button {
   top: 0;
   height: 100%;
   display: none;
-  left: 100%;
+  left: 26%;
   width: max-content;
 
   & & {
-	left: 100%;
+	left: 120%;
 
 	// .main-sub-submenu__item {
 	// 	&:last-child {
@@ -548,9 +561,13 @@ button {
 	transform-origin: left;
 	animation: flyout 0.2s ease-out;
 	background: #e8edf3;
-	padding: 18px 18px 0 25px;
+	// padding: 18px 18px 0 25px;
 
-	&:not(:first-child) {
+	// &:not(:first-child) {
+	// 	padding-top: 18px;
+	// }
+
+	&:first-child {
 		padding-top: 18px;
 	}
 
@@ -576,6 +593,7 @@ button {
 .main-sub-submenu__item.open > .main-sub-submenu {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 //   border-radius: 0 0 16px 16px;
 }
 
@@ -1868,7 +1886,17 @@ section {
 						bottom: 0;
 					}
 				}
+
+				.main-menu__submenu {
+					display: block;
+					position: relative;
+        			top: 0;			
+				}
 			}
+		}
+
+		&__submenu {
+			display: none;
 		}
 	}
 
@@ -1953,12 +1981,12 @@ section {
 		}
 
 		.main-menu__link {
-			padding-left: 15px;
+			padding-left: 35px;
 		}
 
 		& & {
 			.main-menu__link  {
-				padding-left: 20px;
+				padding-left: 55px;
 			}
 		}
 	}
