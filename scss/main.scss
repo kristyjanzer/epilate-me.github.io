@@ -242,6 +242,24 @@ button {
 				fill: $primary;
 			}
 
+			&__item {
+				> .main-menu__link {
+					&:hover {
+						&::before {
+							bottom: -21px;
+						}
+					}
+				}
+
+				&.open {
+					> .main-menu__link {
+						&::before {
+							bottom: -21px;
+						}
+					}
+				}
+			}
+
 			.main-submenu {
 				.main-menu__link {
 					color: rgba(0, 19, 97, .7);
@@ -250,6 +268,10 @@ button {
 						color: $primary;
 					}
 				}
+			}
+
+			.main-sub-submenu .main-menu__link {
+				color: #333;
 			}
 		}
 
@@ -391,6 +413,7 @@ button {
 				display: flex;
 				transform-origin: top;
 				animation: dropdown 0.2s ease-out;
+				gap: 12px;
 				
 				.main-menu__icon {
 					svg {
@@ -401,15 +424,42 @@ button {
 				}
 			}
 
+			> .main-menu__link {
+				&::before {
+					content: "";
+					position: absolute;
+					bottom: -25px;
+					left: 0;
+					width: 100%;
+					height: 4px;
+					background-color: #001360;
+					z-index: 10;
+				}
+			}
 		}
 
 		> .main-submenu {
 			display: none;
 		}
+
+		> .main-menu__link {
+			&:hover {
+				&::before {
+					content: '';
+					position: absolute;
+					bottom: -25px;
+					left: 0;
+					width: 100%;
+					height: 4px;
+					background-color: $primary;
+					z-index: 10;
+				}
+			}
+		}
 	}
 
 	&__link {
-		// padding: 20px;
+		font-size: 18px;
 		color: $white;
 		transition: background 0.2s, color 0.2s;
 		position: relative;
@@ -424,7 +474,7 @@ button {
 
 		svg {
 			width: 20px;
-			height: 20px;
+			height: 18px;
 
 			path {
 				fill: $white;
@@ -443,6 +493,7 @@ button {
 	border-radius: 0 0 16px 16px;
 	z-index: 10;
 	flex-direction: column;
+	padding: 18px;
 
 	.main-menu__link {
 		color: rgba(0, 19, 97, 0.7);
@@ -462,7 +513,6 @@ button {
 
 	&__item {
 		width: 210px;
-		padding: 20px;
 	}
 }
 
@@ -472,7 +522,8 @@ button {
   height: 100%;
   display: none;
   left: 210px;
-  width: 210px;
+  width: max-content;
+  padding: 18px;
 
   & & {
 	left: 100%;
@@ -481,7 +532,6 @@ button {
   &__item {
 	transform-origin: left;
 	animation: flyout 0.2s ease-out;
-	padding: 20px;
 
 	&:hover {
 		> .main-menu__link {
@@ -489,11 +539,18 @@ button {
 		}
 	}
   }
+
+  .main-menu__link {
+	font-size: 16px;
+	color: #333333;
+  }
 }
 
 .main-submenu__item.open > .main-sub-submenu,
 .main-sub-submenu__item.open > .main-sub-submenu {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 
@@ -1796,16 +1853,40 @@ section {
 		max-width: 100%;
 		flex-direction: column;
 		transition: left 0.3s;
-		gap: 10px;
+		gap: 15px;
 
 		&__link {
 			color: $primary;
 			font-size: 16px;
+
+			svg {
+				path {
+					fill: $primary;
+				}
+			}
 		}
 
 		&__item {
 			position: relative;
     		width: 100%;
+
+			> .main-menu__link {
+				&:hover {
+					&::before {
+						height: 0;
+					}
+				}
+			}
+
+			&.open {
+				> .main-menu__link {
+					&::before {
+						background-color: rgba(0, 0, 0, .3);
+						height: 1px;
+						bottom: 0;
+					}
+				}
+			}
 		}
 	}
 
@@ -1848,6 +1929,7 @@ section {
 		max-height: 0;
 		overflow: hidden;
 		transition: max-height 0.3s ease;
+		padding: 18px 0 0;
 	}
 
 	.main-menu__item.open > .main-submenu,
@@ -1860,7 +1942,6 @@ section {
 
 	.main-submenu {
 		flex-direction: column;
-		background: #ffffff;
 		position: relative;
 		left: 100%;
 		top: 0;
@@ -1871,6 +1952,21 @@ section {
 
 		&__item {
 			width: auto;
+
+			&.open {
+				> .main-menu__link {
+					&::before {
+						content: "";
+						position: absolute;
+						left: 0;
+						width: 100%;
+						background-color: rgba(0, 0, 0, .3);
+						height: 1px;
+						bottom: 0;
+						z-index: 10;
+					}
+				}
+			}
 			
 			.main-submenu__item {
 				display: none;
@@ -1884,18 +1980,25 @@ section {
 		}
 
 		.main-menu__link {
-			padding-left: 40px;
+			padding-left: 20px;
 		}
 	}
 
 	.main-sub-submenu {
+		display: none;
+
+		&__item {
+			transform-origin: top;
+			animation: dropdown .2s ease-out;
+		}
+
 		.main-menu__link {
-			padding-left: 60px;
+			padding-left: 40px;
 		}
 
 		& & {
 			.main-menu__link  {
-				padding-left: 80px;
+				padding-left: 60px;
 			}
 		}
 	}
