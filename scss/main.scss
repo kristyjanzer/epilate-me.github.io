@@ -500,7 +500,7 @@ button {
 	width: max-content;
 	display: none;
 	background: #E8EDF3;
-	border-radius: 0 0 16px 16px;
+	// border-radius: 0 0 16px 16px;
 	z-index: 10;
 	flex-direction: column;
 	padding: 18px;
@@ -531,17 +531,17 @@ button {
   top: 0;
   height: 100%;
   display: none;
-  left: 220px;
+  left: 100%;
   width: max-content;
 
   & & {
 	left: 100%;
 
-	.main-sub-submenu__item {
-		&:last-child {
-			border-radius: 0 0 16px 0;
-		}
-	}
+	// .main-sub-submenu__item {
+	// 	&:last-child {
+	// 		border-radius: 0 0 16px 0;
+	// 	}
+	// }
   }
 
   &__item {
@@ -555,7 +555,7 @@ button {
 	}
 
 	&:last-child {
-		border-radius: 0 0 16px 16px;
+		// border-radius: 0 0 16px 16px;
 		padding-bottom: 18px;
 	}
 
@@ -576,7 +576,7 @@ button {
 .main-sub-submenu__item.open > .main-sub-submenu {
   display: flex;
   flex-direction: column;
-  border-radius: 0 0 16px 16px;
+//   border-radius: 0 0 16px 16px;
 }
 
 
@@ -1948,7 +1948,7 @@ section {
 			animation: dropdown .2s ease-out;
 
 			&:last-child {
-				padding-bottom: 0;
+				padding-bottom: 10px;
 			}
 		}
 
