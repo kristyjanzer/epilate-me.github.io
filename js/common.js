@@ -160,24 +160,33 @@ $(function() {
 
   // Функция для обновления состояния header-top
   function updateHeaderMenuState() {
-    const hasOpenItem = document.querySelector('.main-menu__item.open');
-    const headerTop = document.querySelector('.header-top');
+  const hasOpenItem = !!document.querySelector('.main-menu__item.open');
+  const headerTop = document.querySelector('.header-top');
+  const body = document.body; // получаем body
 
-    if (!headerTop) return;
+  const wasMenuOpen = headerTop?.classList.contains('main-menu-open') || false;
 
-    const hadMenuOpen = headerTop.classList.contains('main-menu-open');
-
+  // Управляем состоянием .header-top
+  if (headerTop) {
     if (hasOpenItem) {
       headerTop.classList.add('main-menu-open');
     } else {
       headerTop.classList.remove('main-menu-open');
     }
-
-    // Если меню только что закрылось — нужно обновить состояние 'active'
-    if (hadMenuOpen && !hasOpenItem) {
-      applyScrollActiveState();
-    }
   }
+
+  // Управляем классом 'shadow' на <body>
+  if (hasOpenItem) {
+    body.classList.add('shadow');
+  } else {
+    body.classList.remove('shadow');
+  }
+
+  // Если меню только что закрылось — обновляем active по скроллу
+  if (wasMenuOpen && !hasOpenItem) {
+    applyScrollActiveState();
+  }
+}
 
   function applyScrollActiveState() {
     const headerTop = document.querySelector('.header-top');

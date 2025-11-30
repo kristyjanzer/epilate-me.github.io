@@ -36,6 +36,18 @@ body {
 	margin: 0;
 	background-color: #1B243A;
 
+	&.shadow::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 1;
+		pointer-events: none;
+	}
+
 	input, textarea {
 		border: #666 1px solid;
 		outline: none;
@@ -225,7 +237,7 @@ button {
 		}
 
 		.logo {
-			max-width: 200px;
+			max-width: 185x;
 
 			svg path {
 				fill: $primary;
@@ -370,7 +382,7 @@ button {
 }
 
 .logo {
-	max-width: 316px;
+	max-width: 294px;
 	font-size: 0;
 	transition: all .5s ease;
 
@@ -505,10 +517,6 @@ button {
 }
 
 .main-submenu {
-	// position: absolute;
-	// top: 45px;
-	// left: 0;
-	// width: max-content;
 	position: relative;
 	width: 100%;
 	display: none;
@@ -549,30 +557,18 @@ button {
 
   & & {
 	left: 120%;
-
-	// .main-sub-submenu__item {
-	// 	&:last-child {
-	// 		border-radius: 0 0 16px 0;
-	// 	}
-	// }
   }
 
   &__item {
 	transform-origin: left;
 	animation: flyout 0.2s ease-out;
 	background: #e8edf3;
-	// padding: 18px 18px 0 25px;
-
-	// &:not(:first-child) {
-	// 	padding-top: 18px;
-	// }
 
 	&:first-child {
 		padding-top: 18px;
 	}
 
 	&:last-child {
-		// border-radius: 0 0 16px 16px;
 		padding-bottom: 18px;
 	}
 
@@ -594,7 +590,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-//   border-radius: 0 0 16px 16px;
 }
 
 
@@ -801,10 +796,6 @@ button {
 
 .slick-slide {
 	margin: 0 8px;
-
-	// &:not(:last-child) {
-	// 	margin-right: 16px;
-	// }
 }
 
 .slick-dots {
@@ -1792,7 +1783,7 @@ section {
 		}
 
 		.logo {
-			max-width: 158px;
+			max-width: 145px;
 		}
 
 		&.active {
@@ -1841,7 +1832,7 @@ section {
 			}
 
 			.logo {
-				max-width: 158px;
+				max-width: 145px;
 			}
 		}
 	}
