@@ -162,14 +162,45 @@ $(function() {
   function updateHeaderMenuState() {
     const hasOpenItem = document.querySelector('.main-menu__item.open');
     const headerTop = document.querySelector('.header-top');
-    if (headerTop) {
-      if (hasOpenItem) {
-        headerTop.classList.add('main-menu-open');
-      } else {
-        headerTop.classList.remove('main-menu-open');
-      }
+
+    if (!headerTop) return;
+
+    const hadMenuOpen = headerTop.classList.contains('main-menu-open');
+
+    if (hasOpenItem) {
+      headerTop.classList.add('main-menu-open');
+    } else {
+      headerTop.classList.remove('main-menu-open');
+    }
+
+    // Если меню только что закрылось — нужно обновить состояние 'active'
+    if (hadMenuOpen && !hasOpenItem) {
+      applyScrollActiveState();
     }
   }
+
+  function applyScrollActiveState() {
+    const headerTop = document.querySelector('.header-top');
+    if (!headerTop) return;
+
+    // Не применяем active, если меню открыто
+    if (headerTop.classList.contains('main-menu-open')) {
+      return;
+    }
+
+    const scrollPosition = window.scrollY;
+    if (scrollPosition > 50) {
+      headerTop.classList.add('active');
+    } else {
+      headerTop.classList.remove('active');
+    }
+  }
+
+  // Слушатель скролла
+  window.addEventListener('scroll', function () {
+    applyScrollActiveState();
+  });
+
 
 
   // === Клонируем соцсети и телефон в ОДИН блок ===
@@ -619,20 +650,21 @@ $(function() {
     }
   });
 
+  
 
 });
 
-// Header-Top Scroll
-window.addEventListener('scroll', function() {
-  const headerTop = document.querySelector('.header-top');
-  const scrollPosition = window.scrollY;
+// // Header-Top Scroll
+// window.addEventListener('scroll', function() {
+//   const headerTop = document.querySelector('.header-top');
+//   const scrollPosition = window.scrollY;
 
-  if (scrollPosition > 50) {
-    headerTop.classList.add('active');
-  } else {
-    headerTop.classList.remove('active');
-  }
-});
+//   if (scrollPosition > 50) {
+//     headerTop.classList.add('active');
+//   } else {
+//     headerTop.classList.remove('active');
+//   }
+// });
 
 
 // === Аккордеон ===
