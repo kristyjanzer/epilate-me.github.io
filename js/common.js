@@ -1,5 +1,26 @@
 $(function() {
 
+  // Предзагрузка всех изображений из слайдеров
+function preloadImages() {
+  const imageUrls = new Set();
+
+  // Собираем src всех изображений из equipment и clinics
+  document.querySelectorAll('.equipment-slider-content__item img, .clinics-slider-content__item img')
+    .forEach(img => {
+      if (img.src) imageUrls.add(img.src);
+    });
+
+  // Загружаем каждую картинку в фоне
+  imageUrls.forEach(src => {
+    const img = new Image();
+    img.src = src; // Браузер закэширует её
+  });
+
+  console.log('Предзагружено изображений:', imageUrls.size);
+}
+
+  preloadImages();
+
   // Бургер-меню, Мобильный поиск, Мобильное меню
   const mainMenu = document.querySelector('.main-menu');
   const desktopContainer = document.querySelector('.header-top__menu');
@@ -16,7 +37,6 @@ $(function() {
   document.querySelectorAll(
     '.main-menu__item, .main-submenu__item, .main-sub-submenu__item'
   ).forEach(el => el.classList.remove('open'));
-  updateHeaderMenuState();
 }
 
   // === Функция: закрыть поиск ===
@@ -36,6 +56,7 @@ $(function() {
     }
     closeSearch();
     clearMenuState();
+    updateHeaderMenuState();
   }
 
   // === Перенос меню ===
@@ -121,6 +142,7 @@ $(function() {
       closeSearch(); // Закрываем поиск при открытии меню
       header?.classList.toggle('header-menu-open');
       burgerBody?.classList.toggle('active');
+      updateHeaderMenuState();
     });
   }
 
@@ -160,30 +182,33 @@ $(function() {
 
   // Функция для обновления состояния header-top
   function updateHeaderMenuState() {
-  const hasOpenItem = !!document.querySelector('.main-menu__item.open');
+  const hasOpenDesktopItem = !!document.querySelector('.main-menu__item.open');
+  const header = document.querySelector('.header');
   const headerTop = document.querySelector('.header-top');
-  const body = document.body; // получаем body
+  const body = document.body;
 
-  const wasMenuOpen = headerTop?.classList.contains('main-menu-open') || false;
+  const isMobileMenuOpen = header?.classList.contains('header-menu-open') || false;
+  const isAnyMenuOpen = hasOpenDesktopItem || isMobileMenuOpen;
 
-  // Управляем состоянием .header-top
+  // Обновляем main-menu-open у .header-top (только для десктопного меню)
   if (headerTop) {
-    if (hasOpenItem) {
+    if (hasOpenDesktopItem) {
       headerTop.classList.add('main-menu-open');
     } else {
       headerTop.classList.remove('main-menu-open');
     }
   }
 
-  // Управляем классом 'shadow' на <body>
-  if (hasOpenItem) {
+  // Управляем shadow на body: если открыто ЛЮБОЕ меню
+  if (isAnyMenuOpen) {
     body.classList.add('shadow');
   } else {
     body.classList.remove('shadow');
   }
 
-  // Если меню только что закрылось — обновляем active по скроллу
-  if (wasMenuOpen && !hasOpenItem) {
+  // Если десктопное меню только что закрылось — обновляем active
+  const wasDesktopMenuOpen = headerTop?.classList.contains('main-menu-open') || false;
+  if (wasDesktopMenuOpen && !hasOpenDesktopItem) {
     applyScrollActiveState();
   }
 }
@@ -339,121 +364,129 @@ $(function() {
       ]
   });
 
-  // Clinics Slider
-  const slider = $('.clinics-slider-content__items');
-  const filterButtons = document.querySelectorAll('.clinics-slider-nav__button');
 
-  slider.slick({
-      arrows: false,
-      dots: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      infinite: false,
-      responsive: [
-          { 
-              breakpoint: 1100, 
-              settings: { 
-                  slidesToShow: 2
-              } 
-          },
-          { 
-              breakpoint: 900, 
-              settings: { 
-                  slidesToShow: 2 
-              } 
-          },
-          { 
-              breakpoint: 700, 
-              settings: { 
-                  slidesToShow: 1
-              } 
-          }
-      ]
-  });
 
-  slider.slick('setPosition');
-  slider.slick('refresh');
+// ======== CLINICS SLIDER (надёжная версия) ========
+const sliderContainer = $('.clinics-slider-content__items');
+let originalItems = null;
+let slickActive = false;
 
-  const applyFilter = (category) => {
-      slider.slick('slickUnfilter');
-      
-      if (category) {
-          slider.slick('slickFilter', function() {
-              return $(this).find('.clinics-slider-content__item').attr('data-category') === category;
-          });
-      }
-  };
+if (sliderContainer.length) {
+  originalItems = sliderContainer.children().clone();
+}
 
-  filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-          filterButtons.forEach(b => b.classList.remove('clinics-slider-nav__button--active'));
-          
-          btn.classList.add('clinics-slider-nav__button--active');
-          
-          const category = btn.dataset.filter;
-          
-          applyFilter(category);
-      });
-  });
-
-  const defaultButton = document.querySelector('[data-filter="moscow"]');
-  if (defaultButton) {
-      defaultButton.classList.add('clinics-slider-nav__button--active');
-      applyFilter('moscow');
+const initSlider = (items) => {
+  if (slickActive) {
+    sliderContainer.slick('unslick');
   }
-        
 
-  // Equipment Slider
-  const sliderE = $('.equipment-slider-content__items');
-  const filterButtonsE = document.querySelectorAll('.equipment-slider-nav__button');
+  sliderContainer.empty().append(items);
 
-  sliderE.slick({
-      arrows: false,
-      dots: true,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      infinite: true,
-      adaptiveHeight: true,
-      responsive: [
-          { 
-              breakpoint: 1000, 
-              settings: { 
-                  slidesToShow: 1
-              } 
-          },
-      ]
+  sliderContainer.slick({
+    arrows: false,
+    dots: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    infinite: false,
+    responsive: [
+      { breakpoint: 1100, settings: { slidesToShow: 2 } },
+      { breakpoint: 700, settings: { slidesToShow: 1 } }
+    ]
   });
+  slickActive = true;
+};
 
-  sliderE.slick('setPosition');
-  sliderE.slick('refresh');
+const applyFilter = (category) => {
+  if (!originalItems) return;
 
-  const applyFilterE = (categoryE) => {
-      sliderE.slick('slickUnfilter');
-      
-      if (categoryE) {
-          sliderE.slick('slickFilter', function() {
-              return $(this).find('.equipment-slider-content__item').attr('data-category') === categoryE;
-          });
-      }
-  };
-
-  filterButtonsE.forEach(btn => {
-      btn.addEventListener('click', () => {
-          filterButtonsE.forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
-          
-          btn.classList.add('equipment-slider-nav__button--active');
-          
-          const categoryE = btn.dataset.filter;
-          
-          applyFilterE(categoryE);
-      });
-  });
-
-  const defaultButtonE = document.querySelector('[data-filter="alexandrite"]');
-  if (defaultButtonE) {
-      defaultButtonE.classList.add('equipment-slider-nav__button--active');
-      applyFilterE('alexandrite');
+  let filteredItems;
+  if (category) {
+    filteredItems = originalItems.filter(`[data-category="${category}"]`);
+  } else {
+    filteredItems = originalItems;
   }
+
+  initSlider(filteredItems);
+};
+
+document.querySelectorAll('.clinics-slider-nav__button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.clinics-slider-nav__button').forEach(b => b.classList.remove('clinics-slider-nav__button--active'));
+    btn.classList.add('clinics-slider-nav__button--active');
+    applyFilter(btn.dataset.filter);
+  });
+});
+
+const defaultBtn = document.querySelector('[data-filter="moscow"]');
+if (defaultBtn) {
+  defaultBtn.classList.add('clinics-slider-nav__button--active');
+  applyFilter('moscow');
+}
+
+
+// ======== EQUIPMENT SLIDER (надёжная версия) ========
+const sliderEContainer = $('.equipment-slider-content__items');
+let originalItemsE = null;
+let slickActiveE = false;
+
+// Сохраняем оригинальные элементы
+if (sliderEContainer.length) {
+  originalItemsE = sliderEContainer.children().clone(); // клонируем, чтобы не потерять
+}
+
+const initSliderE = (items) => {
+  // Удаляем старый слайдер
+  if (slickActiveE) {
+    sliderEContainer.slick('unslick');
+  }
+
+  // Очищаем и вставляем нужные элементы
+  sliderEContainer.empty().append(items);
+
+  // Запускаем слайдер
+  sliderEContainer.slick({
+    arrows: false,
+    dots: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    infinite: true,
+    adaptiveHeight: true,
+    responsive: [
+      { breakpoint: 1000, settings: { slidesToShow: 1 } }
+    ]
+  });
+  slickActiveE = true;
+};
+
+const applyFilterE = (category) => {
+  if (!originalItemsE) return;
+
+  let filteredItems;
+  if (category) {
+    filteredItems = originalItemsE.filter(`[data-category="${category}"]`);
+  } else {
+    filteredItems = originalItemsE;
+  }
+
+  // Если нет элементов — можно показать заглушку, но мы просто рендерим пустой
+  initSliderE(filteredItems);
+};
+
+// Кнопки фильтрации
+document.querySelectorAll('.equipment-slider-nav__button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.equipment-slider-nav__button').forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
+    btn.classList.add('equipment-slider-nav__button--active');
+    applyFilterE(btn.dataset.filter);
+  });
+});
+
+// Инициализация по умолчанию
+const defaultBtnE = document.querySelector('[data-filter="alexandrite"]');
+if (defaultBtnE) {
+  defaultBtnE.classList.add('equipment-slider-nav__button--active');
+  applyFilterE('alexandrite');
+}
 
 
     // Clinics and Equipment Sliders
