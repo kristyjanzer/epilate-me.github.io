@@ -519,8 +519,18 @@ button {
 		width: 100%;
 		border-radius: 0 0 16px 16px;
 		overflow: hidden auto;
-		overflow-y: scroll;
 		transition: all .3s ease;
+		overflow-y: scroll;
+		box-sizing: content-box;
+
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 10px; 
+			border: 3px solid #eee;
+		}
 	}
 }
 
@@ -570,7 +580,6 @@ button {
   &__item {
 	transform-origin: left;
 	animation: flyout 0.2s ease-out;
-	background: #e8edf3;
 
 	&:first-child {
 		padding-top: 18px;
