@@ -38,11 +38,11 @@ $(function() {
 
   // === Функция: очистить состояние меню ===
   function clearMenuState() {
-  // Убираем 'open' со всех уровней
-  document.querySelectorAll(
-    '.main-menu__item, .main-submenu__item, .main-sub-submenu__item'
-  ).forEach(el => el.classList.remove('open'));
-}
+    // Убираем 'open' со всех уровней
+    document.querySelectorAll(
+      '.main-menu__item, .main-submenu__item, .main-sub-submenu__item'
+    ).forEach(el => el.classList.remove('open'));
+  }
 
   // === Функция: закрыть поиск ===
   function closeSearch() {
@@ -110,7 +110,6 @@ $(function() {
   const isSubSub = item.classList.contains('main-sub-submenu__item');
 
   if (isRoot) {
-    // Для корневого пункта: подменю — это .main-menu__submenu > .main-submenu
     if (item.classList.contains('open')) {
       item.classList.remove('open');
     } else {
@@ -119,7 +118,6 @@ $(function() {
     }
     updateHeaderMenuState(); 
   } else if (isSub || isSubSub) {
-    // Для вложенных пунктов — подменю находится непосредственно внутри как .main-sub-submenu
     const parentUl = item.parentElement;
     if (parentUl) {
       parentUl.querySelectorAll('.main-submenu__item, .main-sub-submenu__item')
@@ -132,13 +130,14 @@ $(function() {
   }, true);
 
 
-  // Не закрывать меню при клике внутри подменю
   // Запрет закрытия при клике внутри подменю
   document.addEventListener('click', function(e) {
     if (e.target.closest('.main-menu__submenu, .main-submenu, .main-sub-submenu')) {
       e.stopPropagation();
     }
   }, true);
+
+
 
   // === Бургер: открывает/закрывает меню, закрывает поиск ===
   if (burgerMenu) {
@@ -172,6 +171,8 @@ $(function() {
     });
   }
 
+
+
   // === Закрыть всё при клике вне ===
   document.addEventListener('click', (e) => {
     const isInsideBurger = e.target.closest('.header-button-menu, .header-button-menu-body');
@@ -182,10 +183,10 @@ $(function() {
     }
   });
 
-  // =============================================
+  //=====================================================//
 
 
-  // Функция для обновления состояния header-top
+  //=== Функция для обновления состояния header-top ===//
   function updateHeaderMenuState() {
   const hasOpenDesktopItem = !!document.querySelector('.main-menu__item.open');
   const header = document.querySelector('.header');
@@ -195,7 +196,6 @@ $(function() {
   const isMobileMenuOpen = header?.classList.contains('header-menu-open') || false;
   const isAnyMenuOpen = hasOpenDesktopItem || isMobileMenuOpen;
 
-  // Обновляем main-menu-open у .header-top (только для десктопного меню)
   if (headerTop) {
     if (hasOpenDesktopItem) {
       headerTop.classList.add('main-menu-open');
@@ -204,14 +204,12 @@ $(function() {
     }
   }
 
-  // Управляем shadow на body: если открыто ЛЮБОЕ меню
   if (isAnyMenuOpen) {
     body.classList.add('shadow');
   } else {
     body.classList.remove('shadow');
   }
 
-  // Если десктопное меню только что закрылось — обновляем active
   const wasDesktopMenuOpen = headerTop?.classList.contains('main-menu-open') || false;
   if (wasDesktopMenuOpen && !hasOpenDesktopItem) {
     applyScrollActiveState();
@@ -240,9 +238,11 @@ $(function() {
     applyScrollActiveState();
   });
 
+  //=====================================================//
 
 
-  // === Клонируем соцсети и телефон в ОДИН блок ===
+
+  // === Клонируем соцсети и телефон в ОДИН блок ===//
   const socials = document.querySelector('.header-top__socials');
   const phone = document.querySelector('.header-top__phone');
   const mobileSocialsContainer = document.querySelector('.header-button-menu-body__socials');
@@ -276,9 +276,9 @@ $(function() {
   }
 
 
-  // === Слайдеры ===
+  //=== Слайдеры ===//
 
-  // Content Ranks Slider
+  //=== Слайдер Шапки
   $('.header-slider').slick({
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -287,7 +287,8 @@ $(function() {
       infinite: true
   });
 
-  // Main Section Slider
+
+  //=== Слайдер Было/Стало
   $('.main-sect-slider').slick({
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -310,7 +311,8 @@ $(function() {
       ]
   });
 
-  // Two-Level Slider
+
+  //=== Двухуровневый слайдер
   $('.two-level-slider').slick({
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -339,7 +341,8 @@ $(function() {
       ]
   });
 
-  // Areas Slider
+
+  //=== Слайдер Зоны
   $('.areas-slider').slick({
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -370,221 +373,124 @@ $(function() {
   });
 
 
+  //=== Слайдер Клиник
+  const sliderContainer = $('.clinics-slider-content__items');
+  let originalItems = null;
+  let slickActive = false;
 
-// ======== CLINICS SLIDER (надёжная версия) ========
-const sliderContainer = $('.clinics-slider-content__items');
-let originalItems = null;
-let slickActive = false;
-
-if (sliderContainer.length) {
-  originalItems = sliderContainer.children().clone();
-}
-
-const initSlider = (items) => {
-  if (slickActive) {
-    sliderContainer.slick('unslick');
+  if (sliderContainer.length) {
+    originalItems = sliderContainer.children().clone();
   }
 
-  sliderContainer.empty().append(items);
+  const initSlider = (items) => {
+    if (slickActive) {
+      sliderContainer.slick('unslick');
+    }
 
-  sliderContainer.slick({
-    arrows: false,
-    dots: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    infinite: false,
-    responsive: [
-      { breakpoint: 1100, settings: { slidesToShow: 2 } },
-      { breakpoint: 700, settings: { slidesToShow: 1 } }
-    ]
+    sliderContainer.empty().append(items);
+
+    sliderContainer.slick({
+      arrows: false,
+      dots: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: false,
+      responsive: [
+        { breakpoint: 1100, settings: { slidesToShow: 2 } },
+        { breakpoint: 700, settings: { slidesToShow: 1 } }
+      ]
+    });
+    slickActive = true;
+  };
+
+  const applyFilter = (category) => {
+    if (!originalItems) return;
+
+    let filteredItems;
+    if (category) {
+      filteredItems = originalItems.filter(`[data-category="${category}"]`);
+    } else {
+      filteredItems = originalItems;
+    }
+
+    initSlider(filteredItems);
+  };
+
+  document.querySelectorAll('.clinics-slider-nav__button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.clinics-slider-nav__button').forEach(b => b.classList.remove('clinics-slider-nav__button--active'));
+      btn.classList.add('clinics-slider-nav__button--active');
+      applyFilter(btn.dataset.filter);
+    });
   });
-  slickActive = true;
-};
 
-const applyFilter = (category) => {
-  if (!originalItems) return;
-
-  let filteredItems;
-  if (category) {
-    filteredItems = originalItems.filter(`[data-category="${category}"]`);
-  } else {
-    filteredItems = originalItems;
+  const defaultBtn = document.querySelector('[data-filter="moscow"]');
+  if (defaultBtn) {
+    defaultBtn.classList.add('clinics-slider-nav__button--active');
+    applyFilter('moscow');
   }
 
-  initSlider(filteredItems);
-};
 
-document.querySelectorAll('.clinics-slider-nav__button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.clinics-slider-nav__button').forEach(b => b.classList.remove('clinics-slider-nav__button--active'));
-    btn.classList.add('clinics-slider-nav__button--active');
-    applyFilter(btn.dataset.filter);
-  });
-});
+  //=== Слайдер Оборудования
+  const sliderEContainer = $('.equipment-slider-content__items');
+  let originalItemsE = null;
+  let slickActiveE = false;
 
-const defaultBtn = document.querySelector('[data-filter="moscow"]');
-if (defaultBtn) {
-  defaultBtn.classList.add('clinics-slider-nav__button--active');
-  applyFilter('moscow');
-}
-
-
-// ======== EQUIPMENT SLIDER (надёжная версия) ========
-const sliderEContainer = $('.equipment-slider-content__items');
-let originalItemsE = null;
-let slickActiveE = false;
-
-// Сохраняем оригинальные элементы
-if (sliderEContainer.length) {
-  originalItemsE = sliderEContainer.children().clone(); // клонируем, чтобы не потерять
-}
-
-const initSliderE = (items) => {
-  // Удаляем старый слайдер
-  if (slickActiveE) {
-    sliderEContainer.slick('unslick');
+  if (sliderEContainer.length) {
+    originalItemsE = sliderEContainer.children().clone();
   }
 
-  // Очищаем и вставляем нужные элементы
-  sliderEContainer.empty().append(items);
+  const initSliderE = (items) => {
+    if (slickActiveE) {
+      sliderEContainer.slick('unslick');
+    }
 
-  // Запускаем слайдер
-  sliderEContainer.slick({
-    arrows: false,
-    dots: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    infinite: true,
-    adaptiveHeight: true,
-    responsive: [
-      { breakpoint: 1000, settings: { slidesToShow: 1 } }
-    ]
+    sliderEContainer.empty().append(items);
+
+    sliderEContainer.slick({
+      arrows: false,
+      dots: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      infinite: true,
+      adaptiveHeight: true,
+      responsive: [
+        { breakpoint: 1000, settings: { slidesToShow: 1 } }
+      ]
+    });
+    slickActiveE = true;
+  };
+
+  const applyFilterE = (category) => {
+    if (!originalItemsE) return;
+
+    let filteredItems;
+    if (category) {
+      filteredItems = originalItemsE.filter(`[data-category="${category}"]`);
+    } else {
+      filteredItems = originalItemsE;
+    }
+
+    initSliderE(filteredItems);
+  };
+
+  // Кнопки фильтрации
+  document.querySelectorAll('.equipment-slider-nav__button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.equipment-slider-nav__button').forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
+      btn.classList.add('equipment-slider-nav__button--active');
+      applyFilterE(btn.dataset.filter);
+    });
   });
-  slickActiveE = true;
-};
 
-const applyFilterE = (category) => {
-  if (!originalItemsE) return;
-
-  let filteredItems;
-  if (category) {
-    filteredItems = originalItemsE.filter(`[data-category="${category}"]`);
-  } else {
-    filteredItems = originalItemsE;
+  // Инициализация по умолчанию
+  const defaultBtnE = document.querySelector('[data-filter="alexandrite"]');
+  if (defaultBtnE) {
+    defaultBtnE.classList.add('equipment-slider-nav__button--active');
+    applyFilterE('alexandrite');
   }
 
-  // Если нет элементов — можно показать заглушку, но мы просто рендерим пустой
-  initSliderE(filteredItems);
-};
-
-// Кнопки фильтрации
-document.querySelectorAll('.equipment-slider-nav__button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.equipment-slider-nav__button').forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
-    btn.classList.add('equipment-slider-nav__button--active');
-    applyFilterE(btn.dataset.filter);
-  });
-});
-
-// Инициализация по умолчанию
-const defaultBtnE = document.querySelector('[data-filter="alexandrite"]');
-if (defaultBtnE) {
-  defaultBtnE.classList.add('equipment-slider-nav__button--active');
-  applyFilterE('alexandrite');
-}
-
-
-    // Clinics and Equipment Sliders
-    // const initSlider = (selector, settings) => {
-    //     const $slider = $(selector);
-        
-    //     $slider.slick(settings);
-    //     $slider.slick('setPosition');
-    //     $slider.slick('refresh');
-        
-    //     return $slider;
-    // };
-
-    // const applyFilter = ($slider, category, itemSelector, categoryAttr = 'data-category') => {
-    //     $slider.slick('slickUnfilter');
-        
-    //     if (category) {
-    //         $slider.slick('slickFilter', function() {
-    //             return $(this).find(itemSelector).attr(categoryAttr) === category;
-    //         });
-    //     }
-    // };
-
-    // const setupFilterButtons = (buttonSelector, slider, itemSelector, defaultCategory) => {
-    //     const filterButtons = document.querySelectorAll(buttonSelector);
-        
-    //     filterButtons.forEach(btn => {
-    //         btn.addEventListener('click', () => {
-    //             filterButtons.forEach(b => b.classList.remove('clinics-slider-nav__button--active', 'equipment-slider-nav__button--active'));
-                
-    //             btn.classList.add(
-    //                 btn.classList.contains('clinics-slider-nav__button') 
-    //                     ? 'clinics-slider-nav__button--active'
-    //                     : 'equipment-slider-nav__button--active'
-    //             );
-                
-    //             const category = btn.dataset.filter;
-    //             applyFilter(slider, category, itemSelector);
-    //         });
-    //     });
-        
-    //     const defaultButton = document.querySelector(`[data-filter="${defaultCategory}"]`);
-    //     if (defaultButton) {
-    //         defaultButton.classList.add(
-    //             defaultButton.classList.contains('clinics-slider-nav__button')
-    //                 ? 'clinics-slider-nav__button--active'
-    //                 : 'equipment-slider-nav__button--active'
-    //         );
-    //         applyFilter(slider, defaultCategory, itemSelector);
-    //     }
-    // };
-
-    // const clinicsSlider = initSlider('.clinics-slider-content__items', {
-    //     arrows: false,
-    //     dots: true,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     infinite: false,
-    //     responsive: [
-    //         { breakpoint: 1100, settings: { slidesToShow: 2 } },
-    //         { breakpoint: 900,  settings: { slidesToShow: 2 } },
-    //         { breakpoint: 700,  settings: { slidesToShow: 1 } }
-    //     ]
-    // });
-
-    // setupFilterButtons(
-    //     '.clinics-slider-nav__button',
-    //     clinicsSlider,
-    //     '.clinics-slider-content__item',
-    //     'moscow'
-    // );
-
-    // const equipmentSlider = initSlider('.equipment-slider-content__items', {
-    //     arrows: false,
-    //     dots: true,
-    //     slidesToShow: 2,
-    //     slidesToScroll: 1,
-    //     infinite: true,
-    //     adaptiveHeight: true,
-    //     responsive: [
-    //         { breakpoint: 1000, settings: { slidesToShow: 1 } }
-    //     ]
-    // });
-
-    // setupFilterButtons(
-    //     '.equipment-slider-nav__button',
-    //     equipmentSlider,
-    //     '.equipment-slider-content__item',
-    //     'alexandrite'
-    // );
-
-
-  // Licenses Slider
+  // Слайдер Лицензий
   $('.licenses-slider').slick({
       slidesToShow: 6,
       slidesToScroll: 1,
@@ -613,7 +519,7 @@ if (defaultBtnE) {
       ]
   });
 
-  // Experts Slider
+  // Слайдер Специалистов
   $('.experts-slider').slick({
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -642,7 +548,7 @@ if (defaultBtnE) {
       ]
   });
 
-  // Reviews Slider
+  // Слайдер Отзывов
   $('.reviews-slider').slick({
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -666,10 +572,11 @@ if (defaultBtnE) {
       ]
   });
 
-  // ========================================
+  //=====================================================//
 
 
-  // === Показать все кнопки ===
+
+  //=== Показать все кнопки ===//
   $('.accordion-menu-button').click(function (e) {
     e.preventDefault();
     e.returnValue = false;
@@ -701,20 +608,8 @@ if (defaultBtnE) {
 
 });
 
-// // Header-Top Scroll
-// window.addEventListener('scroll', function() {
-//   const headerTop = document.querySelector('.header-top');
-//   const scrollPosition = window.scrollY;
 
-//   if (scrollPosition > 50) {
-//     headerTop.classList.add('active');
-//   } else {
-//     headerTop.classList.remove('active');
-//   }
-// });
-
-
-// === Аккордеон ===
+//=== Аккордеон ===//
 let Accordion = function (el, multiple) {
   this.el = el || {};
   // more than one submenu open?
@@ -749,5 +644,5 @@ Accordion.prototype.dropdown = function (e) {
   }
 };
 
-// Инициализация аккордеона (только один открытый элемент одновременно)
+// Инициализация аккордеона
 let accordion = new Accordion($('.accordion-menu'), false);
