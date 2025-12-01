@@ -1,27 +1,32 @@
 $(function() {
 
-  // Предзагрузка всех изображений из слайдеров
-function preloadImages() {
-  const imageUrls = new Set();
+  //=== Предзагрузка всех изображений из слайдеров ===//
+  function preloadImages() {
+    const imageUrls = new Set();
 
-  // Собираем src всех изображений из equipment и clinics
-  document.querySelectorAll('.equipment-slider-content__item img, .clinics-slider-content__item img')
-    .forEach(img => {
-      if (img.src) imageUrls.add(img.src);
+    // Собираем src всех изображений из equipment и clinics
+    document.querySelectorAll('.equipment-slider-content__item img, .clinics-slider-content__item img')
+      .forEach(img => {
+        if (img.src) imageUrls.add(img.src);
+      });
+
+    // Загружаем каждую картинку в фоне
+    imageUrls.forEach(src => {
+      const img = new Image();
+      img.src = src; // Браузер закэширует её
     });
 
-  // Загружаем каждую картинку в фоне
-  imageUrls.forEach(src => {
-    const img = new Image();
-    img.src = src; // Браузер закэширует её
-  });
+    console.log('Предзагружено изображений:', imageUrls.size);
+  }
 
-  console.log('Предзагружено изображений:', imageUrls.size);
-}
+  preloadImages(); // Вызов функции
 
-  preloadImages();
+  //=====================================================//
 
-  // Бургер-меню, Мобильный поиск, Мобильное меню
+
+
+
+  //=== Бургер-меню, Мобильный поиск, Мобильное меню ===//
   const mainMenu = document.querySelector('.main-menu');
   const desktopContainer = document.querySelector('.header-top__menu');
   const mobileContainer = document.querySelector('.header-button-menu-body__main-menu');
