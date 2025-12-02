@@ -406,19 +406,18 @@ $(function() {
   const applyFilter = (category) => {
     if (!originalItems) return;
 
-    let filteredItems;
-    if (category) {
-      filteredItems = originalItems.filter(`[data-category="${category}"]`);
-    } else {
-      filteredItems = originalItems;
-    }
+    const filteredItems = category
+      ? originalItems.filter(`[data-category="${category}"]`)
+      : originalItems;
 
     initSlider(filteredItems);
   };
 
   document.querySelectorAll('.clinics-slider-nav__button').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.clinics-slider-nav__button').forEach(b => b.classList.remove('clinics-slider-nav__button--active'));
+      document.querySelectorAll('.clinics-slider-nav__button').forEach(b => 
+        b.classList.remove('clinics-slider-nav__button--active')
+      );
       btn.classList.add('clinics-slider-nav__button--active');
       applyFilter(btn.dataset.filter);
     });
@@ -444,9 +443,7 @@ $(function() {
     if (slickActiveE) {
       sliderEContainer.slick('unslick');
     }
-
     sliderEContainer.empty().append(items);
-
     sliderEContainer.slick({
       arrows: false,
       dots: true,
@@ -454,41 +451,106 @@ $(function() {
       slidesToScroll: 1,
       infinite: true,
       adaptiveHeight: true,
-      responsive: [
-        { breakpoint: 1000, settings: { slidesToShow: 1 } }
-      ]
+      responsive: [{ breakpoint: 1000, settings: { slidesToShow: 1 } }]
     });
     slickActiveE = true;
   };
 
-  const applyFilterE = (category) => {
+  const applyEquipmentFilter = (category) => {
     if (!originalItemsE) return;
-
-    let filteredItems;
-    if (category) {
-      filteredItems = originalItemsE.filter(`[data-category="${category}"]`);
-    } else {
-      filteredItems = originalItemsE;
-    }
-
-    initSliderE(filteredItems);
+    const filtered = category
+      ? originalItemsE.filter(`[data-category="${category}"]`)
+      : originalItemsE;
+    initSliderE(filtered);
   };
 
-  // Кнопки фильтрации
-  document.querySelectorAll('.equipment-slider-nav__button').forEach(btn => {
+  // Фильтрация кнопок для слайдера Оборудования
+  document.querySelectorAll('.equipment-filter__button').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.equipment-slider-nav__button').forEach(b => b.classList.remove('equipment-slider-nav__button--active'));
-      btn.classList.add('equipment-slider-nav__button--active');
-      applyFilterE(btn.dataset.filter);
+      document.querySelectorAll('.equipment-filter__button').forEach(b =>
+        b.classList.remove('equipment-filter__button--active')
+      );
+      btn.classList.add('equipment-filter__button--active');
+      applyEquipmentFilter(btn.dataset.filter);
     });
   });
 
-  // Инициализация по умолчанию
-  const defaultBtnE = document.querySelector('[data-filter="alexandrite"]');
-  if (defaultBtnE) {
-    defaultBtnE.classList.add('equipment-slider-nav__button--active');
-    applyFilterE('alexandrite');
+  const defaultEquipBtn = document.querySelector('.equipment-filter__button[data-filter="alexandrite"]');
+  if (defaultEquipBtn) {
+    defaultEquipBtn.classList.add('equipment-filter__button--active');
+    applyEquipmentFilter('alexandrite');
   }
+
+
+
+  //=== Кнопки-фильтры для обычных блоков ===//
+  document.querySelectorAll('.filter-section').forEach(section => {
+    const defaultFilter = section.dataset.defaultFilter || null;
+    const buttons = section.querySelectorAll('.main-filter__button');
+    const galleries = section.querySelectorAll('.gallery[data-category]');
+    const toggleBtn = section.querySelector('.toggle-all-button');
+    
+    let isShowingAll = false;
+
+    // Обновление текста кнопки
+      const updateButtonText = () => {
+        if (!toggleBtn) return;
+        const textSpan = toggleBtn.querySelector('.areas-box__button-text');
+        if (textSpan) {
+          textSpan.textContent = isShowingAll 
+            ? toggleBtn.dataset.hide 
+            : toggleBtn.dataset.show;
+        }
+      };
+
+      // Активация галереи
+      const setActiveGallery = (category) => {
+        galleries.forEach(gal => {
+          gal.classList.remove('is-active', 'show-all');
+        });
+
+        // Активируем нужную
+        const targetGallery = section.querySelector(`.gallery[data-category="${category}"]`);
+        if (targetGallery) {
+          targetGallery.classList.add('is-active');
+          if (isShowingAll) {
+            targetGallery.classList.add('show-all');
+          }
+        }
+
+        updateButtonText();
+      };
+
+      // Применение фильтра
+      const applyFilter = (category) => {
+        isShowingAll = false;
+        buttons.forEach(btn => {
+          btn.classList.toggle('main-filter__button--active', btn.dataset.filter === category);
+        });
+        setActiveGallery(category);
+      };
+
+      // Обработчики кнопок фильтра
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyFilter(btn.dataset.filter);
+        });
+      });
+
+      // Обработчик кнопки "Показать всё / Скрыть"
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isShowingAll = !isShowingAll;
+          const activeCategory = section.querySelector('.main-filter__button--active')?.dataset.filter || defaultFilter;
+          setActiveGallery(activeCategory);
+        });
+      }
+
+      // Инициализация
+      applyFilter(defaultFilter);
+  });
+
+
 
   // Слайдер Лицензий
   $('.licenses-slider').slick({
@@ -572,11 +634,22 @@ $(function() {
       ]
   });
 
+  //=== Слайдер Было/Стало на странице ЛЭ
+  $('.laser-main-sect-slider').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      variableWidth: true
+  });
+
   //=====================================================//
 
 
+  
 
-  //=== Показать все кнопки ===//
+  //=== Показать все кнопки для Аккордеона ===//
   $('.accordion-menu-button').click(function (e) {
     e.preventDefault();
     e.returnValue = false;
@@ -604,7 +677,6 @@ $(function() {
     }
   });
 
-  
 
 });
 

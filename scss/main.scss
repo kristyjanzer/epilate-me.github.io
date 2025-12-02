@@ -163,6 +163,12 @@ button {
 		}
 		
 	}
+
+	&--gray {
+		background: rgba(169, 177, 190, 0.5);
+		color: $white;
+		border: 1px solid #fff;
+	}
 }
 
 
@@ -775,11 +781,11 @@ button {
 
 	&__info {
 		position: relative;
-		max-width: 563px;
+		max-width: 600px;
 	}
 
 	&__title {
-		font-size: 70px;
+		font-size: 60px;
 	}
 
 	&__subtitle {
@@ -802,6 +808,10 @@ button {
 
 	.slick-list {
 		margin: 0;
+	}
+
+	&__button {
+		margin-top: 48px;
 	}
 
 }
@@ -986,7 +996,8 @@ section {
 }
 
 
-.equipment-slider-nav {
+.equipment-filter,
+.main-filter {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -995,10 +1006,16 @@ section {
 	&__list {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		border-radius: 48px;
 		background: #CDD5DF;
 		padding: 6px;
 		min-height: 60px;
+		min-width: 320px;
+	}
+
+	&__item {
+		width: 100%;
 	}
 
 	&__button {
@@ -1007,6 +1024,8 @@ section {
 		padding: 13px 28px;
 		color: rgba(0, 19, 97, 0.6);
 		text-align: center;
+		width: 100%;
+		white-space: nowrap;
 		
 		&--active {
 			color: $white;
@@ -1582,7 +1601,141 @@ section {
   }
 }
 
+.laser-main-sect {
+	&__info-box {
+		margin-top: 40px;
+	}
+}
 
+.laser-info-box {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+
+	&__col {
+		display: flex;
+		gap: 60px;
+	}
+
+	&__title {
+		font-size: 26px;
+	}
+
+	&__text {
+		font-size: 24px;
+		font-weight: 400;
+		margin-top: 24px;
+	}
+
+	&__slider {
+		max-width: 516px;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.3);
+		padding: 32px 28px 53px;
+		max-height: 315px;
+	}
+
+	&__image {
+		max-width: 472px;
+		width: 100%;
+		font-size: 0;
+
+		img {
+			overflow: hidden;
+			border-radius: 16px;
+		}
+	}
+
+	&__list {
+		margin-top: 32px;
+	}
+
+	&__accent {
+		font-size: 26px;
+		margin-top: 50px;
+	}
+
+	&__button {
+		margin-top: 32px;
+	}
+}
+
+.laser-main-sect-slider {
+	&__item {
+		border-radius: 12px;
+		overflow: hidden;
+		max-width: 280px;
+	}
+
+	&__image {
+		width: 100%;
+		height: 100%;
+	}
+
+	.slick-dots {
+		bottom: -30px;
+	}
+}
+
+.info-list {
+	padding-left: 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	&__item {
+		position: relative;
+		font-size: 18px;
+		line-height: 130%;
+
+		&::before {
+			content: "";
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: $accent;
+			position: absolute;
+			top: 5px;
+			left: -20px;
+		}
+	}
+
+}
+
+.areas-box {
+	&__filter {
+		margin-top: 35px;
+	}
+
+	&__gallery {
+		margin-top: 40px;
+		display: none;
+
+		&.show-all .gallery__image {
+			display: inline-block !important;
+		}
+	}
+
+	&__button {
+		margin: 40px auto 0;
+	}
+}
+
+.gallery {
+	display: none;
+
+	&.is-active {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px 16px;
+	}
+
+	&__image {
+		max-width: 300px;
+		width: 100%;
+	}
+}
 
 
 
@@ -1591,6 +1744,19 @@ section {
 	.two-level-slider__columns {
 		grid-template-columns: 3fr;
 	}
+}
+
+@media (max-width: 1100px) {
+  .areas-box__gallery.is-active .gallery__image:nth-child(n+5) {
+    display: none;
+  }
+}
+
+/* На десктопе — скрыть всё, кроме первых 8 */
+@media (min-width: 1100px) {
+  .areas-box__gallery.is-active .gallery__image:nth-child(n+9) {
+    display: none;
+  }
 }
 
 
@@ -2114,7 +2280,8 @@ section {
 		}
 	}
 
-	.equipment-slider-nav {
+	.equipment-filter,
+	.main-filter {
 		flex-direction: column;
 
 		&__button {
