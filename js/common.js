@@ -540,9 +540,20 @@ $(function() {
       // Обработчик кнопки "Показать всё / Скрыть"
       if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
+          const wasShowingAll = isShowingAll;
           isShowingAll = !isShowingAll;
+
           const activeCategory = section.querySelector('.main-filter__button--active')?.dataset.filter || defaultFilter;
           setActiveGallery(activeCategory);
+
+          // Если пользователь нажал "Скрыть" (то есть перешёл из режима "всё" в "ограничено")
+          if (wasShowingAll && !isShowingAll) {
+            // Плавная прокрутка к началу блока
+            section.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         });
       }
 
@@ -641,7 +652,37 @@ $(function() {
       dots: true,
       arrows: false,
       infinite: true,
-      variableWidth: true
+      variableWidth: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              variableWidth: false,
+              slidesToShow: 3,
+          },
+        },
+        {
+          breakpoint: 900,
+            settings: {
+              variableWidth: false,
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              variableWidth: false,
+              slidesToShow: 1,
+          },
+        },
+        // {
+        //   breakpoint: 450,
+        //     settings: {
+        //       variableWidth: false,
+        //       slidesToShow: 1,
+        //   },
+        // }
+      ]
   });
 
   //=====================================================//
