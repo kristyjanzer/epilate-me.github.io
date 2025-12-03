@@ -2432,11 +2432,18 @@ section {
 		}
 
 		&__image {
-			display: none;
+			order: 2;
+			max-width: 100%;
+		}
+
+		&__about {
+			order: 1;
 		}
 
 		&__item {
 			margin-top: 40px;
+			gap: 40px;
+			flex-direction: column;
 		}
 
 		&__accent {
