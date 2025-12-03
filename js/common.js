@@ -685,6 +685,35 @@ $(function() {
       ]
   });
 
+    // Слайдер Специалистов
+  $('.popular-slider').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              slidesToShow: 3,
+          },
+        },
+        {
+          breakpoint: 900,
+            settings: {
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+          },
+        }
+      ]
+  });
+
   //=====================================================//
 
 
@@ -758,4 +787,42 @@ Accordion.prototype.dropdown = function (e) {
 };
 
 // Инициализация аккордеона
-let accordion = new Accordion($('.accordion-menu'), false);
+let accordion = new Accordion($('.advantages-accordion'), false);
+
+
+let Accordion1 = function (el, multiple) {
+  this.el = el || {};
+  // more than one submenu open?
+  this.multiple = multiple || false;
+
+  let accordionMenuLink = this.el.find('.advantages-accordion__top');
+  accordionMenuLink.on('click', {
+    el: this.el,
+    multiple: this.multiple
+  }, this.dropdown);
+};
+
+Accordion1.prototype.dropdown = function (e) {
+  let $el = e.data.el,
+      $this = $(this),                    
+      $next = $this.next();          
+
+  $this.toggleClass('active');
+
+  $next.slideToggle();
+  $next.toggleClass('open');
+
+  if (!e.data.multiple) {
+    $el.find('.advantages-accordion__top')
+      .not($this)                    
+      .removeClass('active');        
+
+    $el.find('.advantages-accordion__content')
+      .not($next)             
+      .slideUp()                   
+      .removeClass('open');      
+  }
+};
+
+// Инициализация аккордеона
+let accordion1 = new Accordion1($('.advantages-accordion'), false);
