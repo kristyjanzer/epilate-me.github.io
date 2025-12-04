@@ -1000,7 +1000,7 @@ section {
 		font-size: 18px;
 		font-weight: 400;
 		color: $black;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 	}
 
 	&__arrow {
@@ -2503,9 +2503,17 @@ section {
 	.laser-two-level {
 		.two-level-slider {
 			&__image {
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    			grid-auto-rows: minmax(300px, auto);
-				grid-template-rows: 300px;
+    			grid-template-rows: 260px;
+			}
+
+			&__arrow svg {
+				width: 40px;
+				height: 40px;
+			}
+
+			&__row {
+				grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+				grid-auto-rows: minmax(260px, auto);
 			}
 		}
 	}
@@ -2883,12 +2891,6 @@ section {
 			margin: 0;
 		}
 	}
-
-	// .two-level-slider {
-	// 	&__row {
-	// 		grid-auto-rows: minmax(242px, auto);
-	// 	}
-	// }
 
 	.equipment-slider-content {
 		&__row {
