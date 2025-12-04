@@ -430,58 +430,6 @@ $(function() {
   }
 
 
-  //=== Слайдер Оборудования
-  const sliderEContainer = $('.equipment-slider-content__items');
-  let originalItemsE = null;
-  let slickActiveE = false;
-
-  if (sliderEContainer.length) {
-    originalItemsE = sliderEContainer.children().clone();
-  }
-
-  const initSliderE = (items) => {
-    if (slickActiveE) {
-      sliderEContainer.slick('unslick');
-    }
-    sliderEContainer.empty().append(items);
-    sliderEContainer.slick({
-      arrows: false,
-      dots: true,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      infinite: true,
-      adaptiveHeight: true,
-      responsive: [{ breakpoint: 1000, settings: { slidesToShow: 1 } }]
-    });
-    slickActiveE = true;
-  };
-
-  const applyEquipmentFilter = (category) => {
-    if (!originalItemsE) return;
-    const filtered = category
-      ? originalItemsE.filter(`[data-category="${category}"]`)
-      : originalItemsE;
-    initSliderE(filtered);
-  };
-
-  // Фильтрация кнопок для слайдера Оборудования
-  document.querySelectorAll('.equipment-filter__button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.equipment-filter__button').forEach(b =>
-        b.classList.remove('equipment-filter__button--active')
-      );
-      btn.classList.add('equipment-filter__button--active');
-      applyEquipmentFilter(btn.dataset.filter);
-    });
-  });
-
-  const defaultEquipBtn = document.querySelector('.equipment-filter__button[data-filter="alexandrite"]');
-  if (defaultEquipBtn) {
-    defaultEquipBtn.classList.add('equipment-filter__button--active');
-    applyEquipmentFilter('alexandrite');
-  }
-
-
 
   //=== Кнопки-фильтры для обычных блоков ===//
   document.querySelectorAll('.filter-section').forEach(section => {
@@ -713,6 +661,119 @@ $(function() {
         }
       ]
   });
+
+  
+    /* Универсальный Slick-Slider для Оборудования ====================//
+
+   * Создаёт фильтруемый Slick-слайдер
+   * @param {Object} options
+   * @param {string} options.sliderSelector — селектор контейнера .slick (например, '.my-slider__items')
+   * @param {string} options.buttonGroupSelector — селектор всех кнопок фильтра (например, '.my-section .filter-btn')
+   * @param {string} [options.activeButtonClass='equipment-filter__button--active'] — класс активной кнопки
+   * @param {string|null} [options.defaultFilter=null] — значение data-filter по умолчанию
+   * @param {number} [options.slidesToShow=1] — сколько слайдов показывать
+   * @param {Array|null} [options.responsive=null] — массив responsive-настроек для Slick
+   * @param {Object} [options.slickExtra={}] — любые дополнительные настройки Slick
+   */
+  function createFilteredSlider({
+    sliderSelector,
+    buttonGroupSelector,
+    activeButtonClass = 'equipment-filter__button--active',
+    defaultFilter = null,
+    slidesToShow = 1,
+    responsive = null,
+    slickExtra = {}
+  }) {
+    const $slider = $(sliderSelector);
+    if (!$slider.length) return;
+
+    // Сохраняем оригинальные элементы для фильтрации
+    const originalItems = $slider.children().clone();
+    let slickActive = false;
+
+    // Базовые настройки Slick
+    const slickOptions = {
+      arrows: false,
+      dots: true,
+      infinite: true,
+      adaptiveHeight: true,
+      slidesToShow: slidesToShow,
+      slidesToScroll: 1,
+      ...slickExtra
+    };
+
+    // Добавляем responsive, если передан
+    if (responsive) {
+      slickOptions.responsive = responsive;
+    }
+
+    // Инициализация (или переинициализация) слайдера
+    const initSlider = (items) => {
+      if (slickActive) {
+        $slider.slick('unslick');
+      }
+      $slider.empty().append(items);
+      $slider.slick(slickOptions);
+      slickActive = true;
+    };
+
+    // Применение фильтра
+    const applyFilter = (category) => {
+      if (!originalItems) return;
+
+      let filteredItems = originalItems;
+      if (category && category !== 'all') {
+        filteredItems = originalItems.filter(`[data-category="${category}"]`);
+      }
+
+      initSlider(filteredItems);
+    };
+
+    // Навешиваем обработчики на кнопки
+    document.querySelectorAll(buttonGroupSelector).forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Убираем активный класс у всех кнопок в группе
+        document.querySelectorAll(buttonGroupSelector).forEach(b => {
+          b.classList.remove(activeButtonClass);
+        });
+        // Добавляем активный класс текущей кнопке
+        btn.classList.add(activeButtonClass);
+        // Применяем фильтр (может быть null или 'all')
+        applyFilter(btn.dataset.filter || null);
+      });
+    });
+
+    // Устанавливаем фильтр по умолчанию
+    if (defaultFilter !== null) {
+      const defaultBtn = document.querySelector(`${buttonGroupSelector}[data-filter="${defaultFilter}"]`);
+      if (defaultBtn) {
+        defaultBtn.classList.add(activeButtonClass);
+        applyFilter(defaultFilter);
+      }
+    }
+  }
+
+  //== Слайдер Оборудования на Главной странице
+  createFilteredSlider({
+    sliderSelector: '.equipment-slider-content__items',
+    buttonGroupSelector: '.equipment .equipment-filter__button',
+    defaultFilter: 'alexandrite',
+    slidesToShow: 2,
+    responsive: [
+      { breakpoint: 1000, settings: { slidesToShow: 1 } }
+    ]
+  });
+
+  //== Слайдер Оборудования на странице ЛЭ
+  createFilteredSlider({
+    sliderSelector: '.laser-equipment-slider-content__items',
+    buttonGroupSelector: '.laser-equipment .equipment-filter__button',
+    defaultFilter: 'alexandrite',
+    slidesToShow: 1
+    // responsive не нужен
+  });
+
+  
 
   //=====================================================//
 
