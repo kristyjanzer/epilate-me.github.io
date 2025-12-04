@@ -1779,7 +1779,6 @@ section {
 .popular-slider {
 	&__image {
 		border-radius: 20px;
-		overflow: hidden;
 	}
 
 	&__name {
@@ -1805,6 +1804,9 @@ section {
 	&__image {
 		max-width: 516px;
 		width: 100%;
+		img {
+			border-radius: 16px;
+		}
 	}
 
 	&__button {
@@ -2011,6 +2013,53 @@ section {
 			left: -15px;
 			transform: translateY(-50%);
 		}
+	}
+}
+
+.contraindications {
+	&__columns {
+		display: flex;
+		align-items: stretch;
+		gap: 16px;
+	}
+
+	&__col {
+		border: 1px solid rgba(255, 255, 255, 0.7);
+		border-radius: 20px;
+		padding: 32px;
+		flex-shrink: 1;
+	}
+
+	&__text {
+		color: $white;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 110%;
+
+		& + & {
+			margin-top: 20px;
+		}
+	}
+
+	&__box {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		margin-top: 40px;
+	}
+
+	&__title {
+		color: $accent;
+		font-size: 26px;
+
+		& + p,
+		& + .contraindications__text {
+			margin-top: 16px;
+		}
+	}
+
+	&__button {
+		margin-top: 16px;
 	}
 }
 
@@ -2879,6 +2928,36 @@ section {
 		}
 	}
 
+	.contraindications {
+		&__box {
+			gap: 16px;
+		}
+
+		&__columns {
+			flex-direction: column;
+		}
+
+		&__col {
+			padding: 16px 10px;
+		}
+
+		&__title {
+			font-size: 22px;
+
+			& + p,
+			& + .contraindications__text {
+				margin-top: 10px;
+			}
+		}
+
+		&__text {
+			font-size: 14px;
+
+			& + & {
+				margin-top: 12px;
+			}
+		}
+	}
 
 }
 
