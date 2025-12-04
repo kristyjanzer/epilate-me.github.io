@@ -2499,8 +2499,7 @@ section {
 
 	.laser-two-level {
 		.two-level-slider {
-			&__image,
-			&__row {
+			&__image {
 				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     			grid-auto-rows: minmax(300px, auto);
 				grid-template-rows: 300px;
@@ -2857,11 +2856,11 @@ section {
 		}
 	}
 
-	.two-level-slider {
-		&__row {
-			grid-auto-rows: minmax(242px, auto);
-		}
-	}
+	// .two-level-slider {
+	// 	&__row {
+	// 		grid-auto-rows: minmax(242px, auto);
+	// 	}
+	// }
 
 	.equipment-slider-content {
 		&__row {

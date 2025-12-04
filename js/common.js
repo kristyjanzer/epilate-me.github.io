@@ -848,7 +848,7 @@ Accordion.prototype.dropdown = function (e) {
 };
 
 // Инициализация аккордеона
-let accordion = new Accordion($('.advantages-accordion'), false);
+let accordion = new Accordion($('.accordion-menu'), false);
 
 
 let Accordion1 = function (el, multiple) {
