@@ -1406,6 +1406,7 @@ section {
 		justify-content: space-between;
 		width: 100%;
 		padding: 32px 40px 32px 40px;
+		gap: 10px;
 
 		&.active .accordion-menu__icon {
 			transform: rotate(-45deg);
@@ -1831,6 +1832,7 @@ section {
 		justify-content: space-between;
 		width: 100%;
 		padding: 15px 0;
+		gap: 10px;
 
 		&.active .advantages-accordion__icon {
 			transform: rotate(-45deg);
@@ -1993,6 +1995,7 @@ section {
 
 	&__item {
 		font-size: 16px;
+		font-weight: 400;
 		color: $black;
 		position: relative;
 
@@ -2595,6 +2598,24 @@ section {
 		}
 	}
 
+	.reviews-slider {
+		&__item {
+			padding: 32px 20px;
+		}
+
+		&__name {
+			font-size: 22px;
+		}
+
+		&__text {
+			font-size: 14px;
+		}
+
+		&__subway {
+			font-size: 14px;
+		}
+	}
+
 	.footer {
 		&__logo {
 			max-width: 210px;
@@ -2840,6 +2861,13 @@ section {
 
 		&__lists {
 			margin-top: 16px;
+			gap: 20px;
+		}
+	}
+
+	.laser-equipment-slider-list {
+		&__item {
+			font-size: 14px;
 		}
 	}
 
