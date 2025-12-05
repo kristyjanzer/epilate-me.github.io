@@ -773,6 +773,41 @@ $(function() {
     // responsive не нужен
   });
 
+
+  // Слайдер Ощущения на странице ЛЭ
+  const $slider = $('.feelings-slider');
+  let isSliderInitialized = false;
+
+  function updateLayout() {
+    const isMobile = $(window).width() <= 1100;
+
+    if (isMobile) {
+      if (!isSliderInitialized) {
+        $slider.removeClass('grid-mode').addClass('slider-mode');
+
+        $slider.slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: true,
+          infinite: true,
+          autoplay: false
+        });
+
+        isSliderInitialized = true;
+      }
+    } else {
+      if (isSliderInitialized) {
+        $slider.slick('unslick');
+        isSliderInitialized = false;
+      }
+      $slider.removeClass('slider-mode').addClass('grid-mode');
+    }
+  }
+
+  updateLayout();
+  $(window).resize(updateLayout);
+
   
 
   //=====================================================//
@@ -809,7 +844,9 @@ $(function() {
   });
 
 
+
 });
+
 
 
 //=== Аккордеон ===//
