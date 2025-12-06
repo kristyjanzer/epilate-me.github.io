@@ -2305,6 +2305,102 @@ section {
 	}
 }
 
+.price {
+	&__box {
+		margin-top: 34px;
+	}
+}
+
+.price-box {
+	&__filters {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	&__content {
+		margin-top: 76px;
+	}
+}
+
+.price-content {
+	display: flex;
+	flex-direction: column;
+	gap: 70px;
+
+	&__images {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+
+		img {
+			max-width: 410px;
+			border-radius: 20px;
+			min-width: 0;
+		}
+	}
+	
+	&__info {
+		margin-top: 46px;
+	}
+}
+
+.price-info {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	
+	&__title {
+		max-width: 360px;
+		width: 100%;
+		color: $accent;
+		font-size: 26px;
+	}
+
+	&__box {
+		display: flex;
+		align-items: flex-start;
+		gap: 60px;
+	}
+
+	&__descr {
+		display: flex;
+		align-items: center;
+		gap: 60px;
+	}
+
+	&__offer {
+		font-size: 32px;
+	}
+
+	&__price {
+		color: $accent;
+		font-size: 32px;
+	}
+
+	.crossing-out {
+		text-decoration: line-through;
+	}
+
+	&__date {
+		font-size: 18px;
+		font-weight: 400;
+	}
+
+	&__button {
+		margin-top: 10px;
+	}
+
+	&__marking {
+		font-size: 14px;
+		font-weight: 400;
+		max-width: 360px;
+		width: 100%;
+	}
+}
+
+
+
 
 
 /************* Media *****************************/
@@ -3156,7 +3252,7 @@ section {
 		&--row {
 			order: 2;
 		}
-		
+
 		&__big-image,
 		&__long-image {
 			img {
