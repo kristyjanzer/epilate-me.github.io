@@ -806,6 +806,54 @@ $(function() {
   updateLayout();
   $(window).resize(updateLayout);
 
+
+  //=== Фильтрация для раздела Цена на ЛЭ ===//
+  document.querySelectorAll('.price-box').forEach(section => {
+    const genderButtons = section.querySelectorAll('.main-filter__button[data-filter="woman"], .main-filter__button[data-filter="man"]');
+    const laserButtons = section.querySelectorAll('.main-filter__button[data-filter="alexandrite"], .main-filter__button[data-filter="diode"]');
+    const priceBlocks = section.querySelectorAll('.price-content');
+
+    let currentGender = section.dataset.defaultGender || 'woman';
+    let currentLaser = section.dataset.defaultLaser || 'alexandrite';
+
+    const showMatchingBlock = () => {
+      priceBlocks.forEach(block => {
+        const genderMatch = block.dataset.gender === currentGender;
+        const laserMatch = block.dataset.laser === currentLaser;
+        block.classList.toggle('is-active', genderMatch && laserMatch);
+      });
+    };
+
+    // Обработчики для кнопок пола
+    genderButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        genderButtons.forEach(b => b.classList.remove('main-filter__button--active'));
+        btn.classList.add('main-filter__button--active');
+        currentGender = btn.dataset.filter;
+        showMatchingBlock();
+      });
+    });
+
+    // Обработчики для кнопок лазера
+    laserButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        laserButtons.forEach(b => b.classList.remove('main-filter__button--active'));
+        btn.classList.add('main-filter__button--active');
+        currentLaser = btn.dataset.filter;
+        showMatchingBlock();
+      });
+    });
+
+    // Инициализация: активируем кнопки по умолчанию
+    const defaultGenderBtn = section.querySelector(`.main-filter__button[data-filter="${currentGender}"]`);
+    const defaultLaserBtn = section.querySelector(`.main-filter__button[data-filter="${currentLaser}"]`);
+
+    if (defaultGenderBtn) defaultGenderBtn.classList.add('main-filter__button--active');
+    if (defaultLaserBtn) defaultLaserBtn.classList.add('main-filter__button--active');
+
+    // Показываем нужный блок
+    showMatchingBlock();
+  });
   
 
   //=====================================================//
@@ -847,116 +895,54 @@ $(function() {
 
 
 
-//=== Аккордеон ===//
-let Accordion = function (el, multiple) {
-  this.el = el || {};
-  // more than one submenu open?
-  this.multiple = multiple || false;
+//=== Аккордеоны ===//
+class Accordion {
+  constructor(el, options = {}) {
+    this.el = el || {};
+    this.multiple = options.multiple || false;
+    this.topClass = options.topClass || '.accordion-menu__top';
+    this.contentClass = options.contentClass || '.accordion-menu__content';
 
-  let accordionMenuLink = this.el.find('.accordion-menu__top');
-  accordionMenuLink.on('click', {
-    el: this.el,
-    multiple: this.multiple
-  }, this.dropdown);
-};
-
-Accordion.prototype.dropdown = function (e) {
-  let $el = e.data.el,
-      $this = $(this),                    
-      $next = $this.next();          
-
-  $this.toggleClass('active');
-
-  $next.slideToggle();
-  $next.toggleClass('open');
-
-  if (!e.data.multiple) {
-    $el.find('.accordion-menu__top')
-      .not($this)                    
-      .removeClass('active');        
-
-    $el.find('.accordion-menu__content')
-      .not($next)             
-      .slideUp()                   
-      .removeClass('open');      
+    const accordionLinks = this.el.find(this.topClass);
+    accordionLinks.on('click', { accordion: this }, this.dropdown);
   }
-};
 
-// Инициализация аккордеона
-let accordion = new Accordion($('.accordion-menu'), false);
+  dropdown(e) {
+    const self = e.data.accordion;
+    const $this = $(this);
+    const $next = $this.next();
 
+    $this.toggleClass('active');
+    $next.slideToggle().toggleClass('open');
 
-let Accordion1 = function (el, multiple) {
-  this.el = el || {};
-  // more than one submenu open?
-  this.multiple = multiple || false;
+    if (!self.multiple) {
+      self.el.find(self.topClass)
+        .not($this)
+        .removeClass('active');
 
-  let accordionMenuLink = this.el.find('.advantages-accordion__top');
-  accordionMenuLink.on('click', {
-    el: this.el,
-    multiple: this.multiple
-  }, this.dropdown);
-};
-
-Accordion1.prototype.dropdown = function (e) {
-  let $el = e.data.el,
-      $this = $(this),                    
-      $next = $this.next();          
-
-  $this.toggleClass('active');
-
-  $next.slideToggle();
-  $next.toggleClass('open');
-
-  if (!e.data.multiple) {
-    $el.find('.advantages-accordion__top')
-      .not($this)                    
-      .removeClass('active');        
-
-    $el.find('.advantages-accordion__content')
-      .not($next)             
-      .slideUp()                   
-      .removeClass('open');      
+      self.el.find(self.contentClass)
+        .not($next)
+        .slideUp()
+        .removeClass('open');
+    }
   }
-};
+}
 
-// Инициализация аккордеона
-let accordion1 = new Accordion1($('.advantages-accordion'), false);
+// Инициализация всех аккордеонов
+new Accordion($('.accordion-menu'), {
+  multiple: false,
+  topClass: '.accordion-menu__top',
+  contentClass: '.accordion-menu__content'
+});
 
+new Accordion($('.advantages-accordion'), {
+  multiple: false,
+  topClass: '.advantages-accordion__top',
+  contentClass: '.advantages-accordion__content'
+});
 
-let Accordion2 = function (el, multiple) {
-  this.el = el || {};
-  // more than one submenu open?
-  this.multiple = multiple || false;
-
-  let accordionMenuLink = this.el.find('.popular-offers-accordion__top');
-  accordionMenuLink.on('click', {
-    el: this.el,
-    multiple: this.multiple
-  }, this.dropdown);
-};
-
-Accordion2.prototype.dropdown = function (e) {
-  let $el = e.data.el,
-      $this = $(this),                    
-      $next = $this.next();          
-
-  $this.toggleClass('active');
-
-  $next.slideToggle();
-  $next.toggleClass('open');
-
-  if (!e.data.multiple) {
-    $el.find('.popular-offers-accordion__top')
-      .not($this)                    
-      .removeClass('active');        
-
-    $el.find('.popular-offers-accordion__content')
-      .not($next)             
-      .slideUp()                   
-      .removeClass('open');      
-  }
-};
-
-// Инициализация аккордеона
-let accordion2 = new Accordion2($('.popular-offers-accordion'), false);
+new Accordion($('.popular-offers-accordion'), {
+  multiple: false,
+  topClass: '.popular-offers-accordion__top',
+  contentClass: '.popular-offers-accordion__content'
+});

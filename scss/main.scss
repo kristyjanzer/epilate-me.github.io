@@ -796,6 +796,7 @@ button {
 	&__subtitle {
 		margin-top: 24px;
 		font-size: 24px;
+		font-weight: 400;
 	}
 
 	.slick-dots {
@@ -1009,7 +1010,7 @@ section {
 		margin-top: auto;
 		font-size: 0;
 
-		svg {
+		img {
 			width: 64px;
 			height: 64px;
 		}
@@ -1068,7 +1069,7 @@ section {
 	&__icon {
 		font-size: 0;
 
-		svg {
+		img {
 			width: 28px;
 			height: 28px;
 		}
@@ -1121,6 +1122,7 @@ section {
 
 	&__text {
 		font-size: 16px;
+		font-weight: 400;
 		color: $black;
 		line-height: 140%;
 		max-width: 315px;
@@ -1292,6 +1294,7 @@ section {
 	&__profession {
 		font-size: 16px;
 		margin-top: 20px;
+		font-weight: 400;
 	}
 
 	&__subway {
@@ -1344,6 +1347,7 @@ section {
 	&__text {
 		color: $black;
 		font-size: 16px;
+		font-weight: 400;
 	}
 
 	&__note {
@@ -1368,7 +1372,7 @@ section {
 	&__icon {
 		font-size: 0;
 
-		svg {
+		img {
 			height: 15px;
 		}
 	}
@@ -1450,6 +1454,7 @@ section {
 		color: $black;
 		font-size: 18px;
 		line-height: 120%;
+		font-weight: 400;
 	}
 
 	&__list {
@@ -1723,6 +1728,7 @@ section {
 		position: relative;
 		font-size: 18px;
 		line-height: 130%;
+		font-weight: 400;
 
 		&::before {
 			content: "";
@@ -1793,6 +1799,7 @@ section {
 	&__descr {
 		font-size: 16px;
 		margin-top: 20px;
+		font-weight: 400;
 	}
 }
 
@@ -1876,6 +1883,7 @@ section {
 	&__text {
 		font-size: 16px;
 		line-height: 120%;
+		font-weight: 400;
 	}
 
 	&__list {
@@ -2329,9 +2337,13 @@ section {
 }
 
 .price-content {
-	display: flex;
-	flex-direction: column;
-	gap: 70px;
+	display: none;
+	
+	&.is-active {
+		display: flex;
+		flex-direction: column;
+		gap: 70px;
+	}
 
 	&__images {
 		display: flex;
@@ -2458,7 +2470,7 @@ section {
 
 	&__offer {
 		font-size: 18px;
-		font-weight: 500;
+		font-weight: 400;
 	}
 
 	&__price {
@@ -2957,17 +2969,19 @@ section {
 			grid-auto-rows: auto;
 			grid-template-rows: 160px;
 		}
+
+		&__arrow {
+			img {
+				width: 40px;
+				height: 40px;
+			}
+		}
 	}
 
 	.laser-two-level {
 		.two-level-slider {
 			&__image {
     			grid-template-rows: 260px;
-			}
-
-			&__arrow svg {
-				width: 40px;
-				height: 40px;
 			}
 
 			&__row {
