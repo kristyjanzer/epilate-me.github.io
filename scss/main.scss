@@ -1107,6 +1107,7 @@ section {
 		color: $primary;
 		font-size: 24px;
 		line-height: 120%;
+		font-weight: 500;
 
 		& + p {
 			margin-top: 24px;
@@ -1909,6 +1910,7 @@ section {
 		color: $primary;
 		font-size: 24px;
 		line-height: 120%;
+		font-weight: 500;
 
 		& + p {
 			margin-top: 24px;
@@ -2260,7 +2262,6 @@ section {
 
 		img {
 			border-radius: 20px;
-			height: 353px;
 			max-width: 622px;
 			object-fit: cover;
 		}
@@ -2274,7 +2275,6 @@ section {
 
 		img {
 			border-radius: 20px;
-			height: 227px;
 			max-width: 303px;
 			object-fit: cover;
 		}
@@ -2285,7 +2285,6 @@ section {
 
 		img {
 			border-radius: 20px;
-			height: 502px;
 			max-width: 303px;
 			object-fit: cover;
 		}
@@ -2302,14 +2301,6 @@ section {
 			border-radius: 20px;
 			object-fit: cover;
 			max-width: 303px;
-
-			&:first-child {
-				height: 178px;
-			}
-
-			&:last-child {
-				height: 308px;
-			}
 		}
 	}
 }
@@ -3162,9 +3153,22 @@ section {
 	}
 	
 	.process-images {
-		&__more-images {
+		&--row {
+			order: 2;
+		}
+		
+		&__big-image,
+		&__long-image {
 			img {
-				max-width: 150px;
+				max-width: 100%;
+			}
+		}
+
+		&__more-images,
+		&__two-images {
+			img {
+				max-width: 100%;
+				min-width: 0;
 			}
 		}
 	}
