@@ -923,4 +923,42 @@ Accordion1.prototype.dropdown = function (e) {
 };
 
 // Инициализация аккордеона
-let accordion1 = new Accordion1($('.advantages-accordion'), false);
+let accordion1 = new Accordion1($('.popular-offers-accordion'), false);
+
+
+let Accordion2 = function (el, multiple) {
+  this.el = el || {};
+  // more than one submenu open?
+  this.multiple = multiple || false;
+
+  let accordionMenuLink = this.el.find('.popular-offers-accordion__top');
+  accordionMenuLink.on('click', {
+    el: this.el,
+    multiple: this.multiple
+  }, this.dropdown);
+};
+
+Accordion2.prototype.dropdown = function (e) {
+  let $el = e.data.el,
+      $this = $(this),                    
+      $next = $this.next();          
+
+  $this.toggleClass('active');
+
+  $next.slideToggle();
+  $next.toggleClass('open');
+
+  if (!e.data.multiple) {
+    $el.find('.popular-offers-accordion__top')
+      .not($this)                    
+      .removeClass('active');        
+
+    $el.find('.popular-offers-accordion__content')
+      .not($next)             
+      .slideUp()                   
+      .removeClass('open');      
+  }
+};
+
+// Инициализация аккордеона
+let accordion2 = new Accordion2($('.popular-offers-accordion'), false);

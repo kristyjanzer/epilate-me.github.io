@@ -130,8 +130,6 @@ button {
 	font-size: 16px;
 	font-family: $default-font;
 	cursor: pointer;
-	background-color: $primary;
-	color: $white;
 	transition: .3s all ease;
 	display: inline-block;
 	min-width: 173px;
@@ -141,27 +139,27 @@ button {
     align-items: center;
     justify-content: center;
     max-width: max-content;
+	gap: 8px;
+	background-color: $accent;
+	color: $text;
 
 	&:hover {
 		box-shadow: inset 0 0 0 30px rgba(255, 255, 255, .1);
 	}
 
-	&--accent {
-		gap: 8px;
-		background-color: $accent;
-		color: $text;
+	&--primary {
+		background-color: $primary;
+		color: $white;
+		// .button {
+		// 	&__icon {
+		// 		font-size: 0;
 
-		.button {
-			&__icon {
-				font-size: 0;
-
-				svg {
-					width: 14px;
-					height: 14px;
-				}
-			}
-		}
-		
+		// 		svg {
+		// 			width: 14px;
+		// 			height: 14px;
+		// 		}
+		// 	}
+		// }
 	}
 
 	&--gray {
@@ -1845,7 +1843,7 @@ section {
 		}
 	}
 
-	&__link {
+	&__title {
 		font-size: 26px;
 		cursor: pointer;
 		display: block;
@@ -2399,6 +2397,68 @@ section {
 	}
 }
 
+.popular-offers {
+	&__title {
+		font-size: 32px;
+		font-weight: 400;
+	}
+
+	&__image {
+		img {
+			max-width: 622px;
+			border-radius: 20px;
+		}
+	}
+
+	&__columns {
+		margin-top: 30px;
+		display: flex;
+		gap: 16px;
+	}
+}
+
+.popular-offers-accordion {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	&__item {
+		cursor: pointer;
+		border: 1px solid #fff;
+		border-radius: 12px;
+		background-color: transparent;
+		transition: all .3s ease;
+
+		&.active,
+		&:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		padding: 14px 16px;
+		gap: 10px;
+	}
+
+	&__offer {
+		font-size: 18px;
+		font-weight: 500;
+	}
+
+	&__price {
+		font-size: 18px;
+		color: $accent;
+	}
+
+	&__content {
+		display: none;
+		padding: 0 16px 13px;
+	}
+}
 
 
 
@@ -3171,7 +3231,7 @@ section {
 			padding: 20px 10px;
 		}
 
-		&__link {
+		&__title {
 			font-size: 22px;
 		}
 
@@ -3266,6 +3326,12 @@ section {
 				max-width: 100%;
 				min-width: 0;
 			}
+		}
+	}
+
+	.price-content {
+		&__images {
+
 		}
 	}
 }
