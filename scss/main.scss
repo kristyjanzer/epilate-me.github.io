@@ -1416,7 +1416,7 @@ section {
 		}
 	}
 
-	&__link {
+	&__title {
 		font-size: 24px;
 		color: $black;
 		cursor: pointer;
@@ -2046,7 +2046,7 @@ section {
 		margin-top: 40px;
 	}
 
-	&__title {
+	&__heading {
 		color: $accent;
 		font-size: 26px;
 
@@ -2219,7 +2219,7 @@ section {
 	flex-shrink: 1;
 
 	&__item {
-		padding: 33px 15px 45px 0;
+		padding: 33px 0 45px 0;
 		border-bottom: 1px solid $white;
 
 		&:first-child {
@@ -2885,7 +2885,7 @@ section {
 			padding: 20px 10px;
 		}
 
-		&__link {
+		&__title {
 			font-size: 22px;
 		}
 
@@ -3135,6 +3135,39 @@ section {
 			display: block !important;
 		}
 	}
+
+	.process {
+		&__columns {
+			margin-top: 40px;
+			gap: 40px;
+		}
+
+		&__col {
+			flex-direction: column;
+		}
+	}
+
+	.process-list {
+		&__title {
+			font-size: 22px;
+		}
+
+		&__text {
+			font-size: 14px;
+		}
+
+		&__item {
+			padding: 30px 0 20px;
+		}
+	}
+	
+	.process-images {
+		&__more-images {
+			img {
+				max-width: 150px;
+			}
+		}
+	}
 }
 
 
@@ -3221,7 +3254,7 @@ section {
 			padding: 16px 10px;
 		}
 
-		&__title {
+		&__heading {
 			font-size: 22px;
 
 			& + p,
