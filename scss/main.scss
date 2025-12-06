@@ -150,16 +150,6 @@ button {
 	&--primary {
 		background-color: $primary;
 		color: $white;
-		// .button {
-		// 	&__icon {
-		// 		font-size: 0;
-
-		// 		svg {
-		// 			width: 14px;
-		// 			height: 14px;
-		// 		}
-		// 	}
-		// }
 	}
 
 	&--gray {
@@ -167,6 +157,23 @@ button {
 		color: $white;
 		border: 1px solid #fff;
 	}
+
+	&__icon {
+		img {
+			width: 14px;
+			height: 14px;
+		}
+	}
+}
+
+.slick-slider {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+.slick-initialized {
+  opacity: 1;
+  visibility: visible;
 }
 
 
@@ -2363,7 +2370,6 @@ section {
 
 	&__descr {
 		display: flex;
-		align-items: center;
 		gap: 60px;
 	}
 
@@ -2374,6 +2380,7 @@ section {
 	&__price {
 		color: $accent;
 		font-size: 32px;
+		margin-top: 20px;
 	}
 
 	.crossing-out {
@@ -2383,6 +2390,7 @@ section {
 	&__date {
 		font-size: 18px;
 		font-weight: 400;
+		margin-top: 10px;
 	}
 
 	&__button {
@@ -2414,6 +2422,10 @@ section {
 		margin-top: 30px;
 		display: flex;
 		gap: 16px;
+	}
+
+	&__button {
+		margin-top: 30px;
 	}
 }
 
@@ -2452,6 +2464,7 @@ section {
 	&__price {
 		font-size: 18px;
 		color: $accent;
+		white-space: nowrap;
 	}
 
 	&__content {
@@ -3213,6 +3226,7 @@ section {
 	.advantages {
 		&__columns {
 			flex-direction: column;
+			margin-top: 24px;
 		}
 
 		&__col {
@@ -3331,10 +3345,92 @@ section {
 
 	.price-content {
 		&__images {
+			img {
+				display: none;
+	
+				&:first-child {
+					display: block;
+					max-width: 100%;
+				}
+			}
+		}
+	}
 
+	.price-content {
+		gap: 60px;
+	}
+
+	.price-box {
+		&__content {
+			margin-top: 30px;
+		}
+
+		&__filters {
+			flex-direction: column;
+		}
+	}
+
+	.price-info {
+		&__box,
+		&__descr {
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		&__title {
+			font-size: 22px;
+		}
+
+		&__offer,
+		&__price {
+			font-size: 28px;
+		}
+
+		&__date {
+			font-size: 16px;
+		}
+
+		&__button {
+			margin-top: 0;
+		}
+
+		&__marking {
+			font-size: 11px;
+			order: 2;
+		}
+	}
+
+	.popular-offers {
+		&__image {
+			display: none;
+		}
+
+		&__title {
+			font-size: 24px;
+		}
+
+		&__button {
+			margin-top: 20px;
+		}
+	}
+
+	.popular-offers-accordion {
+		width: 100%;
+
+		&__offer,
+		&__price {
+			font-size: 16px;
+		}
+
+		&__top {
+			flex-direction: column;
+			align-items: flex-start;
 		}
 	}
 }
+
+
+
 
 
 @media (max-width: 900px) {

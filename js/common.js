@@ -15,8 +15,6 @@ $(function() {
       const img = new Image();
       img.src = src; // Браузер закэширует её
     });
-
-    console.log('Предзагружено изображений:', imageUrls.size);
   }
 
   preloadImages(); // Вызов функции
@@ -923,7 +921,7 @@ Accordion1.prototype.dropdown = function (e) {
 };
 
 // Инициализация аккордеона
-let accordion1 = new Accordion1($('.popular-offers-accordion'), false);
+let accordion1 = new Accordion1($('.advantages-accordion'), false);
 
 
 let Accordion2 = function (el, multiple) {
