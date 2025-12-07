@@ -255,7 +255,7 @@ button {
 		}
 
 		.logo {
-			max-width: 185x;
+			max-width: 185px;
 
 			svg path {
 				fill: $primary;
@@ -331,6 +331,7 @@ button {
 
 		.socials {
 			&__icon {
+				
 				svg {
 					width: 20px;
 					height: 20px;
@@ -402,7 +403,7 @@ button {
 .logo {
 	max-width: 294px;
 	font-size: 0;
-	transition: all .5s ease;
+	transition: max-width .5s ease;
 
 	svg {
 		width: 100%;
@@ -500,7 +501,7 @@ button {
 	&__link {
 		font-size: 18px;
 		color: $white;
-		transition: background 0.2s, color 0.2s;
+		transition: font-size 0.5s, color 0.5s;
 		position: relative;
 		z-index: 1;
 		display: flex;
@@ -670,6 +671,7 @@ button {
 		svg {
 			width: 24px;
 			height: 24px;
+			transition: width 0.5s ease, height 0.5s ease;
 		}
 	}
 }
@@ -678,7 +680,7 @@ button {
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	transition: all .5s ease;
+	transition: color .5s ease, font-size .5s ease;
 
 	&__tel {
 		font-size: 18px;
