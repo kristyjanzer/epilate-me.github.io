@@ -890,6 +890,10 @@ $(function() {
   });
 
 
+  // Пересчёт позиций всех слайдеров после небольшой задержки
+  setTimeout(() => {
+    $('.slick-initialized').slick('setPosition');
+  }, 300);
 
 });
 
