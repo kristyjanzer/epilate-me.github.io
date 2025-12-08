@@ -890,12 +890,6 @@ $(function() {
   });
 
 
-  setTimeout(() => {
-  const $laserSlider = $('.laser-equipment-slider-content__items');
-  if ($laserSlider.hasClass('slick-initialized')) {
-    $laserSlider.slick('setPosition');
-  }
-}, 300);
 
 });
 

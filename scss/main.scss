@@ -1960,6 +1960,7 @@ section {
 	&__image {
 		border-radius: 24px;
 		background-color: #e8edf3;
+		width: 100%;
 		max-width: 303px;
 		padding: 40px;
 		flex-shrink: 0;
@@ -1996,6 +1997,9 @@ section {
 		> div {
 			display: flex;
 			min-height: 100%;
+			width: 100% !important;
+			max-width: 100%;
+			box-sizing: border-box;
 		}
 	}
 
