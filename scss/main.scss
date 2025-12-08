@@ -1903,14 +1903,15 @@ section {
 .laser-equipment-slider-content {
 	&__item {
 		display: flex;
-		min-height: 320px;
+		height: auto !important;
+		min-height: auto !important;
 	}
 	
 	&__row {
 		display: flex;
-		align-items: stretch;
+		align-items: flex-start;
 		gap: 16px;
-		height: 100%;
+		height: auto;
 		width: 100%;
 	}
 
@@ -1998,9 +1999,10 @@ section {
 
 		> div {
 			display: flex;
+			flex-direction: column;
 			height: auto !important;
 			min-height: auto !important;
-			width: 100% !important;
+			width: 100%;
 			max-width: 100%;
 		}
 	}
@@ -3175,12 +3177,6 @@ section {
 
 		&__descr {
 			font-size: 12px;
-		}
-	}
-
-	.laser-main-sect {
-		&__info-box {
-
 		}
 	}
 

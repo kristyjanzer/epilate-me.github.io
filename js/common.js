@@ -724,7 +724,14 @@ $(function() {
         filteredItems = originalItems.filter(`[data-category="${category}"]`);
       }
 
+      // ✅ Откладываем инициализацию до полной загрузки страницы
+    if (document.readyState === 'loading') {
+      window.addEventListener('load', () => {
+        initSlider(filteredItems);
+      }, { once: true });
+    } else {
       initSlider(filteredItems);
+    }
     };
 
     // Навешиваем обработчики на кнопки
