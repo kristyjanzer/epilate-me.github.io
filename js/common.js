@@ -890,10 +890,12 @@ $(function() {
   });
 
 
-  // Пересчёт позиций всех слайдеров после небольшой задержки
   setTimeout(() => {
-    $('.slick-initialized').slick('setPosition');
-  }, 300);
+  const $laserSlider = $('.laser-equipment-slider-content__items');
+  if ($laserSlider.hasClass('slick-initialized')) {
+    $laserSlider.slick('setPosition');
+  }
+}, 300);
 
 });
 
