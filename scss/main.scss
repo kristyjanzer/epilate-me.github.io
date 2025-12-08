@@ -2419,6 +2419,11 @@ section {
 		width: 100%;
 		color: $white;
 		display: inline-block;
+
+		a[href^="tel"] {
+			color: inherit;
+			text-decoration: none;
+		}
 	}
 }
 
