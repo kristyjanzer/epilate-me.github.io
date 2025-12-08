@@ -1035,7 +1035,7 @@ section {
 		background: #CDD5DF;
 		padding: 6px;
 		min-height: 60px;
-		min-width: 320px;
+		min-width: 330px;
 		max-width: 100%;
 	}
 
@@ -2418,11 +2418,11 @@ section {
 		max-width: 360px;
 		width: 100%;
 		color: $white;
-		display: inline-block;
-
+		
 		a[href^="tel"] {
-			color: inherit;
+			color: $white;
 			text-decoration: none;
+			display: inline-block;
 		}
 	}
 }
