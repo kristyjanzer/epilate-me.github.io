@@ -5,7 +5,7 @@ $(function() {
     const imageUrls = new Set();
 
     // Собираем src всех изображений из equipment и clinics
-    document.querySelectorAll('.equipment-slider-content__item img, .clinics-slider-content__item img')
+    document.querySelectorAll('.equipment-slider-content__item img, .clinics-slider-content__item img, .laser-equipment-slider img')
       .forEach(img => {
         if (img.src) imageUrls.add(img.src);
       });

@@ -1899,9 +1899,11 @@ section {
 }
 
 
+
 .laser-equipment-slider-content {
 	&__item {
 		display: flex;
+		min-height: 320px;
 	}
 	
 	&__row {
@@ -1992,14 +1994,14 @@ section {
 	}
 
 	.slick-slide {
-		height: auto;
+		height: auto !important;
 
 		> div {
 			display: flex;
-			min-height: 100%;
+			height: auto !important;
+			min-height: auto !important;
 			width: 100% !important;
 			max-width: 100%;
-			box-sizing: border-box;
 		}
 	}
 
@@ -3483,6 +3485,12 @@ section {
 	.laser-equipment-slider-content {
 		&__row {
 			flex-direction: column;
+			height: auto;
+			align-items: flex-start;
+		}
+
+		&__item {
+			height: auto !important;
 		}
 
 		&__image {
@@ -3492,6 +3500,7 @@ section {
 
 			img {
 				max-width: 160px;
+				height: auto;
 			}
 		}
 
@@ -3501,6 +3510,7 @@ section {
 
 		&__info {
 			padding: 20px 15px;
+			width: 100%;
 		}
 
 		&__title {
