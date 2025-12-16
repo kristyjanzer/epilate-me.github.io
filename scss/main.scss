@@ -187,6 +187,49 @@ button {
 
 	&__content {
 		padding-top: 160px;
+
+		.header-slider {
+			&--sm {
+				margin-top: 70px;
+			}
+
+			&__title {
+				font-size: 32px;
+				font-weight: 600;
+				font-family: 'Montserrat';
+				
+				& + p,
+				.header-slider__text {
+					margin-top: 24px;
+				}
+			}
+
+			&__text {
+				font-size: 18px;
+				font-weight: 500;
+				font-family: 'Montserrat';
+				line-height: 132%;
+			}
+
+			&__info {
+				backdrop-filter: blur(30px);
+				box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.18), inset 1px 2px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -2px 3px 0 rgba(255, 255, 255, 0.05);
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 30px;
+				padding: 60px 45px 50px;
+				max-width: 500px;
+			}
+
+			&__image {
+				img {
+					border-radius: 20px;
+				}
+			}
+
+			.slick-dots {
+				bottom: 30px;
+			}
+		}
 	}
 	
 }
@@ -871,6 +914,15 @@ button {
 
 	&__button {
 		margin-top: 48px;
+	}
+
+	&--sm {
+		.header-slider {
+			&__item {
+				min-height: 372px;
+				padding: 64px 70px;
+			}
+		}
 	}
 
 }
@@ -2551,7 +2603,7 @@ section {
 }
 
 
-.about-clinic {
+.clinic-address {
 	&__columns {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
