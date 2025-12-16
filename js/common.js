@@ -906,6 +906,54 @@ $(function() {
 
 
 
+
+
+  // Gallery Slider
+function swiperSlider3dCategory() {
+  if ($('.gallery-slider__container').length) {
+    var swiperCategory = new Swiper('.gallery-slider__container', {
+        mode:'horizontal',
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        parallax: true,
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 0,
+          depth: 400,
+          modifier: 1,
+          slideShadows: true,
+        },
+        navigation: {
+          nextEl: '.gallery-slider__nav .next-btn',
+          prevEl: '.gallery-slider__nav .prev-btn',
+        },
+        breakpoints: {
+        920: {
+          slidesPerView: 3,
+          spaceBetween: 0,
+        },
+        // 851: {
+        //   slidesPerView: 3,
+        //   effect: 'coverflow',
+        //   autoHeight: false,
+        // },
+        // 1151: {
+        //   slidesPerView: 3,
+        //   effect: 'coverflow',
+        // }
+      }
+      });
+  }
+}
+
+swiperSlider3dCategory();
+
+
+
 });
 
 
