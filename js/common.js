@@ -429,82 +429,90 @@ $(function() {
 
 
 
-  //=== Кнопки-фильтры для обычных блоков ===//
+  // === Универсальная функция для переключения "показать всё / скрыть" ===
+  function toggleItemsList(container, list, button, isShowingAll, shouldScroll = false) {
+    const textSpan = button?.querySelector('.clinic-services__button-text, .areas-box__button-text');
+    if (!textSpan) return;
+
+    if (isShowingAll) {
+      list.classList.add('show-all');
+      textSpan.textContent = button.dataset.hide;
+    } else {
+      list.classList.remove('show-all');
+      textSpan.textContent = button.dataset.show;
+
+      if (shouldScroll) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  // === 1. Обработка блоков С фильтрами (как раньше) ===
   document.querySelectorAll('.filter-section').forEach(section => {
-    const defaultFilter = section.dataset.defaultFilter || null;
+    const defaultFilter = section.dataset.defaultFilter;
     const buttons = section.querySelectorAll('.main-filter__button');
     const galleries = section.querySelectorAll('.gallery[data-category]');
     const toggleBtn = section.querySelector('.toggle-all-button');
-    
+
     let isShowingAll = false;
 
-    // Обновление текста кнопки
-      const updateButtonText = () => {
-        if (!toggleBtn) return;
-        const textSpan = toggleBtn.querySelector('.areas-box__button-text');
-        if (textSpan) {
-          textSpan.textContent = isShowingAll 
-            ? toggleBtn.dataset.hide 
-            : toggleBtn.dataset.show;
-        }
-      };
-
-      // Активация галереи
-      const setActiveGallery = (category) => {
-        galleries.forEach(gal => {
-          gal.classList.remove('is-active', 'show-all');
-        });
-
-        // Активируем нужную
-        const targetGallery = section.querySelector(`.gallery[data-category="${category}"]`);
-        if (targetGallery) {
-          targetGallery.classList.add('is-active');
-          if (isShowingAll) {
-            targetGallery.classList.add('show-all');
-          }
-        }
-
-        updateButtonText();
-      };
-
-      // Применение фильтра
-      const applyFilter = (category) => {
-        isShowingAll = false;
-        buttons.forEach(btn => {
-          btn.classList.toggle('main-filter__button--active', btn.dataset.filter === category);
-        });
-        setActiveGallery(category);
-      };
-
-      // Обработчики кнопок фильтра
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          applyFilter(btn.dataset.filter);
-        });
-      });
-
-      // Обработчик кнопки "Показать всё / Скрыть"
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-          const wasShowingAll = isShowingAll;
-          isShowingAll = !isShowingAll;
-
-          const activeCategory = section.querySelector('.main-filter__button--active')?.dataset.filter || defaultFilter;
-          setActiveGallery(activeCategory);
-
-          // Если пользователь нажал "Скрыть" (то есть перешёл из режима "всё" в "ограничено")
-          if (wasShowingAll && !isShowingAll) {
-            // Плавная прокрутка к началу блока
-            section.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
+    const setActiveGallery = (category) => {
+      galleries.forEach(gal => gal.classList.remove('is-active', 'show-all'));
+      const targetGallery = section.querySelector(`.gallery[data-category="${category}"]`);
+      if (targetGallery) {
+        targetGallery.classList.add('is-active');
+        toggleItemsList(section, targetGallery, toggleBtn, isShowingAll, false);
       }
+    };
 
-      // Инициализация
-      applyFilter(defaultFilter);
+    const applyFilter = (category) => {
+      isShowingAll = false;
+      buttons.forEach(btn => {
+        btn.classList.toggle('main-filter__button--active', btn.dataset.filter === category);
+      });
+      setActiveGallery(category);
+    };
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+    });
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const wasShowingAll = isShowingAll;
+        isShowingAll = !isShowingAll;
+
+        const activeCategory =
+          section.querySelector('.main-filter__button--active')?.dataset.filter || defaultFilter;
+        const activeGallery = section.querySelector(`.gallery[data-category="${activeCategory}"]`);
+
+        if (activeGallery) {
+          toggleItemsList(section, activeGallery, toggleBtn, isShowingAll, wasShowingAll);
+        }
+      });
+    }
+
+    if (defaultFilter) applyFilter(defaultFilter);
+  });
+
+  // === 2. Обработка блоков БЕЗ фильтров: clinic-services ===
+  document.querySelectorAll('.clinic-services').forEach(section => {
+    const list = section.querySelector('.clinic-services__list');
+    const toggleBtn = section.querySelector('.toggle-all-button');
+
+    if (!list || !toggleBtn) return;
+
+    let isShowingAll = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isShowingAll = !isShowingAll;
+      toggleItemsList(section, list, toggleBtn, isShowingAll, false);
+    });
+
+    // Инициализация: убедимся, что изначально всё в порядке
+    list.classList.remove('show-all');
+    const textSpan = toggleBtn.querySelector('.clinic-services__button-text');
+    if (textSpan) textSpan.textContent = toggleBtn.dataset.show;
   });
 
 
