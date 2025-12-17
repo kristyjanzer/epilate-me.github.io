@@ -847,7 +847,7 @@ $(function() {
             clickable: true,
           },
           breakpoints: {
-          920: {
+          1100: {
             slidesPerView: 3,
             spaceBetween: 0,
           },
@@ -981,6 +981,51 @@ $(function() {
   
 
 
+
+  //=== Плавный скролл от ссылки к блоку ===//
+  function smoothScrollTo(targetY, duration = 1500) {
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+
+      function animateScroll(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Используем "ease-out" функцию для мягкого замедления в конце
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+
+          window.scrollTo(0, startY + distance * easeOut);
+
+          if (progress < 1) {
+              requestAnimationFrame(animateScroll);
+          }
+      }
+
+      requestAnimationFrame(animateScroll);
+  }
+
+  // Обработчик клика
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+              e.preventDefault();
+              const offsetTop = targetElement.offsetTop - 110; // отступ
+              smoothScrollTo(offsetTop, 1500); // 1500 мс = 1.5 секунды
+          }
+      });
+  });
+
+  //=====================================================//
+  
+
+  
 
   //=== Показать все кнопки для Аккордеона ===//
   $('.accordion-menu-button').click(function (e) {
