@@ -639,7 +639,7 @@ $(function() {
       ]
   });
 
-    // Слайдер Специалистов
+  // Слайдер Специалистов
   $('.popular-slider').slick({
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -787,7 +787,7 @@ $(function() {
   });
 
 
-  // Слайдер Ощущения на странице ЛЭ
+  //== Слайдер Ощущения на странице ЛЭ
   const $slider = $('.feelings-slider');
   let isSliderInitialized = false;
 
@@ -820,6 +820,52 @@ $(function() {
 
   updateLayout();
   $(window).resize(updateLayout);
+
+
+
+  //== Gallery Slider
+  function swiperSlider3dCategory() {
+    if ($('.gallery-slider__container').length) {
+      var swiperCategory = new Swiper('.gallery-slider__container', {
+          mode:'horizontal',
+          loop: true,
+          speed: 500,
+          slidesPerView: 1,
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          parallax: true,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 400,
+            modifier: 1,
+            slideShadows: true,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          breakpoints: {
+          920: {
+            slidesPerView: 3,
+            spaceBetween: 0,
+          },
+          // 851: {
+          //   slidesPerView: 3,
+          //   effect: 'coverflow',
+          //   autoHeight: false,
+          // },
+          // 1151: {
+          //   slidesPerView: 3,
+          //   effect: 'coverflow',
+          // }
+        }
+      });
+    }
+  }
+
+  swiperSlider3dCategory();
 
 
   //=== Фильтрация для раздела Цена на ЛЭ ===//
@@ -871,10 +917,70 @@ $(function() {
   });
   
 
+  // Слайдер Отзывов
+  $('.info-slider').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+          },
+        }
+      ]
+  });
+
+
   //=====================================================//
 
 
+
+  // === Видео Блок ===//
+  document.querySelectorAll('.video-block__preview').forEach(preview => {
+    preview.addEventListener('click', function() {
+      const videoBlock = this.closest('.video-block');
+      const video = videoBlock.querySelector('.video-block__video');
+      const source = video.querySelector('source');
+
+      const videoSrc = this.getAttribute('data-video');
+
+      // Устанавливаем src только при первом клике
+      if (!source.src || source.src !== videoSrc) {
+        source.src = videoSrc;
+        video.load(); // перезагружаем видео с новым src
+      }
+
+      // Добавляем controls
+      video.setAttribute('controls', 'controls');
+
+      const playPromise = video.play();
+
+      // Обработка ошибок автовоспроизведения
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.warn('Видео не удалось воспроизвести автоматически');
+        });
+      }
+
+      videoBlock.classList.add('is-playing');
+    });
+  });
+
+  //=====================================================//
   
+
+
 
   //=== Показать все кнопки для Аккордеона ===//
   $('.accordion-menu-button').click(function (e) {
@@ -906,51 +1012,6 @@ $(function() {
 
 
 
-
-
-  // Gallery Slider
-function swiperSlider3dCategory() {
-  if ($('.gallery-slider__container').length) {
-    var swiperCategory = new Swiper('.gallery-slider__container', {
-        mode:'horizontal',
-        loop: true,
-        speed: 500,
-        slidesPerView: 1,
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        parallax: true,
-        coverflowEffect: {
-          rotate: 0,
-          stretch: 0,
-          depth: 400,
-          modifier: 1,
-          slideShadows: true,
-        },
-        navigation: {
-          nextEl: '.gallery-slider__nav .next-btn',
-          prevEl: '.gallery-slider__nav .prev-btn',
-        },
-        breakpoints: {
-        920: {
-          slidesPerView: 3,
-          spaceBetween: 0,
-        },
-        // 851: {
-        //   slidesPerView: 3,
-        //   effect: 'coverflow',
-        //   autoHeight: false,
-        // },
-        // 1151: {
-        //   slidesPerView: 3,
-        //   effect: 'coverflow',
-        // }
-      }
-      });
-  }
-}
-
-swiperSlider3dCategory();
 
 
 
