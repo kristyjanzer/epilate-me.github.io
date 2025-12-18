@@ -484,7 +484,7 @@ button {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 5px 17px;
+		gap: 3px 17px;
 	}
 
 	&__item {
@@ -559,7 +559,7 @@ button {
 					left: 0;
 					width: 100%;
 					height: 4px;
-					background-color: #001360;
+					background-color: $accent;
 					z-index: 10;
 				}
 			}
@@ -588,7 +588,7 @@ button {
 					left: 0;
 					width: 100%;
 					height: 4px;
-					background-color: $primary;
+					background-color: $accent;
 					z-index: 10;
 				}
 			}
