@@ -387,9 +387,13 @@
 			<div class="header-button-menu-body__socials"></div>
 			<div class="header-button-menu-body__main-menu"></div>
 		</div>
-		<div class="header__content">
+		<div class="shadow"></div>
+	</header>
+
+	<main>
+		<section class="about-clinic">
 			<div class="container">
-				<div class="header__breadcrumbs breadcrumbs">
+				<div class="about-clinic__breadcrumbs breadcrumbs">
 					<ul class="breadcrumbs__items">
 						<li class="breadcrumbs__item">
 							<a href="/" class="breadcrumbs__link">Epilat me</a>
@@ -405,63 +409,62 @@
 						</li>
 					</ul>
 				</div>
-				<div class="header__clinic-address clinic-address">
-					<div class="clinic-address__columns">
-						<div class="clinic-address__col">
-							<div class="clinic-address__address">
-								<h2 class="clinic-address__title">Клиника "Epilate-me" в  Хамовниках</h2>
-								<div class="clinic-address__subtitle">Москва,  ул. Льва Толстого, 23к1 <br>
-									Парковка: городская парковка ЖК «Литератор»</div>
-								<div class="clinic-address__subway">м. Парк Культуры</div>
-							</div>
-							<div class="clinic-address__buttons">
-								<div class="clinic-address__button button">
-									<div class="button__icon">
-										<img src="img/sign-up.svg" alt="">
-									</div>
-									<span>Записаться</span>
+				<div class="about-clinic__address">
+					<div class="clinic-address">
+						<div class="clinic-address__columns">
+							<div class="clinic-address__col">
+								<div class="clinic-address__address">
+									<h2 class="clinic-address__title">Клиника "Epilate-me" в  Хамовниках</h2>
+									<div class="clinic-address__subtitle">Москва,  ул. Льва Толстого, 23к1 <br>
+										Парковка: городская парковка ЖК «Литератор»</div>
+									<div class="clinic-address__subway">м. Парк Культуры</div>
 								</div>
-								<a href="#map" class="clinic-address__button clinic-address__button--map button">
-									<div class="button__icon">
-										<img src="img/map.svg" alt="">
+								<div class="clinic-address__buttons">
+									<div class="clinic-address__button button">
+										<div class="button__icon">
+											<img src="img/sign-up.svg" alt="">
+										</div>
+										<span>Записаться</span>
 									</div>
-									<span>Посмотреть на карте</span>
-								</a>
+									<a href="#map" class="clinic-address__button button button--violet">
+										<div class="button__icon">
+											<img src="img/map.svg" alt="">
+										</div>
+										<span>Посмотреть на карте</span>
+									</a>
+								</div>
 							</div>
-						</div>
-						<div class="clinic-address__col">
-							<img class="clinic-address__image" src="img/clinics/clinics-9.jpg" alt="">
+							<div class="clinic-address__col">
+								<img class="clinic-address__image" src="img/clinics/clinics-9.jpg" alt="">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="header__slider header-slider">
-					<div class="header-slider__item">
-						<div class="header-slider__image">
+				<div class="about-clinic__slider clinic-promo-slider">
+					<div class="clinic-promo-slider__item">
+						<div class="clinic-promo-slider__image">
 							<img src="img/slider-sm-bg.jpg" alt="">
 						</div>
-						<div class="header-slider__info">
-							<h2 class="header-slider__title">-30% на первый визит!</h2>
-							<p class="header-slider__text">Новый год - новая жизнь! <br>
+						<div class="clinic-promo-slider__info">
+							<h2 class="clinic-promo-slider__title">-30% на первый визит!</h2>
+							<p class="clinic-promo-slider__text">Новый год - новая жизнь! <br>
 								Будь самой красивой на этом празднике</p>
 						</div>
 					</div>
-					<div class="header-slider__item">
-						<div class="header-slider__image">
+					<div class="clinic-promo-slider__item">
+						<div class="clinic-promo-slider__image">
 							<img src="img/slider-sm-bg.jpg" alt="">
 						</div>
-						<div class="header-slider__info">
-							<h2 class="header-slider__title">-30% на первый визит!</h2>
-							<p class="header-slider__text">Новый год - новая жизнь! <br>
+						<div class="clinic-promo-slider__info">
+							<h2 class="clinic-promo-slider__title">-30% на первый визит!</h2>
+							<p class="clinic-promo-slider__text">Новый год - новая жизнь! <br>
 								Будь самой красивой на этом празднике</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="shadow"></div>
-	</header>
+		</section>
 
-	<main>
 		<section class="clinic-services">
 			<div class="container">
 				<h2 class="clinic-services__title title"><span class="title__accent">Услуги </span> клиники</h2>
@@ -834,31 +837,31 @@
 			</div>
 		</section>
 
-		<section class="clinics">
+		<section class="clinics has-slick filterable-section">
 			<div class="container">
 				<h2 class="clinics__title title"><span class="title__accent">Epilate Me</span> — гарантированный результат <br> после первой процедуры эпиляции</h2>
 				<div class="clinics__slider clinics-slider">
-					<div class="clinics-slider__nav clinics-slider-nav">
-						<ul class="clinics-slider-nav__list">
-							<li class="clinics-slider-nav__item">
-								<button type="button" class="clinics-slider-nav__button" data-filter="moscow">Москва</button>
+					<div class="clinics-slider__nav clinics-nav">
+						<ul class="clinics-nav__list">
+							<li class="clinics-nav__item">
+								<button type="button" class="clinics-nav__button" data-filter="moscow">Москва</button>
 							</li>
-							<li class="clinics-slider-nav__item">
-								<button type="button" class="clinics-slider-nav__button" data-filter="sochi">Сочи</button>
+							<li class="clinics-nav__item">
+								<button type="button" class="clinics-nav__button" data-filter="sochi">Сочи</button>
 							</li>
-							<li class="clinics-slider-nav__item">
-								<button type="button" class="clinics-slider-nav__button" data-filter="samara">Самара</button>
+							<li class="clinics-nav__item">
+								<button type="button" class="clinics-nav__button" data-filter="samara">Самара</button>
 							</li>
-							<li class="clinics-slider-nav__item">
-								<button type="button" class="clinics-slider-nav__button" data-filter="dubai">Дубай</button>
+							<li class="clinics-nav__item">
+								<button type="button" class="clinics-nav__button" data-filter="dubai">Дубай</button>
 							</li>
-							<li class="clinics-slider-nav__item">
-								<button type="button" class="clinics-slider-nav__button" data-filter="tashkent">Ташкент</button>
+							<li class="clinics-nav__item">
+								<button type="button" class="clinics-nav__button" data-filter="tashkent">Ташкент</button>
 							</li>
 						</ul>
 					</div>
 					<div class="clinics-slider__content clinics-slider-content">
-						<ul class="clinics-slider-content__items">
+						<ul class="clinics-slider-content__items is-slick-slider">
 							<!-- Moscow -->
 							<li class="clinics-slider-content__item" data-category="moscow">
 								<div class="clinics-slider-content__row">

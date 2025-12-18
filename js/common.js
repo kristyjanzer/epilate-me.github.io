@@ -285,6 +285,15 @@ $(function() {
       infinite: true
   });
 
+  //=== Слайдер Акций в Клинике
+  $('.clinic-promo-slider').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true
+  });
+
 
   //=== Слайдер Было/Стало
   $('.main-sect-slider').slick({
@@ -371,61 +380,82 @@ $(function() {
   });
 
 
-  //=== Слайдер Клиник
-  const sliderContainer = $('.clinics-slider-content__items');
-  let originalItems = null;
-  let slickActive = false;
 
-  if (sliderContainer.length) {
-    originalItems = sliderContainer.children().clone();
-  }
+  
+  //=== Слайдер Клиник и Фильтрация по городам
+  const hasSlick = typeof $ !== 'undefined' && $.fn.slick;
 
-  const initSlider = (items) => {
-    if (slickActive) {
-      sliderContainer.slick('unslick');
+  // === 1. Обычные секции (без слайдера) ===
+  document.querySelectorAll('.filterable-section:not(.has-slick)').forEach(section => {
+    const buttons = section.querySelectorAll('[data-filter]');
+    const items = section.querySelectorAll('[data-category]');
+
+    const showItems = (category) => {
+      items.forEach(item => {
+        item.classList.toggle('hidden', item.dataset.category !== category);
+      });
+    };
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('clinics-nav__button--active'));
+        btn.classList.add('clinics-nav__button--active');
+        showItems(btn.dataset.filter);
+      });
+    });
+
+    const def = buttons[0] || section.querySelector('[data-filter="moscow"]');
+    if (def) {
+      def.classList.add('clinics-nav__button--active');
+      showItems(def.dataset.filter);
     }
-
-    sliderContainer.empty().append(items);
-
-    sliderContainer.slick({
-      arrows: false,
-      dots: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      infinite: false,
-      responsive: [
-        { breakpoint: 1100, settings: { slidesToShow: 2 } },
-        { breakpoint: 700, settings: { slidesToShow: 1 } }
-      ]
-    });
-    slickActive = true;
-  };
-
-  const applyFilter = (category) => {
-    if (!originalItems) return;
-
-    const filteredItems = category
-      ? originalItems.filter(`[data-category="${category}"]`)
-      : originalItems;
-
-    initSlider(filteredItems);
-  };
-
-  document.querySelectorAll('.clinics-slider-nav__button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.clinics-slider-nav__button').forEach(b => 
-        b.classList.remove('clinics-slider-nav__button--active')
-      );
-      btn.classList.add('clinics-slider-nav__button--active');
-      applyFilter(btn.dataset.filter);
-    });
   });
 
-  const defaultBtn = document.querySelector('[data-filter="moscow"]');
-  if (defaultBtn) {
-    defaultBtn.classList.add('clinics-slider-nav__button--active');
-    applyFilter('moscow');
+  // === 2. Секции со слайдером ===
+  if (hasSlick) {
+    document.querySelectorAll('.filterable-section.has-slick').forEach(section => {
+      const buttons = section.querySelectorAll('[data-filter]');
+      const sliderContainer = section.querySelector('.is-slick-slider');
+      if (!sliderContainer) return;
+
+      const $slider = $(sliderContainer);
+      const originalItems = $slider.children().clone();
+      let slickActive = false;
+
+      const initSlider = (category) => {
+        const filtered = originalItems.filter(`[data-category="${category}"]`);
+        if (slickActive) $slider.slick('unslick');
+        $slider.empty().append(filtered);
+        $slider.slick({
+          arrows: false,
+          dots: true,
+          slidesToShow: 3,
+          responsive: [
+            { breakpoint: 1100, settings: { slidesToShow: 2 } },
+            { breakpoint: 700, settings: { slidesToShow: 1 } }
+          ]
+        });
+        slickActive = true;
+      };
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('clinics-nav__button--active'));
+          btn.classList.add('clinics-nav__button--active');
+          initSlider(btn.dataset.filter);
+        });
+      });
+
+      const def = buttons[0] || section.querySelector('[data-filter="moscow"]');
+      if (def) {
+        def.classList.add('clinics-nav__button--active');
+        initSlider(def.dataset.filter);
+      }
+    });
   }
+
+
+
 
 
 
