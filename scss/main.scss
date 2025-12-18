@@ -2642,6 +2642,7 @@ section {
 	}
 }
 
+
 .clinic-services {
 	&__box {
 		margin-top: 40px;
@@ -2650,9 +2651,7 @@ section {
 	&__popular-offers {
 		margin-top: 70px;
 	}
-}
 
-.clinic-services {
 	&__list {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
@@ -3923,6 +3922,8 @@ section {
 	.breadcrumbs {
 		&__item {
 			font-size: 12px;
+			margin-right: 5px;
+    		padding: 0 5px;
 		}
 	}
 
@@ -4131,6 +4132,10 @@ section {
 		&__list{
 			grid-template-columns: 1fr;
 			gap: 24px;
+
+			&:not(.show-all) .clinic-services__item:nth-child(n+5) {
+				display: none;
+			}
 		}
 	}
 
@@ -4177,6 +4182,5 @@ section {
 		}
 	}
 }
-
 
 
