@@ -482,6 +482,10 @@ button {
 	& + .title {
 		margin-top: 53px;
 	}
+
+	& + .about-clinic__slider {
+		margin-top: 40px;
+	}
 }
 
 
@@ -2505,7 +2509,7 @@ section {
 	}
 }
 
-.popular-offers-accordion {
+.offers-accordion {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -2535,12 +2539,27 @@ section {
 	&__offer {
 		font-size: 18px;
 		font-weight: 400;
+		width: 75%;
 	}
 
 	&__price {
-		font-size: 18px;
-		color: $accent;
-		white-space: nowrap;
+		display: flex;
+		gap: 10px;
+		width: 370px;
+    	justify-content: flex-end;
+		
+		&-text {
+			font-size: 18px;
+			color: $accent;
+			white-space: nowrap;
+		}
+
+		&-card {
+			font-size: 18px;
+			color: #9FABDE;
+			white-space: nowrap;
+			width: 62%;
+		}
 	}
 
 	&__content {
@@ -3000,9 +3019,61 @@ section {
 		gap: 70px;
 		margin-top: 70px;
 	}
+
+	&__title {
+		margin-top: 68px;
+	}
 }
 
+.price-list {
+	&__offers {
+		margin-top: 40px;
+	}
 
+	&__box {
+		margin-top: 80px;
+	}
+
+	&__subtitle {
+		font-size: 32px;
+		font-weight: 400;
+		margin-top: 70px;
+
+		& + .offers-accordion {
+			margin-top: 30px;
+		}
+	}
+}
+
+.price-list-offers {
+	&__item {
+		position: relative;
+		height: 230px;
+		cursor: pointer;
+		border: 2px solid transparent;
+		overflow: hidden;
+    	border-radius: 20px;
+
+		&--active {
+			border: 2px solid #f6d75a;
+			border-radius: 20px;
+		}
+	}
+
+	&__text {
+		position: absolute;
+		bottom: 27px;
+		left: 20px;
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 32px;
+		padding: 0px 24px;
+		font-size: 18px;
+		color: $black;
+		min-height: 40px;
+		display: flex;
+		align-items: center;
+	}
+}
 
 
 
@@ -3941,9 +4012,13 @@ section {
 		}
 	}
 
-	.popular-offers-accordion {
-		&__offer,
-		&__price {
+	.offers-accordion {
+		&__offer {
+			font-size: 16px;
+		}
+
+		&__price-text,
+		&__price-card {
 			font-size: 16px;
 		}
 

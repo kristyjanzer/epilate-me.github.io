@@ -380,8 +380,43 @@ $(function() {
   });
 
 
+  //=== Слайдер Зоны
+  $('.price-list-offers').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      // variableWidth: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              slidesToShow: 3,
+          },
+        },
+        {
+          breakpoint: 900,
+            settings: {
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+          },
+        }
+      ]
+  });
 
-  
+  $('.price-list-offers').on('click', '.price-list-offers__item', function() {
+    $('.price-list-offers__item').removeClass('price-list-offers__item--active');
+    $(this).addClass('price-list-offers__item--active');
+  });
+
+
+
   //=== Слайдер Клиник и Фильтрация по городам
   const hasSlick = typeof $ !== 'undefined' && $.fn.slick;
 
@@ -1140,8 +1175,8 @@ new Accordion($('.advantages-accordion'), {
   contentClass: '.advantages-accordion__content'
 });
 
-new Accordion($('.popular-offers-accordion'), {
+new Accordion($('.offers-accordion'), {
   multiple: false,
-  topClass: '.popular-offers-accordion__top',
-  contentClass: '.popular-offers-accordion__content'
+  topClass: '.offers-accordion__top',
+  contentClass: '.offers-accordion__content'
 });
