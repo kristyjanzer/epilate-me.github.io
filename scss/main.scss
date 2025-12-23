@@ -3049,6 +3049,7 @@ section {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 20px;
 	}
 }
 
@@ -3079,6 +3080,11 @@ section {
 		min-height: 40px;
 		display: flex;
 		align-items: center;
+	}
+
+	&__image {
+		height: 100%;
+		object-fit: cover;
 	}
 }
 
@@ -3161,16 +3167,19 @@ section {
 		width: 100%;
 		top: 98%;
 		left: -1px;
-		margin-top: 0;
+		margin-top: 2px;
 		border-radius: 0 1px 5px 5px;
 		overflow: hidden;
+		display: none;
 		max-height: 200px;
 		overflow-y: auto;
 		z-index: 9;
 		padding: 0;
+		list-style: none;
 		border: inherit;
 		border-top: 0;
 		box-sizing: content-box;
+		background-color: #1b243a;
 
 		&::-webkit-scrollbar {
 			width: 5px;
@@ -3184,7 +3193,7 @@ section {
 
 	&__option {
 		padding: 16px 20px;
-		transition: all .2s ease;
+		transition: background .2s ease;
 		cursor: pointer;
 
 		&:hover {
@@ -4226,9 +4235,17 @@ section {
 			bottom: 40px;
 		}
 
-		&__image img {
-			border-radius: 0;
-			object-position: 75% center;
+		&__image {
+			img {
+				border-radius: 0;
+				object-position: 75% center;
+			}
+
+			&--op65 {
+				img {
+					object-position: 65% center;
+				}
+			}
 		}
 
 		&__info {
@@ -4295,6 +4312,75 @@ section {
 		&__addresses {
 			margin-top: 40px;
 			gap: 40px;
+		}
+	}
+
+	.price-list {
+		&__selection {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 20px;
+			width: max-content;
+        	margin: 30px auto 0;
+		}
+
+		&__offers {
+			margin-top: 34px;
+		}
+
+		&__subtitle {
+			margin-top: 45px;
+			font-size: 24px;
+
+			& + .offers-accordion {
+				margin-top: 20px;
+			}
+		}
+	}
+
+	.offers-accordion {
+		&__price {
+			width: 100%;
+			justify-content: flex-start;
+		}
+
+		&__offer {
+			width: 100%;
+		}
+	}
+
+	.uni-selection {
+		flex-direction: column;
+		align-items: flex-start;
+
+		&__title {
+			font-size: 18px;
+		}
+	}
+
+	.check {
+		input[type=checkbox] + label {
+			font-size: 18px;
+			padding-left: 50px;
+
+			&::before {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+
+	.form-select {
+		min-width: 340px;
+		
+		span {
+			font-size: 16px;
+		}
+	}
+
+	.about-clinic {
+		&__title {
+			margin-top: 40px;
 		}
 	}
 }
