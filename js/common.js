@@ -1122,6 +1122,21 @@ $(function() {
 
 
 
+  // Дропменю
+  $('.form-select').click(function () {
+    $(this).attr('tabindex', 1).focus();
+    $(this).toggleClass('form-select--active');
+    $(this).find('.form-select__options').slideToggle(300);
+  });
+  $('.form-select').focusout(function () {
+    $(this).removeClass('form-select--active');
+    $(this).find('.form-select__options').slideUp(300);
+  });
+  $('.form-select__option').click(function () {
+    $(this).parents('.form-select').find('.form-select__span').text($(this).text());
+  });
+
+
 
 
 

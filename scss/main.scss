@@ -3043,6 +3043,13 @@ section {
 			margin-top: 30px;
 		}
 	}
+
+	&__selection {
+		margin-top: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 
 .price-list-offers {
@@ -3074,6 +3081,119 @@ section {
 		align-items: center;
 	}
 }
+
+
+.check {
+    position: relative;
+
+	input[type="checkbox"] {
+		display: none;
+		visibility: hidden;
+		opacity: 0;
+
+		& + label {
+			display: block;
+			position: relative;
+			cursor: pointer;
+			padding-left: 60px;
+			font-size: 24px;
+			line-height: 120%;
+
+			&:before {
+				content: '';
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				top: 50%;
+				left: 0;
+				transform: translateY(-50%);
+				background: url(../img/checkbox.svg) no-repeat 50% 50%;
+			}
+		}
+
+		&:checked + label:before {
+			background: url(../img/checked.svg) no-repeat 50% 50%;
+		}
+	}
+}
+
+.uni-selection {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+
+	&__title {
+		font-size: 24px;
+	}
+}
+
+.form-select {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+	padding: 16px 20px;
+	width: 300px;
+	min-height: 50px;
+	position: relative;
+	transition: all .5s ease;
+	outline: 0;
+	cursor: pointer;
+
+	span {
+		color: $white;
+		font-weight: 400;
+		font-size: 18px;
+	}
+
+	&__icon {
+		position: absolute;
+		right: 25px;
+		top: 50%;
+		transform: translateY(-50%);
+		background-image: url('../img/arrow-select.svg');
+		background-repeat: no-repeat;
+		width: 12px;
+		height: 10px;
+	}
+
+	&__options {
+		position: absolute;
+		width: 100%;
+		top: 98%;
+		left: -1px;
+		margin-top: 0;
+		border-radius: 0 1px 5px 5px;
+		overflow: hidden;
+		max-height: 200px;
+		overflow-y: auto;
+		z-index: 9;
+		padding: 0;
+		border: inherit;
+		border-top: 0;
+		box-sizing: content-box;
+
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 10px; 
+  			border: 3px solid #eee;
+		}
+	}
+
+	&__option {
+		padding: 16px 20px;
+		transition: all .2s ease;
+		cursor: pointer;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.2);
+		}
+	}
+}
+
+
 
 
 
