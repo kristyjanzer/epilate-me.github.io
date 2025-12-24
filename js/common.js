@@ -1122,7 +1122,7 @@ $(function() {
 
 
 
-  // Дропменю
+  //=== Дропменю ===//
   $('.form-select').click(function () {
     $(this).attr('tabindex', 1).focus();
     $(this).toggleClass('form-select--active');
@@ -1140,7 +1140,119 @@ $(function() {
 
 
 
+	//=== Модальное окно с валидацией формы ===//
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const overlay = document.querySelector('.overlay');
+  const modalForm = document.querySelector('.modal-block');
+  const closeModalBtn = document.querySelector('.modal-block__close');
+  const openModalButtons = document.querySelectorAll('.modal');
+
+  let isPhoneMaskInitialized = false;
+  let isValidationInitialized = false;
+
+  // Маска телефона на чистом JS
+  function initPhoneMask() {
+    const phoneInput = document.getElementById('phone');
+    if (!phoneInput || phoneInput.dataset.maskInitialized) return;
+
+    phoneInput.dataset.maskInitialized = "true";
+
+    phoneInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, ''); // Только цифры
+      if (value.startsWith('8')) value = '7' + value.slice(1); // 8 → 7
+      if (!value.startsWith('7')) value = '7' + value; // Всегда начинаем с 7
+      if (value.length > 11) value = value.slice(0, 11);
+
+      let formatted = '+7';
+      if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+      if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
+      if (value.length >= 7) formatted += '-' + value.slice(7, 9);
+      if (value.length >= 9) formatted += '-' + value.slice(9, 11);
+
+      e.target.value = formatted;
+    });
+
+    // Очистка при потере фокуса, если номер неполный
+    phoneInput.addEventListener('blur', function(e) {
+      const digits = e.target.value.replace(/\D/g, '');
+      if (digits.length !== 11 || digits[0] !== '7') {
+        e.target.value = '';
+      }
+    });
+  }
+
+  // Валидация формы
+  function initValidation() {
+    $.validator.addMethod("phoneRU", function(phone_number, element) {
+      const digits = phone_number.replace(/\D/g, '');
+      return this.optional(element) || (digits.length === 11 && digits[0] === '7');
+    }, "Пожалуйста, введите корректный номер телефона");
+
+    $('form.form-block').validate({
+      rules: {
+        name: { required: true, minlength: 2 },
+        phone: { required: true, phoneRU: true },
+        email: { required: true, email: true }
+      },
+      messages: {
+        name: {
+          required: "Пожалуйста, заполните поле",
+          minlength: "Имя должно содержать не менее 2 символов"
+        },
+        phone: {
+          required: "Пожалуйста, введите номер полностью"
+        },
+        email: {
+          required: "Пожалуйста, заполните поле",
+          email: "Пожалуйста, введите корректный email"
+        }
+      }
+    });
+  }
+
+  // Открытие модалки
+  function openModal() {
+    document.body.classList.add('lock');
+    overlay.classList.add('active');
+    modalForm.classList.add('active');
+
+    if (!isPhoneMaskInitialized) {
+      initPhoneMask();
+      isPhoneMaskInitialized = true;
+    }
+
+    if (!isValidationInitialized) {
+      initValidation();
+      isValidationInitialized = true;
+    }
+  }
+
+  // Закрытие модалки
+  async function closeModal() {
+    modalForm.classList.remove('active');
+    await wait(200);
+    overlay.classList.remove('active');
+    document.body.classList.remove('lock');
+  }
+
+  // Обработчики
+  openModalButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeModalBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+
+  //=====================================================//
+
+
 });
+
+
 
 
 

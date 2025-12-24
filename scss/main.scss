@@ -164,7 +164,7 @@ button {
 
 	&__icon {
 		font-size: 0;
-		
+
 		img {
 			width: 14px;
 			height: 14px;
@@ -3205,6 +3205,195 @@ section {
 }
 
 
+.modal-block {
+	font-size: 16px;
+	max-width: 524px;
+	width: 95%;
+	border-radius: 24px;
+	background: #fff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	opacity: 0;
+  	visibility: hidden;
+	z-index: 10;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
+	box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.25);
+
+	&.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&__close {
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		top: 30px;
+		right: 25px;
+		cursor: pointer;
+		display: block;
+		background-image: url('../img/close.svg');
+		z-index: 5;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	&__top {
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		overflow: hidden;
+		min-height: 255px;
+		position: relative;
+		padding: 35px 48px;
+	}
+
+	&__image {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+		z-index: -1;
+	}
+
+	&__info {
+		max-width: 240px;
+	}
+
+	&__title {
+		font-size: 32px;
+		letter-spacing: -0.03em;
+		margin-top: 10px;
+	}
+
+	&__subtitle {
+		font-size: 400px;
+		font-size: 16px;
+		margin-top: 23px;
+		line-height: 120%;
+	}
+}
+
+.form-block {
+	padding: 35px 45px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	&__button {
+		background-color: #1B243A;
+		color: $white;
+		border-radius: 8px;
+		width: 100%;
+		min-height: 50px;
+		font-size: 16px;
+		font-weight: 500;
+		font-family: $default-font;
+	}
+
+	&__item {
+		background-color: transparent;
+		border: 1px solid #e1e1e1;
+		border-radius: 8px;
+		width: 100%;
+		min-height: 40px;
+		padding: 16px 25px;
+		font-size: 16px;
+		font-family: $default-font;
+		color: #1b243a;;
+
+		&::placeholder {
+			color: #1b243a;;
+    		font-family: $default-font;
+		}
+
+		&:required:valid {
+			border-color: green;
+		}
+
+		&.error {
+			border: 1px solid #ff5f00 !important;
+		}
+	}
+
+	label.error {
+		color: #ff5f00;
+		font-size: 12px;
+	}
+
+	&__descr {
+		&-check {
+			position: relative;
+
+			input[type="checkbox"] {
+				display: none;
+				visibility: hidden;
+				opacity: 0;
+
+				& + label {
+					display: block;
+					position: relative;
+					cursor: pointer;
+					padding-left: 28px;
+
+					&:before {
+						content: '';
+						position: absolute;
+						width: 16px;
+						height: 16px;
+						top: 0;
+						left: 0;
+						background: url(../img/modal-checkbox.svg) no-repeat 50% 50%;
+					}
+				}
+
+				&:checked + label:before {
+					background: url(../img/modal-checked.svg) no-repeat 50% 50%;
+				}
+			}
+		}
+
+		&-text {
+			color: #4D4D4D;
+			font-size: 14px;
+
+			a {
+				display: inline-block;
+				text-decoration: underline;
+				color: #4D4D4D;
+				font-size: 14px;
+			}
+		}
+	}
+}
+
+.overlay {
+	z-index: 3;
+	position: fixed;
+	background-color: $text;
+	opacity: 0;
+  	visibility: hidden;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+
+	&.active {
+		opacity: 0.8;
+		visibility: visible;
+	}
+}
+
 
 
 
@@ -4391,6 +4580,7 @@ section {
 
 
 
+
 @media (max-width: 900px) {
 	.footer {
 		&__row {
@@ -4553,6 +4743,35 @@ section {
 		&__image {
 			max-width: 100%;
 		}
+	}
+
+	.modal-block {
+		overflow: auto;
+		height: 86vh;
+
+		&__top {
+			padding: 35px 20px;
+		}
+
+		&__info {
+			max-width: 200px;
+		}
+
+		&__title {
+			font-size: 30px;
+		}
+
+		&__subtitle {
+			font-size: 15px;
+		}
+
+		&__image {
+			object-position: 0% center;
+		}
+	}
+
+	.form-block {
+		padding: 30px 20px;
 	}
 }
 
