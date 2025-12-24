@@ -1236,12 +1236,12 @@ $(function() {
     document.body.classList.remove('lock');
   }
 
-  // Обработчики
-  openModalButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Делегирование: обрабатываем клик по ЛЮБОЙ кнопке .modal в будущем
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.modal')) {
       e.preventDefault();
       openModal();
-    });
+    }
   });
 
   closeModalBtn?.addEventListener('click', closeModal);
