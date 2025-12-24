@@ -3394,7 +3394,30 @@ section {
 	}
 }
 
+.not-found {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 637px;
 
+	&__info {
+		max-width: 700px;
+		padding-top: 230px;
+	}
+
+	&__title {
+		font-size: 60px;
+		font-weight: 500;
+	}
+
+	&__subtitle {
+		font-weight: 500;
+	}
+
+	&__button {
+		margin-top: 37px;
+	}
+}
 
 
 
@@ -4572,6 +4595,28 @@ section {
 	.about-clinic {
 		&__title {
 			margin-top: 40px;
+		}
+	}
+
+	.not-found {
+		background-position: 70% center;
+		min-height: 590px;
+
+		&__info {
+			padding-top: 60px;
+			max-width: 100%;
+		}
+
+		&__title {
+			font-size: 32px;
+		}
+
+		&__subtitle {
+			margin-top: 16px !important;
+		}
+
+		&__button {
+			margin-top: 16px;
 		}
 	}
 }
