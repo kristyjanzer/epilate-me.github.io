@@ -490,6 +490,9 @@ button {
 	}
 }
 
+.has-breadcrumbs {
+	padding-top: 90px !important;
+}
 
 .main-menu { 
 	display: flex;
@@ -960,6 +963,10 @@ section {
 
 	&:first-child {
 		padding-top: 0;
+	}
+
+	&:has(.breadcrumbs) {
+		padding-top: 90px !important;
 	}
 }
 
@@ -3003,8 +3010,6 @@ section {
 }
 
 .about-clinic {
-	padding-top: 90px !important;
-
 	&__slider {
 		margin-top: 70px;
 	}
@@ -3421,6 +3426,107 @@ section {
 	}
 }
 
+.political {
+	padding-top: 90px;
+	
+	a {
+		color: $white;
+		text-decoration: none;
+		display: inline-block;
+		font-size: inherit;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__title {
+		& + p,
+		& + .political__descr {
+			margin-top: 24px;
+		}
+	}
+
+	&__descr {
+		font-size: 24px;
+		line-height: 130%;
+
+		& + & {
+			margin-top: 25px;
+		}
+
+		& + h2,
+		& + .political__caption {
+			margin-top: 40px;
+		}
+	}
+
+	&__caption {
+		font-size: 32px;
+		font-weight: 500;
+		margin-top: 40px;
+
+		& + h3,
+		& + .political__subtitle {
+			margin-top: 20px;
+		}
+
+		& + p,
+		& + .political__text {
+			margin-top: 20px;
+		}
+	}
+
+	&__subtitle {
+		font-size: 26px;
+		font-weight: 500;
+
+		& + p,
+		& + .political__text {
+			margin-top: 20px;
+		}
+	}
+
+	&__text {
+		font-size: 18px;
+		line-height: 130%;
+		font-weight: 400;
+
+		& + & {
+			margin-top: 25px;
+		}
+
+		& + h3,
+		& + .political__subtitle {
+			margin-top: 40px;
+		}
+
+		& + ul,
+		& + .political__list {
+			margin-top: 25px;
+		}
+	}
+
+	&__list {
+		margin-top: 25px;
+
+		& + h2,
+		& + .political__caption {
+			margin-top: 40px;
+		}
+
+		& + p,
+		& + .political__text {
+			margin-top: 25px;
+		}
+	}
+
+	&__item {
+		font-size: 18px;
+		line-height: 130%;
+		font-weight: 400;
+	}
+}
 
 
 
@@ -3876,6 +3982,10 @@ section {
 
 	section {
 		padding: 20px 0;
+
+		&:has(.breadcrumbs) {
+			padding-top: 40px !important;
+		}
 	}
 
 	.title {
@@ -4424,6 +4534,10 @@ section {
 		}
 	}
 
+	.has-breadcrumbs {
+		padding-top: 40px !important;
+	}
+
 	.clinic-promo-slider {
 		margin-top: 48px;
 		margin-right: -20px;
@@ -4519,8 +4633,6 @@ section {
 	}
 
 	.about-clinic {
-		padding-top: 40px !important;
-
 		&__address {
 			margin-top: 42px;
 		}
@@ -4619,6 +4731,49 @@ section {
 
 		&__button {
 			margin-top: 16px;
+		}
+	}
+
+	.political {
+		&__descr,
+		&__item {
+			font-size: 16px;
+		}
+
+		&__caption {
+			font-size: 28px;
+
+			& + h3,
+			& + .political__subtitle {
+				margin-top: 10px;
+			}
+
+			& + p,
+			& + .political__text {
+				margin-top: 10px;
+			}
+		}
+		
+		&__subtitle {
+			font-size: 20px;
+
+			& + p,
+			& + .political__text {
+				margin-top: 10px;
+			}
+		}
+
+		&__text {
+			font-size: 16px;
+
+			& + & {
+				margin-top: 20px;
+			}
+
+			& + ul,
+			& + .political__list {
+				margin-top: 20px;
+			}
 		}
 	}
 }
