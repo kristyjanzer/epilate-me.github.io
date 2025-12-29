@@ -992,7 +992,7 @@ section {
 .main-sect {
 	&__slider {
 		margin-top: 40px;
-		margin-bottom: 70px;
+		margin-bottom: 50px;
 	}
 
 	&__wrap {
@@ -1728,8 +1728,7 @@ section {
 	flex-direction: column;
 	gap: 40px;
 
-	&__col,
-	&__item {
+	&__col {
 		display: flex;
 		gap: 60px;
 	}
@@ -1742,6 +1741,10 @@ section {
 		font-size: 24px;
 		font-weight: 400;
 		margin-top: 24px;
+
+		& + .laser-info-box__title {
+			margin-top: 32px;
+		}
 	}
 
 	&__slider {
@@ -1753,13 +1756,12 @@ section {
 	}
 
 	&__image {
-		max-width: 472px;
-		width: 100%;
 		font-size: 0;
 
 		img {
 			overflow: hidden;
 			border-radius: 16px;
+			width: 472px;
 		}
 	}
 
@@ -2284,13 +2286,15 @@ section {
 		display: flex;
 		flex-direction: column;
 		gap: 50px;
-		margin-top: 70px;
+		margin-top: 60px;
 	}
 
 	&__col {
-		display: flex;
-		align-items: stretch;
+		// display: flex;
+		// align-items: stretch;
 		gap: 16px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 	}
 
 	&__row {
@@ -2311,10 +2315,10 @@ section {
 }
 
 .process-list {
-	flex-shrink: 1;
+	display: grid;
 
 	&__item {
-		padding: 33px 0 45px 0;
+		padding: 25px 0 30px 0;
 		border-bottom: 1px solid $white;
 
 		&:first-child {
@@ -2334,66 +2338,33 @@ section {
 	&__text {
 		font-size: 16px;
 		font-weight: 400;
+		line-height: 120%;
 	}
 }
 
 .process-images {
-	flex-shrink: 0;
 	gap: 16px;
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: auto;
 	
 	&--column {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 	}
 
-	&--row {
-		flex-direction: row;
-	}
-
-	&__big-image {
+	&__imgs {
 		font-size: 0;
-
-		img {
-			border-radius: 20px;
-			max-width: 622px;
-			object-fit: cover;
-		}
-	}
-
-	&__more-images {
-		display: flex;
-		align-items: center;
+		display: grid;
 		gap: 16px;
-		font-size: 0;
 
 		img {
 			border-radius: 20px;
-			max-width: 303px;
 			object-fit: cover;
+			height: 100%;
 		}
-	}
 
-	&__long-image {
-		font-size: 0;
-
-		img {
-			border-radius: 20px;
-			max-width: 303px;
-			object-fit: cover;
-		}
-	}
-
-	&__two-images {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-		font-size: 0;
-
-		img {
-			border-radius: 20px;
-			object-fit: cover;
-			max-width: 303px;
+		&--more {
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 }
@@ -4209,6 +4180,8 @@ section {
 	}
 
 	.laser-info-box {
+		gap: 80px;
+
 		&__col {
 			flex-direction: column;
 			gap: 40px;
@@ -4230,17 +4203,14 @@ section {
 
 		&__image {
 			order: 2;
-			max-width: 100%;
+
+			img {
+				width: 100%;
+			}
 		}
 
 		&__about {
 			order: 1;
-		}
-
-		&__item {
-			margin-top: 40px;
-			gap: 40px;
-			flex-direction: column;
 		}
 
 		&__accent {
@@ -4358,7 +4328,7 @@ section {
 		}
 
 		&__col {
-			flex-direction: column;
+			grid-template-columns: 1fr;
 		}
 	}
 
@@ -4379,21 +4349,6 @@ section {
 	.process-images {
 		&--row {
 			order: 2;
-		}
-
-		&__big-image,
-		&__long-image {
-			img {
-				max-width: 100%;
-			}
-		}
-
-		&__more-images,
-		&__two-images {
-			img {
-				max-width: 100%;
-				min-width: 0;
-			}
 		}
 	}
 
