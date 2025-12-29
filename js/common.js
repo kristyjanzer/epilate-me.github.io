@@ -1007,6 +1007,30 @@ $(function() {
   });
 
 
+  // Слайдер Лицензий
+  $('.process-slider').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+          },
+        }
+      ]
+  });
+
+
   //=====================================================//
 
 
