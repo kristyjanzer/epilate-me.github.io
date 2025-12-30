@@ -1008,10 +1008,55 @@ section {
 		overflow: hidden;
 	}
 
+	&__col {
+		display: grid;
+    	grid-template-columns: 1fr 1fr;
+
+		&--before,
+		&--after {
+			position: relative;
+
+			&::before {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				background-color: rgba(255, 255, 255, .8);
+				z-index: 1;
+				border-radius: 32px;
+				color: $black;
+				padding: 10px 24px;
+				font-size: 18px;
+				font-weight: 500;
+			}
+		}
+
+		&--before {
+			&::before {
+				content: 'Было';
+			}
+
+			&::after {
+				position: absolute;
+				content: '';
+				top: 0;
+				right: -2px;
+				height: 100%;
+				width: 3px;
+				background-color: $white;
+				z-index: 1;
+			}
+		}
+
+		&--after {
+			&::before {
+				content: 'Стало';
+			}
+		}
+	}
+
 	&__image {
-		// object-fit: cover;
-		width: 100%;
-		height: 100%;
+		object-fit: cover;
+		height: 230px;
 	}
 
 	.slick-dots {
@@ -1165,7 +1210,8 @@ section {
 .equipment-slider-content {
 	&__item {
 		display: flex;
-		min-height: auto !important;
+		// min-height: auto !important;
+		min-height: 330px;
 	}
 	
 	&__row {
@@ -1176,7 +1222,8 @@ section {
 		display: flex;
 		align-items: center;
 		gap: 40px;
-		height: auto;
+		// height: auto;
+		height: 100%;
 	}
 
 	&__info {
@@ -1218,7 +1265,8 @@ section {
 		> div {
 			display: flex;
 			height: auto !important;
-    		min-height: auto !important;
+    		// min-height: auto !important;
+			min-height: 100%;
 		}
 	}
 
@@ -1802,9 +1850,55 @@ section {
 		max-width: 280px;
 	}
 
+	&__col {
+		display: grid;
+    	grid-template-columns: 1fr 1fr;
+
+		&--before,
+		&--after {
+			position: relative;
+
+			&::before {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				background-color: rgba(255, 255, 255, .8);
+				z-index: 1;
+				border-radius: 32px;
+				color: $black;
+				padding: 10px 24px;
+				font-size: 18px;
+				font-weight: 500;
+			}
+		}
+
+		&--before {
+			&::before {
+				content: 'Было';
+			}
+
+			&::after {
+				position: absolute;
+				content: '';
+				top: 0;
+				right: -2px;
+				height: 100%;
+				width: 3px;
+				background-color: $white;
+				z-index: 1;
+			}
+		}
+
+		&--after {
+			&::before {
+				content: 'Стало';
+			}
+		}
+	}
+
 	&__image {
-		width: 100%;
-		height: 100%;
+		object-fit: cover;
+		height: 230px;
 	}
 
 	.slick-dots {
@@ -1860,14 +1954,14 @@ section {
 		grid-template-columns: repeat(4, 1fr);
 		gap: 10px 16px;
 
-		.gallery__image {
+		.gallery__col {
 			&:nth-child(n+9) {
 				display: none;
 			}
 		}
 	}
 
-	&.show-all .gallery__image {
+	&.show-all .gallery__col {
 		display: inline-block !important;
 	}
 
@@ -1898,7 +1992,7 @@ section {
 .advantages {
 	&__columns {
 		display: grid;
-    	grid-template-columns: 1fr 516px;
+    	grid-template-columns: 1fr minmax(auto, 516px);
 		gap: 40px;
 		margin-top: 65px;
 	}
@@ -4957,6 +5051,16 @@ section {
 	.main-sect-slider {
 		margin: 0 -8px;
 
+		&__col {
+			&--after,
+			&--before {
+				&::before {
+					font-size: 16px;
+					padding: 5px 16px;
+				}
+			}
+		}
+
 		.slick-list {
 			margin: 0;
 		}
@@ -4992,7 +5096,7 @@ section {
 			grid-template-columns: 1fr;
 			gap: 16px;
 
-			.gallery__image:nth-child(n+4) {
+			.gallery__col:nth-child(n+4) {
 				display: none;
 			}
 		}
