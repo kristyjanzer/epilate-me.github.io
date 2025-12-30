@@ -767,7 +767,7 @@ $(function() {
       arrows: false,
       dots: true,
       infinite: true,
-      adaptiveHeight: false,
+      adaptiveHeight: true,
       slidesToShow: slidesToShow,
       slidesToScroll: 1,
       ...slickExtra
@@ -786,41 +786,7 @@ $(function() {
       $slider.empty().append(items);
       $slider.slick(slickOptions);
       slickActive = true;
-
-      // Принудительно обновляем высоту после загрузки изображений
-      setTimeout(() => {
-        setUniformSlideHeight($slider);
-      }, 100);
     };
-
-    function setUniformSlideHeight($slider) {
-      const $slides = $slider.find('.equipment-slider-content__item');
-      let maxHeight = 0;
-
-      // Ждём загрузки изображений
-      const images = $slides.find('img').get();
-      const loaded = images.every(img => img.complete && img.naturalHeight !== 0);
-
-      if (!loaded) {
-        // Если не все загружены — ждём
-        images.forEach(img => {
-          if (!img.complete) {
-            img.onload = () => setUniformSlideHeight($slider);
-          }
-        });
-        return;
-      }
-
-      // Измеряем высоту каждого слайда
-      $slides.each(function () {
-        // Сбрасываем фиксированную высоту, чтобы получить естественную
-        $(this).css('height', '');
-        maxHeight = Math.max(maxHeight, $(this).outerHeight());
-      });
-
-      // Применяем одинаковую высоту
-      $slides.css('height', maxHeight + 'px');
-    }
 
     // Применение фильтра
     const applyFilter = (category) => {
