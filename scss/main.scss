@@ -5074,6 +5074,7 @@ section {
 		&__row {
 			flex-direction: column;
 			align-items: flex-start;
+			height: auto;
 		}
 		
 		&__text {
@@ -5082,6 +5083,12 @@ section {
 
 		&__image {
 			margin: 0 auto;
+		}
+
+		.slick-slide {
+			> div {
+				min-height: auto !important;
+			}
 		}
 	}
 
