@@ -1057,7 +1057,7 @@ section {
 		border-radius: 20px;
 		background: rgba(205, 213, 223, 0.8);
 		overflow: hidden;
-		padding: 40px 30px 30px;
+		padding: 40px 27px 30px;
 		display: flex;
 		flex-direction: column;
 	}
@@ -1896,29 +1896,30 @@ section {
 
 .advantages {
 	&__columns {
-		display: flex;
-		align-items: flex-start;
-		justify-content: space-between;
+		display: grid;
+    	grid-template-columns: 1fr 516px;
 		gap: 40px;
 		margin-top: 65px;
 	}
 
+	&__col {
+		display: grid;
+	}
+
 	&__image {
-		max-width: 516px;
-		width: 100%;
 		img {
 			border-radius: 16px;
 		}
 	}
 
 	&__button {
-		margin-top: 40px;
+		margin-top: auto;
+		height: 40px;
 	}
 }
 
 .advantages-accordion {
-	display: flex;
-	flex-direction: column;
+	display: grid;
 	width: 620px;
 
 	&__item {
@@ -1927,6 +1928,7 @@ section {
 
 		&:last-child {
 			border-bottom: 1px solid $white;
+			margin-bottom: 15px;
 		}
 	}
 
@@ -3233,8 +3235,7 @@ section {
 	font-size: 16px;
 	max-width: 524px;
 	width: 95%;
-	border-radius: 24px;
-	background: #fff;
+	background: transparent;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -3267,11 +3268,14 @@ section {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		border-bottom-left-radius: 24px;
+		border-bottom-right-radius: 24px;
+		overflow: hidden;
 	}
 
 	&__top {
-		border-top-left-radius: 20px;
-		border-top-right-radius: 20px;
+		border-top-left-radius: 24px;
+		border-top-right-radius: 24px;
 		overflow: hidden;
 		min-height: 255px;
 		position: relative;
@@ -3311,6 +3315,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	background-color: $white;
 
 	&__button {
 		background-color: #1B243A;
@@ -4321,7 +4326,7 @@ section {
 
 	.advantages {
 		&__columns {
-			flex-direction: column;
+    		grid-template-columns: 1fr;
 			margin-top: 24px;
 		}
 
@@ -4508,9 +4513,24 @@ section {
 			font-size: 16px;
 		}
 
+		&__price-card {
+			width: 100%;
+		}
+
 		&__top {
 			flex-direction: column;
 			align-items: flex-start;
+		}
+
+		&__price {
+			width: 100%;
+			justify-content: flex-start;
+		}
+
+		&--more {
+			.offers-accordion__price {
+				width: 100%;
+			}
 		}
 	}
 
@@ -4700,17 +4720,6 @@ section {
 			& + .offers-accordion {
 				margin-top: 20px;
 			}
-		}
-	}
-
-	.offers-accordion {
-		&__price {
-			width: 100%;
-			justify-content: flex-start;
-		}
-
-		&__offer {
-			width: 100%;
 		}
 	}
 
@@ -4964,6 +4973,10 @@ section {
 		
 		&__text {
 			max-width: 100%;
+		}
+
+		&__image {
+			margin: 0 auto;
 		}
 	}
 
