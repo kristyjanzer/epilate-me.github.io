@@ -780,41 +780,44 @@ $(function() {
 
     // Инициализация (или переинициализация) слайдера
     const initSlider = (items) => {
-  if (slickActive) {
-    $slider.slick('unslick');
-  }
-  $slider.empty().append(items);
-  $slider.slick(slickOptions);
-  slickActive = true;
+      if (slickActive) {
+        $slider.slick('unslick');
+      }
+      $slider.empty().append(items);
+      $slider.slick(slickOptions);
+      slickActive = true;
 
-  // === Новая логика: выравнивание высоты слайдов ===
-  const equalizeSlideHeights = () => {
-    // Сбрасываем фиксированную высоту, чтобы корректно измерить
-    $slider.find('.equipment-slider-content__item').css('height', '');
+      // === Универсальное выравнивание высоты для текущего слайдера ===
+      const equalizeSlideHeights = () => {
+        // Находим прямые дочерние <li> внутри текущего слайдера — они и есть слайды
+        const $slides = $slider.children('li');
+        
+        // Сбрасываем высоту, чтобы измерить реальную
+        $slides.css('height', '');
 
-    // Получаем только видимые слайды (Slick добавляет класс slick-active)
-    const $visibleSlides = $slider.find('.equipment-slider-content__item.slick-active');
+        // Находим только видимые (активные) слайды
+        const $visibleSlides = $slides.filter('.slick-active');
 
-    if ($visibleSlides.length === 0) return;
+        if ($visibleSlides.length === 0) return;
 
-    let maxHeight = 0;
-    $visibleSlides.each(function () {
-      maxHeight = Math.max(maxHeight, $(this).outerHeight());
-    });
+        // Ищем максимальную высоту среди видимых
+        let maxHeight = 0;
+        $visibleSlides.each(function () {
+          maxHeight = Math.max(maxHeight, $(this).outerHeight());
+        });
 
-    // Устанавливаем одинаковую высоту
-    $visibleSlides.css('height', maxHeight + 'px');
-  };
+        // Устанавливаем одинаковую высоту
+        $visibleSlides.css('height', maxHeight + 'px');
+      };
 
-  // Вызываем после инициализации и при смене слайдов
-  $slider.on('init', equalizeSlideHeights);
-  $slider.on('afterChange', equalizeSlideHeights);
+      // Подписываемся на события Slick
+      $slider.on('init', equalizeSlideHeights);
+      $slider.on('afterChange', equalizeSlideHeights);
 
-  // На всякий случай — повторный вызов после короткой задержки
-  // (полезно при медленной загрузке изображений или рендеринге на iOS)
-  setTimeout(equalizeSlideHeights, 100);
-  $(window).on('load', equalizeSlideHeights); // на случай, если картинки грузились долго
-};
+      // Дополнительные триггеры для надёжности (особенно на iOS)
+      setTimeout(equalizeSlideHeights, 100);
+      $(window).on('load', equalizeSlideHeights);
+    };
 
     // Применение фильтра
     const applyFilter = (category) => {
@@ -866,7 +869,7 @@ $(function() {
     defaultFilter: 'alexandrite',
     slidesToShow: 2,
     responsive: [
-      { breakpoint: 1000, settings: { slidesToShow: 1 } }
+      { breakpoint: 1100, settings: { slidesToShow: 1 } }
     ]
   });
 
