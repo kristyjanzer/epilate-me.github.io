@@ -767,7 +767,7 @@ $(function() {
       arrows: false,
       dots: true,
       infinite: true,
-      adaptiveHeight: true,
+      adaptiveHeight: false,
       slidesToShow: slidesToShow,
       slidesToScroll: 1,
       ...slickExtra
@@ -787,36 +787,47 @@ $(function() {
       $slider.slick(slickOptions);
       slickActive = true;
 
-      // === Универсальное выравнивание высоты для текущего слайдера ===
-      const equalizeSlideHeights = () => {
-        // Находим прямые дочерние <li> внутри текущего слайдера — они и есть слайды
-        const $slides = $slider.children('li');
-        
-        // Сбрасываем высоту, чтобы измерить реальную
-        $slides.css('height', '');
+      // === Принудительное обновление высоты слайдера на iOS ===
+      const refreshSliderHeight = () => {
+        // Убираем фиксированную высоту, если была
+        $slider.css('height', '');
+        $slider.find('.slick-list').css('height', '');
+        $slider.find('.slick-track').css('height', '');
 
-        // Находим только видимые (активные) слайды
-        const $visibleSlides = $slides.filter('.slick-active');
-
-        if ($visibleSlides.length === 0) return;
-
-        // Ищем максимальную высоту среди видимых
-        let maxHeight = 0;
-        $visibleSlides.each(function () {
-          maxHeight = Math.max(maxHeight, $(this).outerHeight());
-        });
-
-        // Устанавливаем одинаковую высоту
-        $visibleSlides.css('height', maxHeight + 'px');
+        // Пересчитываем высоту через Slick
+        if (slickActive) {
+          $slider.slick('setPosition');
+        }
       };
 
-      // Подписываемся на события Slick
-      $slider.on('init', equalizeSlideHeights);
-      $slider.on('afterChange', equalizeSlideHeights);
+      // Вызываем после инициализации
+      $slider.on('init', refreshSliderHeight);
+      $slider.on('afterChange', refreshSliderHeight);
 
-      // Дополнительные триггеры для надёжности (особенно на iOS)
-      setTimeout(equalizeSlideHeights, 100);
-      $(window).on('load', equalizeSlideHeights);
+      // Дополнительные триггеры для iOS
+      setTimeout(refreshSliderHeight, 50);
+      setTimeout(refreshSliderHeight, 300); // часто помогает на iOS
+
+      // После полной загрузки изображений
+      $(window).on('load', refreshSliderHeight);
+
+      // Если есть lazy-изображения — подождать их
+      const $images = $slider.find('img[loading="lazy"]');
+      if ($images.length) {
+        let loaded = 0;
+        const total = $images.length;
+        $images.each((i, img) => {
+          if (img.complete) {
+            loaded++;
+            if (loaded === total) setTimeout(refreshSliderHeight, 100);
+          } else {
+            img.onload = () => {
+              loaded++;
+              if (loaded === total) setTimeout(refreshSliderHeight, 100);
+            };
+          }
+        });
+      }
     };
 
     // Применение фильтра

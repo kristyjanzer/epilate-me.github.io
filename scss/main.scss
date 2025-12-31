@@ -860,11 +860,14 @@ button {
 
 	&__title {
 		font-size: 60px;
+		line-height: 110%;
+		font-weight: 500;
 	}
 
 	&__subtitle {
 		margin-top: 24px;
 		font-size: 24px;
+		line-height: 130%;
 		font-weight: 400;
 	}
 
@@ -4924,28 +4927,7 @@ section {
 
 
 
-
-
-
-@media (max-width: 900px) {
-	.footer {
-		&__row {
-			flex-direction: column;
-		}
-
-		&__about {
-			max-width: 100%;
-		}
-
-		.socials {
-			justify-content: flex-start;
-		}
-
-		.phone {
-			justify-content: flex-start;
-		}
-	}
-
+@media (max-width: 1000px) {
 	.laser-equipment-slider-content {
 		&__row {
 			grid-template-columns: 1fr;
@@ -5001,6 +4983,29 @@ section {
 	.laser-equipment-slider-list {
 		&__item {
 			font-size: 14px;
+		}
+	}
+}
+
+
+
+
+@media (max-width: 900px) {
+	.footer {
+		&__row {
+			flex-direction: column;
+		}
+
+		&__about {
+			max-width: 100%;
+		}
+
+		.socials {
+			justify-content: flex-start;
+		}
+
+		.phone {
+			justify-content: flex-start;
 		}
 	}
 
