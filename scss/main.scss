@@ -1955,7 +1955,7 @@ section {
 .gallery {
 	&.is-active {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 10px 16px;
 
 		.gallery__col {
@@ -1970,7 +1970,6 @@ section {
 	}
 
 	&__image {
-		max-width: 300px;
 		width: 100%;
 	}
 }
@@ -2756,7 +2755,7 @@ section {
 
 	&__list {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 41px 16px;
 
 		&:not(.show-all) .clinic-services__item:nth-child(n + 9) {
@@ -5043,7 +5042,6 @@ section {
 	
 	.clinic-services {
 		&__list{
-			grid-template-columns: 1fr;
 			gap: 24px;
 
 			&:not(.show-all) .clinic-services__item:nth-child(n+5) {
@@ -5100,7 +5098,6 @@ section {
 
 	.gallery {
 		&.is-active {
-			grid-template-columns: 1fr;
 			gap: 16px;
 
 			.gallery__col:nth-child(n+4) {
