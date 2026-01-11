@@ -193,6 +193,10 @@ button {
 	background-position: top center;
 	position: relative;
 	transition: all .5s ease;
+
+	~ .breadcrumbs {
+		padding-top: 40px;
+	}
 }
 
 .header-top {
@@ -448,6 +452,7 @@ button {
 	&__item {
 		position: relative;
 		font-size: 16px;
+		font-weight: 400;
 
 		&:first-child {
 			padding-left: 0;
@@ -1158,7 +1163,7 @@ section {
 	}
 
 	&__item {
-		width: 100%;
+		flex: 1 1 auto;
 	}
 
 	&__button {
@@ -1168,7 +1173,7 @@ section {
 		color: rgba(0, 19, 97, 0.6);
 		text-align: center;
 		width: 100%;
-		white-space: nowrap;
+		// white-space: nowrap;
 		
 		&--active {
 			color: $white;
@@ -1177,6 +1182,7 @@ section {
 		}
 	}
 }
+
 
 .equipment-certificate {
 	border: 2px solid $accent;
@@ -2173,6 +2179,10 @@ section {
 		align-items: center;
 	}
 
+	&__btn {
+		margin-top: auto;
+	}
+
 	&__lists {
 		margin-top: 20px;
 		display: flex;
@@ -2810,6 +2820,12 @@ section {
 .uni-list {
 	margin-left: 35px;
 
+	&--disc {
+		.uni-list__item {
+			list-style-type: disc;
+		}
+	}
+
 	&__item {
 		list-style-type: decimal;
 		font-size: 24px;
@@ -3051,7 +3067,6 @@ section {
 		position: relative;
 	}
 	
-
 	&__image {
 		position: absolute;
 		top: 0;
@@ -3067,33 +3082,6 @@ section {
 			height: 100%;
 			border-radius: 20px;
 		}
-	}
-
-	&__info {
-		backdrop-filter: blur(30px);
-		box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.18), inset 1px 2px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -2px 3px 0 rgba(255, 255, 255, 0.05);
-		background: rgba(255, 255, 255, 0.2);
-		border-radius: 30px;
-		padding: 60px 45px 50px;
-		max-width: 500px;
-	}
-
-	&__title {
-		font-size: 32px;
-		font-weight: 600;
-		font-family: 'Montserrat';
-		
-		& + p,
-		.header-slider__text {
-			margin-top: 24px;
-		}
-	}
-
-	&__text {
-		font-size: 18px;
-		font-weight: 500;
-		font-family: 'Montserrat';
-		line-height: 132%;
 	}
 
 	&__subtitle {
@@ -3121,6 +3109,33 @@ section {
 
 	&__button {
 		margin-top: 48px;
+	}
+}
+
+.slider-info {
+	backdrop-filter: blur(30px);
+	box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.18), inset 1px 2px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -2px 3px 0 rgba(255, 255, 255, 0.05);
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 30px;
+	padding: 60px 45px 50px;
+	max-width: 500px;
+
+	&__title {
+		font-size: 32px;
+		font-weight: 600;
+		font-family: 'Montserrat';
+		
+		& + p,
+		.header-slider__text {
+			margin-top: 24px;
+		}
+	}
+
+	&__text {
+		font-size: 18px;
+		font-weight: 500;
+		font-family: 'Montserrat';
+		line-height: 132%;
 	}
 }
 
@@ -3273,6 +3288,13 @@ section {
 		color: $white;
 		font-weight: 400;
 		font-size: 18px;
+	}
+
+	&__select {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 90%;
 	}
 
 	&__icon {
@@ -3651,6 +3673,15 @@ section {
 		margin-top: 24px;
 	}
 }
+
+.devices {
+	.form-select {
+		width: 195px;
+	}
+}
+
+
+
 
 
 
@@ -4223,6 +4254,7 @@ section {
 		&__button {
 			font-size: 13px;
 			padding: 10px;
+			white-space: nowrap;
 		}
 	}
 
@@ -4698,19 +4730,6 @@ section {
 			min-height: 590px;
 			padding: 303px 20px 94px;
 		}
-
-		&__title {
-			font-size: 28px;
-
-			& + p,
-			& + .clinic-promo-slider__text {
-				margin-top: 16px;
-			}
-		}
-
-		&__text {
-			font-size: 16px;
-		}
 		
 		.slick-dots {
 			bottom: 40px;
@@ -4728,9 +4747,22 @@ section {
 				}
 			}
 		}
+	}
+	
+	.slider-info {
+		padding: 26px;
 
-		&__info {
-			padding: 26px;
+		&__title {
+			font-size: 28px;
+
+			& + p,
+			& + .clinic-promo-slider__text {
+				margin-top: 16px;
+			}
+		}
+
+		&__text {
+			font-size: 16px;
 		}
 	}
 
@@ -4845,7 +4877,7 @@ section {
 	}
 
 	.form-select {
-		min-width: 340px;
+		min-width: 100%;
 		
 		span {
 			font-size: 16px;
@@ -4920,6 +4952,12 @@ section {
 			& + .political__list {
 				margin-top: 20px;
 			}
+		}
+	}
+
+	.devices {
+		.form-select {
+			width: 340px;
 		}
 	}
 }

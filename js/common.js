@@ -887,7 +887,7 @@ $(function() {
   //== Слайдер Оборудования на странице ЛЭ
   createFilteredSlider({
     sliderSelector: '.laser-equipment-slider-content__items',
-    buttonGroupSelector: '.laser-equipment .equipment-filter__button',
+    buttonGroupSelector: '.laser-equipment-slider .equipment-filter__button',
     defaultFilter: 'alexandrite',
     slidesToShow: 1
     // responsive не нужен
