@@ -1450,7 +1450,9 @@ section {
 .reviews,
 .popular,
 .laser-equipment,
-.feelings {
+.feelings,
+.two-level,
+.cosmetology-info {
 	&__slider {
 		margin-top: 40px;
 		margin-bottom: 40px;
@@ -1832,7 +1834,7 @@ section {
 	}
 }
 
-.laser-info-box {
+.info-box {
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
@@ -1846,7 +1848,7 @@ section {
 		font-size: 26px;
 
 		& + p,
-		& + .laser-info-box__text {
+		& + .info-box__text {
 			margin-top: 24px;
 		}
 	}
@@ -1854,8 +1856,9 @@ section {
 	&__text {
 		font-size: 24px;
 		font-weight: 400;
+		line-height: 130%;
 
-		& + .laser-info-box__title {
+		& + .info-box__title {
 			margin-top: 32px;
 		}
 
@@ -1879,6 +1882,16 @@ section {
 			overflow: hidden;
 			border-radius: 16px;
 			width: 472px;
+		}
+	}
+
+	&__descr {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		&--jcs {
+			justify-content: start;
 		}
 	}
 
@@ -3722,6 +3735,52 @@ section {
 	}
 }
 
+.information {
+	&__info-box {
+		margin-top: 40px;
+	}
+}
+
+.cosmetology-info-slider {
+	&__row {
+		display: flex;
+		gap: 62px;
+	}
+
+	&__image {
+		font-size: 0;
+		
+		img {
+			width: 472px;
+			border-radius: 16px;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__title {
+		font-size: 28px;
+
+		& + p,
+		& + .cosmetology-info-slider__text {
+			margin-top: 20px;
+		}
+	}
+
+	&__text {
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 130%;
+	}
+
+	&__button {
+		margin-top: 30px;
+	}
+}
 
 
 
@@ -4445,7 +4504,7 @@ section {
 		}
 	}
 
-	.laser-info-box {
+	.info-box {
 		gap: 40px;
 
 		&__col {
@@ -4500,7 +4559,10 @@ section {
 		&__text {
 			font-size: 16px;
 		}
+	}
 
+	.laser-main-sect,
+	.information {
 		&__info-box {
 			margin-top: 25px;
 		}
@@ -5033,6 +5095,36 @@ section {
 	.equipment {
 		.form-select {
 			width: 320px;
+		}
+	}
+
+	.cosmetology-info {
+		&__slider {
+			margin-top: 15px;
+		}
+	}
+
+	.cosmetology-info-slider {
+		&__row {
+			flex-direction: column;
+			gap: 40px;
+		}
+
+		&__image {
+			order: 2;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		&__title {
+			font-size: 22px;
+		}
+
+		&__text {
+			font-size: 16px;
+			line-height: 120%;
 		}
 	}
 }
