@@ -1451,8 +1451,7 @@ section {
 .popular,
 .laser-equipment,
 .feelings,
-.two-level,
-.cosmetology-info {
+.two-level {
 	&__slider {
 		margin-top: 40px;
 		margin-bottom: 40px;
@@ -3738,6 +3737,12 @@ section {
 .information {
 	&__info-box {
 		margin-top: 40px;
+	}
+}
+
+.cosmetology-info {
+	&__slider {
+		margin-bottom: 40px;
 	}
 }
 
