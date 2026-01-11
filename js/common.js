@@ -1316,6 +1316,19 @@ $(function() {
   //=====================================================//
 
 
+
+  //=== Equipment-nav ===//
+
+  const equipmentButtons = document.querySelectorAll('.equipment-nav__button');
+
+  equipmentButtons.forEach(button => {
+    button.addEventListener('click', function () {
+			this.classList.toggle('equipment-nav__button--active');
+		});
+  });
+
+  //=====================================================//
+
 });
 
 

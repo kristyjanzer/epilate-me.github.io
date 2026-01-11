@@ -1008,6 +1008,10 @@ section {
 		background: rgba(255, 255, 255, 0.3);
 		padding: 32px;
 	}
+
+	&__list {
+		margin-top: 40px;
+	}
 }
 
 .main-sect-slider {
@@ -1069,6 +1073,27 @@ section {
 
 	.slick-dots {
 		bottom: -66px;
+	}
+}
+
+.main-sect-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	&__item {
+		padding: 10px 0 15px;
+		border-bottom: 1px solid $white;
+	}
+
+	&__title {
+		font-size: 26px;
+	}
+
+	&__text {
+		font-weight: 400;
+		font-size: 16px;
+		margin-top: 16px;
 	}
 }
 
@@ -1158,7 +1183,7 @@ section {
 		background: #CDD5DF;
 		padding: 6px;
 		min-height: 60px;
-		min-width: 340px;
+		min-width: 320px;
 		max-width: 100%;
 	}
 
@@ -1192,7 +1217,7 @@ section {
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	min-width: 340px;
+	min-width: 320px;
 
 	&__icon {
 		font-size: 0;
@@ -1212,6 +1237,12 @@ section {
 .equipment-slider,
 .laser-equipment-slider {
 	&__content {
+		margin-top: 40px;
+	}
+}
+
+.laser-equipment-slider {
+	&__nav {
 		margin-top: 40px;
 	}
 }
@@ -1292,7 +1323,8 @@ section {
 	}
 }
 
-.clinics-nav {
+.clinics-nav,
+.equipment-nav {
 	&__list {
 		display: flex;
 		align-items: center;
@@ -1308,10 +1340,21 @@ section {
 		color: $black;
 		min-height: 40px;
 		font-size: 18px;
+		text-align: left;
 
 		&--active {
 			background: #CDD5DF;
 		}
+	}
+}
+
+.equipment-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	&__title {
+		font-size: 24px;
 	}
 }
 
@@ -2122,9 +2165,10 @@ section {
 		font-size: 24px;
 		line-height: 120%;
 		font-weight: 500;
+		margin-bottom: 24px;
 
 		& + p {
-			margin-top: 24px;
+			margin-bottom: 20px;
 		}
 	}
 
@@ -2144,11 +2188,7 @@ section {
 		font-weight: 400;
 
 		& + & {
-			margin-top: 20px;
-		}
-
-		& + .laser-equipment-slider-content__subtitle {
-			margin-top: 20px;
+			margin-bottom: 20px;
 		}
 	}
 
@@ -3272,6 +3312,7 @@ section {
 	}
 }
 
+
 .form-select {
 	background: rgba(255, 255, 255, 0.2);
 	border: 1px solid #e1e1e1;
@@ -3674,7 +3715,7 @@ section {
 	}
 }
 
-.devices {
+.equipment {
 	.form-select {
 		width: 195px;
 	}
@@ -3685,10 +3726,17 @@ section {
 
 
 
+
 /************* Media *****************************/
 @media (max-width: 1100px) {
 	.button {
 		min-width: 150px;
+	}
+
+	.header {
+		~ .breadcrumbs {
+			padding-top: 35px;
+		}
 	}
 
 	.header-button-menu {
@@ -4167,6 +4215,16 @@ section {
 		}
 	}
 
+	.main-sect-list {
+		&__title {
+			font-size: 22px;
+		}
+
+		&__text {
+			font-size: 14px;
+		}
+	}
+
 	.two-level {
 		&__slider {
 			margin-top: 40px;
@@ -4201,15 +4259,24 @@ section {
 		}
 	}
 
-	.clinics-nav {
+	.clinics-nav,
+	.equipment-nav {
 		&__list {
 			gap: 10px 6px;
 		}
 
 		&__button {
 			font-size: 16px;
+			padding: 10px 16px;
 		}
 	}
+
+	.equipment-nav {
+		&__title {
+			font-size: 18px;
+		}
+	}
+
 
 	.clinics-slider-content {
 		&__column {
@@ -4878,6 +4945,7 @@ section {
 
 	.form-select {
 		min-width: 100%;
+		padding: 14px 20px;
 		
 		span {
 			font-size: 16px;
@@ -4955,9 +5023,15 @@ section {
 		}
 	}
 
-	.devices {
+	.laser-equipment-slider {
+		&__nav {
+			margin-top: 20px;
+		}
+	}
+
+	.equipment {
 		.form-select {
-			width: 340px;
+			width: 320px;
 		}
 	}
 }
@@ -5001,10 +5075,6 @@ section {
 
 		&__text {
 			font-size: 14px;
-
-			& + .laser-equipment-slider-content__subtitle {
-				margin-top: 16px;
-			}
 		}
 
 		&__subtitle {
