@@ -500,6 +500,30 @@ $(function() {
   });
 
 
+  //=== Слайдер Информации
+  $('.information-slider').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: true,
+      responsive: [
+        {
+          breakpoint: 1100,
+            settings: {
+              slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+          },
+        }
+      ]
+  });
+
+
 
 
 
@@ -987,22 +1011,28 @@ $(function() {
 
   //=== Фильтрация для раздела Цена на ЛЭ ===//
   document.querySelectorAll('.price-box').forEach(section => {
-    const genderButtons = section.querySelectorAll('.main-filter__button[data-filter="woman"], .main-filter__button[data-filter="man"]');
-    const laserButtons = section.querySelectorAll('.main-filter__button[data-filter="alexandrite"], .main-filter__button[data-filter="diode"]');
-    const priceBlocks = section.querySelectorAll('.price-content');
+  const genderButtons = section.querySelectorAll('.main-filter__button[data-filter="woman"], .main-filter__button[data-filter="man"]');
+  const laserButtons = section.querySelectorAll('.main-filter__button[data-filter="alexandrite"], .main-filter__button[data-filter="diode"]');
+  const priceBlocks = section.querySelectorAll('.price-content');
 
-    let currentGender = section.dataset.defaultGender || 'woman';
-    let currentLaser = section.dataset.defaultLaser || 'alexandrite';
+  // Определяем, какие фильтры вообще существуют в этом блоке
+  const hasGenderFilter = genderButtons.length > 0;
+  const hasLaserFilter = laserButtons.length > 0;
 
-    const showMatchingBlock = () => {
-      priceBlocks.forEach(block => {
-        const genderMatch = block.dataset.gender === currentGender;
-        const laserMatch = block.dataset.laser === currentLaser;
-        block.classList.toggle('is-active', genderMatch && laserMatch);
-      });
-    };
+  // Инициализируем текущие значения с учётом наличия фильтров
+  let currentGender = hasGenderFilter ? (section.dataset.defaultGender || 'woman') : null;
+  let currentLaser = hasLaserFilter ? (section.dataset.defaultLaser || 'alexandrite') : null;
 
-    // Обработчики для кнопок пола
+  const showMatchingBlock = () => {
+    priceBlocks.forEach(block => {
+      const genderMatch = !hasGenderFilter || block.dataset.gender === currentGender;
+      const laserMatch = !hasLaserFilter || block.dataset.laser === currentLaser;
+      block.classList.toggle('is-active', genderMatch && laserMatch);
+    });
+  };
+
+  // Обработчики для кнопок пола
+  if (hasGenderFilter) {
     genderButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         genderButtons.forEach(b => b.classList.remove('main-filter__button--active'));
@@ -1012,7 +1042,13 @@ $(function() {
       });
     });
 
-    // Обработчики для кнопок лазера
+    // Активируем кнопку по умолчанию
+    const defaultGenderBtn = section.querySelector(`.main-filter__button[data-filter="${currentGender}"]`);
+    if (defaultGenderBtn) defaultGenderBtn.classList.add('main-filter__button--active');
+  }
+
+  // Обработчики для кнопок лазера
+  if (hasLaserFilter) {
     laserButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         laserButtons.forEach(b => b.classList.remove('main-filter__button--active'));
@@ -1022,16 +1058,14 @@ $(function() {
       });
     });
 
-    // Инициализация: активируем кнопки по умолчанию
-    const defaultGenderBtn = section.querySelector(`.main-filter__button[data-filter="${currentGender}"]`);
+    // Активируем кнопку по умолчанию
     const defaultLaserBtn = section.querySelector(`.main-filter__button[data-filter="${currentLaser}"]`);
-
-    if (defaultGenderBtn) defaultGenderBtn.classList.add('main-filter__button--active');
     if (defaultLaserBtn) defaultLaserBtn.classList.add('main-filter__button--active');
+  }
 
-    // Показываем нужный блок
-    showMatchingBlock();
-  });
+  // Показываем нужный блок при инициализации
+  showMatchingBlock();
+});
   
 
   // Слайдер Отзывов

@@ -840,6 +840,7 @@ button {
 		min-height: 637px;
 		padding: 225px 0 60px;
 		position: relative;
+		cursor: pointer;
 	}
 
 	&__image {
@@ -923,7 +924,7 @@ button {
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	bottom: -40px;
+	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 1;
@@ -1018,6 +1019,7 @@ section {
 	&__item {
 		border-radius: 12px;
 		overflow: hidden;
+		cursor: pointer;
 	}
 
 	&__col {
@@ -1097,11 +1099,6 @@ section {
 	}
 }
 
-.two-level {
-	&__slider {
-		margin-top: 50px;
-	}
-}
 
 .two-level-slider {
 	&__columns	{
@@ -1234,9 +1231,8 @@ section {
 	}
 }
 
-.equipment-slider,
-.laser-equipment-slider {
-	&__content {
+.laser-equipment {
+	&__slider {
 		margin-top: 40px;
 	}
 }
@@ -1248,10 +1244,16 @@ section {
 }
 
 .equipment-slider-content {
+	&__items {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
 	&__item {
 		display: flex;
 		// min-height: auto !important;
 		min-height: 330px;
+		cursor: pointer;
 	}
 	
 	&__row {
@@ -1316,9 +1318,8 @@ section {
 	}
 }
 
-
-.clinics-slider {
-	&__content {
+.clinics {
+	&__slider {
 		margin-top: 40px;
 	}
 }
@@ -1361,11 +1362,17 @@ section {
 .clinics-slider-content {
 	position: relative;
 
+	&__items {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
 	&__item {
 		background-color: #E8EDF3;
 		border-radius: 24px;
 		overflow: hidden;
 		min-height: 320px;
+		cursor: pointer;
 	}
 
 	&__image {
@@ -1443,22 +1450,24 @@ section {
 }
 
 .areas,
-.equipment,
 .licenses,
 .experts,
-.clinics,
 .reviews,
 .popular,
-.laser-equipment,
 .feelings,
-.two-level {
+.two-level,
+.information {
 	&__slider {
-		margin-top: 40px;
-		margin-bottom: 40px;
+		padding-top: 40px;
+		padding-bottom: 40px;
 	}
 }
 
 .experts-slider {
+	&__item {
+		cursor: pointer;
+	}
+
 	&__image {
 		border-radius: 20px;
 		overflow: hidden;
@@ -1504,6 +1513,7 @@ section {
 		background-color: #e8edf3;
     	border-radius: 24px;
 		padding: 32px;
+		cursor: pointer;
 	}
 	
 	&__wrap {
@@ -1648,6 +1658,12 @@ section {
 	min-width: max-content;
 	min-height: 40px;
 	padding: 8px 38px;
+}
+
+.licenses-slider {
+	&__item {
+		cursor: pointer;
+	}
 }
 
 
@@ -1904,7 +1920,32 @@ section {
 	}
 
 	&__button {
-		margin-top: 32px;
+		margin-top: 35px;
+	}
+}
+
+.info-column {
+	&__title {
+		font-size: 36px;
+
+		& + p,
+		& + .info-column__text {
+			margin-top: 24px;
+		}
+	}
+
+	&__text {
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 130%;
+
+		& + .info-column__title {
+			margin-top: 32px;
+		}
+
+		& + & {
+			margin-top: 24px;
+		}
 	}
 }
 
@@ -1913,6 +1954,7 @@ section {
 		border-radius: 12px;
 		overflow: hidden;
 		max-width: 280px;
+		cursor: pointer;
 	}
 
 	&__col {
@@ -2037,6 +2079,10 @@ section {
 
 
 .popular-slider {
+	&__item {
+		cursor: pointer;
+	}
+
 	&__image {
 		border-radius: 20px;
 	}
@@ -2148,10 +2194,16 @@ section {
 }
 
 .laser-equipment-slider-content {
+	&__items {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
 	&__item {
 		display: flex;
 		height: auto !important;
 		min-height: auto !important;
+		cursor: pointer;
 	}
 	
 	&__row {
@@ -2333,11 +2385,6 @@ section {
 	}
 }
 
-.feelings {
-	&__slider {
-		margin-top: 40px;
-	}
-}
 
 .feelings-slider {
 	&.slider-mode {
@@ -2487,7 +2534,8 @@ section {
 	}
 
 	&__slider {
-		margin-top: 50px;
+		padding-top: 50px;
+		padding-bottom: 50px;
 	}
 }
 
@@ -2547,7 +2595,9 @@ section {
 }
 
 .process-slider {
-	margin-bottom: 50px;
+	&__item {
+		cursor: pointer;
+	}
 
 	&__image {
 		border-radius: 20px;
@@ -2574,11 +2624,11 @@ section {
 
 .price-content {
 	display: none;
+	gap: 70px;
 	
 	&.is-active {
 		display: flex;
 		flex-direction: column;
-		gap: 70px;
 	}
 
 	&__images {
@@ -2618,12 +2668,15 @@ section {
 
 	&__offer {
 		font-size: 32px;
+
+		& + .price-info__price {
+			margin-top: 20px;
+		}
 	}
 
 	&__price {
 		color: $accent;
 		font-size: 32px;
-		margin-top: 20px;
 	}
 
 	.crossing-out {
@@ -2633,10 +2686,6 @@ section {
 	&__date {
 		font-size: 18px;
 		font-weight: 400;
-		margin-top: 10px;
-	}
-
-	&__button {
 		margin-top: 10px;
 	}
 
@@ -2658,15 +2707,21 @@ section {
 	&__title {
 		font-size: 32px;
 		font-weight: 400;
+
+		& + .popular-offers__columns {
+			margin-top: 30px;
+		}
 	}
 
 	&__image {
-		border-radius: 20px;
 		font-size: 0;
+		
+		img {
+			border-radius: 20px;
+		}
 	}
 
 	&__columns {
-		margin-top: 30px;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 16px;
@@ -2699,6 +2754,9 @@ section {
 		border-radius: 12px;
 		background-color: transparent;
 		transition: all .3s ease;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 
 		&.active,
 		&:hover {
@@ -2865,8 +2923,8 @@ section {
 	}
 
 	&__info-slider {
-		margin-top: 60px;
-		margin-bottom: 40px;
+		padding-top: 60px;
+		padding-bottom: 40px;
 	}
 }
 
@@ -3118,6 +3176,7 @@ section {
 		min-height: 372px;
 		padding: 64px 70px;
 		position: relative;
+		cursor: pointer;
 	}
 	
 	&__image {
@@ -3732,21 +3791,43 @@ section {
 	.form-select {
 		width: 195px;
 	}
+
+	&__slider {
+		padding-top: 40px;
+	}
 }
 
 .information {
 	&__info-box {
 		margin-top: 40px;
 	}
+
+	&__column {
+		margin-top: 70px;
+	}
+}
+
+.information-slider {
+	&__item {
+		cursor: pointer;
+	}
+
+	&__image {
+		border-radius: 20px;
+	}
 }
 
 .cosmetology-info {
 	&__slider {
-		margin-bottom: 40px;
+		padding-bottom: 40px;
 	}
 }
 
 .cosmetology-info-slider {
+	&__item {
+		cursor: pointer;	
+	}
+	
 	&__row {
 		display: flex;
 		gap: 62px;
@@ -4290,12 +4371,6 @@ section {
 		}
 	}
 
-	.two-level {
-		&__slider {
-			margin-top: 40px;
-			margin-bottom: 40px;
-		}
-	}
 
 	.two-level-slider {
 		&__image {
@@ -4550,6 +4625,21 @@ section {
 		}
 	}
 
+	.info-column {
+		&__title {
+			font-size: 22px;
+
+			& + p,
+			& + .info-column__text {
+				margin-top: 16px;
+			}
+		}
+
+		&__text {
+			font-size: 16px;
+		}
+	}
+
 	.laser-main-sect-slider {
 		.slick-dots {
 			bottom: -60px;
@@ -4674,10 +4764,6 @@ section {
 		&__col {
 			grid-template-columns: 1fr;
 		}
-
-		&__slider {
-			margin-top: 40px;
-		}
 	}
 
 	.process-list {
@@ -4701,7 +4787,7 @@ section {
 	}
 
 	.price-content {
-		gap: 60px;
+		gap: 45px;
 		
 		&__images {
 			grid-template-columns: 1fr;
@@ -4740,10 +4826,6 @@ section {
 
 		&__date {
 			font-size: 16px;
-		}
-
-		&__button {
-			margin-top: 0;
 		}
 
 		&__marking {
@@ -4787,6 +4869,9 @@ section {
 		&__top {
 			flex-direction: column;
 			align-items: flex-start;
+			gap: 5px;
+			padding-top: 10px;
+			padding-bottom: 10px;
 		}
 
 		&__price {
@@ -4885,7 +4970,7 @@ section {
 	}
 	
 	.slider-info {
-		padding: 26px;
+		padding: 24px;
 
 		&__title {
 			font-size: 28px;
@@ -5105,7 +5190,7 @@ section {
 
 	.cosmetology-info {
 		&__slider {
-			margin-top: 15px;
+			padding-top: 15px;
 		}
 	}
 
