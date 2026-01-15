@@ -604,17 +604,18 @@ button {
 		border-radius: 0 0 16px 16px;
 		overflow: hidden auto;
 		transition: all .3s ease;
-		overflow-y: scroll;
+		// overflow-y: scroll;
 		box-sizing: content-box;
+		scrollbar-gutter: stable;
 
-		&::-webkit-scrollbar {
-			width: 5px;
-		}
+		// &::-webkit-scrollbar {
+		// 	width: 5px;
+		// }
 
-		&::-webkit-scrollbar-thumb {
-			border-radius: 10px; 
-			border: 3px solid #eee;
-		}
+		// &::-webkit-scrollbar-thumb {
+		// 	border-radius: 10px; 
+		// 	border: 3px solid #eee;
+		// }
 	}
 }
 
@@ -626,7 +627,7 @@ button {
 	flex-direction: column;
 	max-width: 1300px;
     margin: 0 auto;
-    padding: 18px 110px 30px;
+    padding: 18px 120px 30px;
 
 	.main-menu__link {
 		color: rgba(0, 19, 97, 0.7);
