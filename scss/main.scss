@@ -1788,6 +1788,12 @@ section {
 }
 
 .services {
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		gap: 30px;
+	}
+
 	&__title {
 		color: $accent;
 		font-size: 18px;
@@ -1798,16 +1804,28 @@ section {
 		margin-top: 20px;
 	}
 
+	&__item {
+		max-width: 300px;
+	}
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
 	&__list {
 		display: grid;
-    	grid-template-columns: repeat(3, 1fr);
-		gap: 12px;
+    	grid-template-columns: repeat(2, 1fr);
+		gap: 12px 20px;
 		align-items: center;
 	}
 
 	&__link {
 		color: $white;
-		font-size: 14px;
+		font-size: 16px;
+		line-height: 110%;
 
 		&:hover {
 			color: $accent;
@@ -5385,8 +5403,17 @@ section {
 	}
 
 	.services {
+		&__row {
+			flex-direction: column;
+			gap: 15px;
+		}
+
 		&__list {
 			grid-template-columns: 1fr;
+		}
+
+		&__link {
+			font-size: 14px;
 		}
 	}
 
