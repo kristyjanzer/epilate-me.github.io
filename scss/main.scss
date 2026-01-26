@@ -2075,6 +2075,120 @@ section {
 	}
 }
 
+.areas-img {
+	position: relative;
+
+	&::before {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		background-color: rgba(255, 255, 255, .8);
+		z-index: 1;
+		border-radius: 32px;
+		color: $black;
+		padding: 10px 24px;
+		font-size: 18px;
+		font-weight: 500;
+	}
+
+	&--body {
+		&::before {
+			content: 'Все тело';
+		}
+	}
+
+	&--armpits {
+		&::before {
+			content: 'Подмышки';
+		}
+	}
+
+	&--back {
+		&::before {
+			content: 'Спина';
+		}
+	}
+
+	&--bikini {
+		&::before {
+			content: 'Зона бикини';
+		}
+	}
+
+	&--face {
+		&::before {
+			content: 'Лицо';
+		}
+	}
+
+	&--hands {
+		&::before {
+			content: 'Руки';
+		}
+	}
+
+	&--breast {
+		&::before {
+			content: 'Грудь';
+		}
+	}
+
+	&--chin {
+		&::before {
+			content: 'Подбородок';
+		}
+	}
+
+	&--eyebrows {
+		&::before {
+			content: 'Брови';
+		}
+	}
+
+	&--lips {
+		&::before {
+			content: 'Губы';
+		}
+	}
+
+	&--stomach {
+		&::before {
+			content: 'Живот';
+		}
+	}
+
+	&--legs {
+		&::before {
+			content: 'Ноги';
+		}
+	}
+
+	&--lower-legs {
+		&::before {
+			content: 'Голени';
+		}
+	}
+
+	&--buttocks {
+		&::before {
+			content: 'Ягодицы';
+		}
+	}
+
+	&--intergluteal-zone {
+		&::before {
+			content: 'Голени';
+		}
+	}
+
+}
+
+.areas-slider {
+	&__image {
+		border-radius: 20px;
+	}
+}
+
 .gallery {
 	&.is-active {
 		display: grid;
@@ -2089,11 +2203,16 @@ section {
 	}
 
 	&.show-all .gallery__col {
-		display: inline-block !important;
+		display: flex !important;
 	}
 
 	&__image {
 		width: 100%;
+		border-radius: 20px;
+	}
+
+	&__col {
+		font-size: 0;
 	}
 }
 
@@ -5366,6 +5485,13 @@ section {
 
 
 @media (max-width: 700px) {
+	.areas-img {
+		&::before {
+			font-size: 16px;
+			padding: 5px 16px;
+		}
+	}
+
 	.main-sect-slider {
 		margin: 0 -8px;
 
