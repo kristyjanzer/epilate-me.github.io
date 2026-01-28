@@ -1376,7 +1376,6 @@ section {
 	}
 
 	&__item {
-		background-color: #E8EDF3;
 		border-radius: 24px;
 		overflow: hidden;
 		min-height: 320px;
@@ -1416,6 +1415,7 @@ section {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		background-color: #E8EDF3;
 	}
 
 	&__info {
@@ -1922,6 +1922,8 @@ section {
 			overflow: hidden;
 			border-radius: 16px;
 			width: 472px;
+			height: 405px;
+    		object-fit: cover;
 		}
 	}
 
@@ -2126,6 +2128,8 @@ section {
 
 	&__image {
 		width: 100%;
+		height: 100%;
+    	object-fit: cover;
 		border-radius: 20px;
 	}
 
@@ -2160,6 +2164,8 @@ section {
 
 	&__image {
 		border-radius: 20px;
+		height: 300px;
+		object-fit: cover;
 	}
 
 	&__name {
@@ -2189,6 +2195,8 @@ section {
 	&__image {
 		img {
 			border-radius: 16px;
+			height: 100%;
+    		object-fit: cover;
 		}
 	}
 
@@ -2536,7 +2544,7 @@ section {
 
 	&__image {
 		width: 100%;
-		height: auto;
+		height: 100%;
 		border-radius: 24px;
 		object-fit: cover;
 	}
@@ -2724,6 +2732,8 @@ section {
 		img {
 			border-radius: 20px;
 			min-width: 0;
+			height: 200px;
+    		object-fit: cover;
 		}
 	}
 	
@@ -2802,6 +2812,8 @@ section {
 		
 		img {
 			border-radius: 20px;
+			height: 100%;
+    		object-fit: cover;
 		}
 	}
 
@@ -2974,6 +2986,8 @@ section {
 
 	&__image {
 		border-radius: 20px;
+		height: 300px;
+    	object-fit: cover;
 	}
 
 	&__text {
@@ -5011,6 +5025,10 @@ section {
 		&__text {
 			font-size: 22px;
 			margin-top: 5px;
+		}
+
+		&__list {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
