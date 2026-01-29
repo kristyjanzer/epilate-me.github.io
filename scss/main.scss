@@ -5187,6 +5187,7 @@ section {
 
 		&__box {
 			width: 100%;
+			border-radius: 0;
 		}
 
 		.swiper-slide .gallery-slider__img {
@@ -5202,6 +5203,16 @@ section {
 
 		.swiper-pagination {
 			left: calc(50% - 40px);
+		}
+
+		.swiper-slide {
+			&.swiper-slide-active {
+				.gallery-slider__box:hover {
+					.gallery-slider__info {
+						padding-top: 80px;
+					}
+				}
+			}
 		}
 	}
 
@@ -5439,6 +5450,8 @@ section {
 			font-size: 14px;
 		}
 	}
+
+
 }
 
 

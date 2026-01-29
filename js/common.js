@@ -1378,12 +1378,13 @@ $(function() {
   //=== Gallery ===//
 
   $(".gallery-slider").magnificPopup({
-    delegate: "a",
+    delegate: 'a[data-gallery]',
     type: "image",
     mainClass: "mfp-img-mobile",
     gallery: {
       enabled: true,
       navigateByImgClick: true,
+      tCounter: ''
     },
     image: {
       tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
