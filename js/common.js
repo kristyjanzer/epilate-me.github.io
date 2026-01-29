@@ -1373,6 +1373,27 @@ $(function() {
 
   //=====================================================//
 
+
+
+  //=== Gallery ===//
+
+  $(".gallery-slider").magnificPopup({
+    delegate: "a",
+    type: "image",
+    mainClass: "mfp-img-mobile",
+    gallery: {
+      enabled: true,
+      navigateByImgClick: true,
+    },
+    image: {
+      tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+    },
+    zoom: {
+      enabled: true,
+      duration: 700
+    },
+  });
+
 });
 
 
