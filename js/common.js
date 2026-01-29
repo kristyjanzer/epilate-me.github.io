@@ -1378,7 +1378,7 @@ $(function() {
   //=== Gallery ===//
 
   $(".gallery-slider").magnificPopup({
-    delegate: 'a[data-gallery]',
+    delegate: 'a[data-gallery]:not(.swiper-slide-duplicate a)',
     type: "image",
     mainClass: "mfp-img-mobile",
     gallery: {
