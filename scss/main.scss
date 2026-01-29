@@ -1308,6 +1308,12 @@ section {
 	&__image {
 		max-width: 160px;
 		width: 100%;
+		height: 100%;
+
+		img {
+			height: 100%;
+    		object-fit: cover;
+		}
 	}
 
 	.slick-slide {
@@ -1478,6 +1484,8 @@ section {
 	&__image {
 		border-radius: 20px;
 		overflow: hidden;
+		height: 300px;
+		object-fit: cover;
 	}
 
 	&__name {
@@ -1922,7 +1930,7 @@ section {
 			overflow: hidden;
 			border-radius: 16px;
 			width: 472px;
-			height: 405px;
+			height: 100%;
     		object-fit: cover;
 		}
 	}
@@ -2089,6 +2097,8 @@ section {
 
 	&__image {
 		border-radius: 20px;
+		height: 300px;
+		object-fit: cover;
 	}
 
 	&__text {
@@ -2353,13 +2363,18 @@ section {
 		background-color: #e8edf3;
 		width: 100%;
 		max-width: 303px;
-		padding: 40px;
+		padding: 32px 40px;
 		flex-shrink: 0;
 		display: flex;
     	flex-direction: column;
 		align-items: center;
 		gap: 40px;
 		height: auto;
+
+		img {
+			height: 100%;
+    		object-fit: cover;
+		}
 	}
 
 	&__button {
@@ -2693,6 +2708,8 @@ section {
 
 	&__image {
 		border-radius: 20px;
+		height: 300px;
+		object-fit: cover;
 	}
 }
 
@@ -3912,6 +3929,8 @@ section {
 
 	&__image {
 		border-radius: 20px;
+		height: 340px;
+		object-fit: cover;
 	}
 }
 
@@ -3936,6 +3955,8 @@ section {
 		
 		img {
 			width: 472px;
+			height: 100%;
+			object-fit: cover;
 			border-radius: 16px;
 		}
 	}
