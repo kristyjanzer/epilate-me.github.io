@@ -1390,7 +1390,8 @@ $(function() {
     },
     zoom: {
       enabled: true,
-      duration: 700
+      duration: 700,
+      easing: 'ease-in-out',
     },
   });
 
