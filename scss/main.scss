@@ -450,9 +450,12 @@ button {
 .breadcrumbs {
 	&__items {
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 3px 17px;
+		margin-top: 0;
+		padding-left: 0;
 	}
 
 	&__item {
@@ -477,6 +480,14 @@ button {
 			border-top: 1px solid $white;
 			border-right: 1px solid $white;
 			transform: rotate(45deg);
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
 		}
 	}
 
@@ -929,6 +940,7 @@ button {
 
 .slick-dots {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
@@ -936,6 +948,8 @@ button {
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 1;
+	gap: 0;
+	padding-left: 0;
 
 	li {
 		position: relative;
@@ -949,6 +963,14 @@ button {
 		border-radius: 50%;
 		opacity: 0.6;
 		outline: none;
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 
 		&.slick-active {
 			background-color: $white;
@@ -973,6 +995,35 @@ button {
 
 main {
 	padding: 70px 0;
+	
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin-top: 15px;
+		padding-left: 18px;
+	}
+
+	li {
+		position: relative;
+
+		&:not(:last-child) {
+			margin-bottom: 15px;
+		}
+
+		&::before {
+			content: "";
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: $accent;
+			position: absolute;
+			top: 50%;
+			left: -20px;
+			transform: translateY(-50%);
+		}
+	}
 }
 
 section {
@@ -1090,10 +1141,15 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	padding-left: 0;
 
 	&__item {
 		padding: 10px 0 15px;
 		border-bottom: 1px solid $white;
+
+		&:before {
+			display: none;
+		}
 	}
 
 	&__title {
@@ -1182,6 +1238,9 @@ section {
 
 	&__list {
 		display: flex;
+		flex-direction: row;
+		gap: 0;
+		padding-left: 0;
 		align-items: center;
 		justify-content: center;
 		border-radius: 48px;
@@ -1190,10 +1249,19 @@ section {
 		min-height: 60px;
 		min-width: 320px;
 		max-width: 100%;
+		margin-top: 0;
 	}
 
 	&__item {
 		flex: 1 1 auto;
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
+
+		&:before {
+			display: none;
+		}
 	}
 
 	&__button {
@@ -1255,6 +1323,8 @@ section {
 	&__items {
 		padding-top: 40px;
 		padding-bottom: 40px;
+		padding-left: 0;
+		margin-top: 0;
 	}
 
 	&__item {
@@ -1262,6 +1332,10 @@ section {
 		// min-height: auto !important;
 		min-height: 330px;
 		cursor: pointer;
+
+		&:before {
+			display: none;
+		}
 	}
 	
 	&__row {
@@ -1342,6 +1416,9 @@ section {
 .equipment-nav {
 	&__list {
 		display: flex;
+		flex-direction: row;
+		gap: 0;
+		padding-left: 0;
 		align-items: center;
 		gap: 16px;
 		flex-wrap: wrap;
@@ -1359,6 +1436,16 @@ section {
 
 		&--active {
 			background: #CDD5DF;
+		}
+	}
+
+	&__item {
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
+
+		&:before {
+			display: none;
 		}
 	}
 }
@@ -1379,6 +1466,8 @@ section {
 	&__items {
 		padding-top: 40px;
 		padding-bottom: 40px;
+		padding-left: 0;
+		margin-top: 0;
 	}
 
 	&__item {
@@ -1600,6 +1689,8 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+	margin-top: 0;
+	padding-left: 0;
 
 	&__item {
 		border-radius: 16px;
@@ -1607,6 +1698,10 @@ section {
 		cursor: pointer;
 
 		&--hidden {
+			display: none;
+		}
+
+		&:before {
 			display: none;
 		}
 	}
@@ -2068,8 +2163,13 @@ section {
 			border-radius: 50%;
 			background-color: $accent;
 			position: absolute;
-			top: 5px;
+			top: 50%;
 			left: -20px;
+			transform: translateY(-50%);
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
 		}
 	}
 
@@ -2219,6 +2319,9 @@ section {
 .advantages-accordion {
 	display: grid;
 	width: 620px;
+	padding-left: 0;
+	margin-top: 0;
+	gap: 0;
 
 	&__item {
 		cursor: pointer;
@@ -2227,6 +2330,14 @@ section {
 		&:last-child {
 			border-bottom: 1px solid $white;
 			margin-bottom: 15px;
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
 		}
 	}
 
@@ -2293,11 +2404,17 @@ section {
 		line-height: 140%;
 		font-weight: 400;
 		list-style-type: disc;
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 	}
 
 	&__items {
 		padding-top: 40px;
 		padding-bottom: 40px;
+		padding-left: 0;
+		margin-top: 0;
 	}
 
 	&__item {
@@ -2305,6 +2422,10 @@ section {
 		height: auto !important;
 		min-height: auto !important;
 		cursor: pointer;
+
+		&:before {
+			display: none;
+		}
 	}
 	
 	&__row {
@@ -2648,6 +2769,9 @@ section {
 
 .process-list {
 	display: grid;
+	padding-left: 0;
+	margin-top: 0;
+	gap: 0;
 
 	&__item {
 		padding: 25px 0 30px 0;
@@ -2655,6 +2779,14 @@ section {
 
 		&:first-child {
 			padding-top: 0;
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
 		}
 	}
 
@@ -2848,6 +2980,8 @@ section {
 .offers-accordion {
 	display: grid;
 	gap: 10px;
+	padding-left: 0;
+	margin-top: 0;
 
 	&--more {
 		.offers-accordion {
@@ -2870,6 +3004,14 @@ section {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 
 		&.active,
 		&:hover {
@@ -2991,6 +3133,8 @@ section {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		gap: 41px 16px;
+		padding-left: 0;
+		margin-top: 0;
 
 		&:not(.show-all) .clinic-services__item:nth-child(n + 9) {
 			display: none;
@@ -3014,6 +3158,16 @@ section {
 
 	&__button {
 		margin: 40px auto 0;
+	}
+
+	&__item {
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -3045,6 +3199,8 @@ section {
 
 .uni-list {
 	margin-left: 35px;
+	gap: 0;
+	padding-left: 0;
 
 	&--disc {
 		.uni-list__item {
@@ -3057,6 +3213,14 @@ section {
 		font-size: 24px;
 		font-weight: 400;
 		line-height: 130%;
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -3914,6 +4078,8 @@ section {
 
 	&__list {
 		margin-top: 25px;
+		gap: 0;
+		padding-left: 0;
 
 		& + h2,
 		& + .political__caption {
@@ -3930,6 +4096,14 @@ section {
 		font-size: 18px;
 		line-height: 130%;
 		font-weight: 400;
+
+		&:before {
+			display: none;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 0;
+		}
 	}
 }
 
