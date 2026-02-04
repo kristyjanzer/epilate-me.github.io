@@ -326,9 +326,11 @@ button {
 		}
 
 		.search {
-			border: 2px solid $primary;
-			height: 30px;
-			width: 160px;
+			&__row {
+				border: 2px solid $primary;
+				height: 30px;
+				width: 160px;
+			}
 
 			&__icon {
 				width: 14px;
@@ -389,10 +391,6 @@ button {
 			fill: $primary;
 		}
 	} 
-
-	.search {
-		border: 2px solid $primary;
-	}
 
 	.socials__icon,
 	.phone__icon {
@@ -713,16 +711,18 @@ button {
 
 
 .search {
-	width: 205px;
-    padding-left: 10px;
-    transition: all 0.5s ease;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 1);
-	background-color: transparent;
-	height: 40px;
-    padding-right: 45px;
-	position: relative;
-	transition: width .5s ease;
+	&__row {
+		width: 205px;
+		padding-left: 10px;
+		transition: all 0.5s ease;
+		border-radius: 8px;
+		border: 2px solid rgba(255, 255, 255, 1);
+		background-color: transparent;
+		height: 40px;
+		padding-right: 45px;
+		position: relative;
+		transition: width .5s ease;
+	}
 
 	&__input {
 		border: 0px;
@@ -821,19 +821,21 @@ button {
 		padding: 4px 10px;
 		min-height: 32px;
 		text-align: center;
-		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: max-content;
 		min-width: 128px;
 		margin-left: auto;
+		display: none;
 	}
 
 	.search {
-		background-color: $white;
-		border: 2px solid rgba(0, 19, 97, 0.6);
-		border-radius: 8px;
-		width: 100%;
+		&__row {
+			background-color: $white;
+			border: 2px solid rgba(0, 19, 97, 0.6);
+			border-radius: 8px;
+			width: 100%;
+		}
 
 		&__icon {
 			svg {
@@ -4436,7 +4438,9 @@ section {
 			}
 
 			.search {
-				width: 100%;
+				&__row {
+					width: 100%;
+				}
 			}
 
 			.search-mobile {
@@ -4629,6 +4633,16 @@ section {
 			&.active {
 				display: flex;
 			}
+		}
+
+		&__button {
+			display: flex;
+		}
+
+		.search {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
 		}
 	}
 
