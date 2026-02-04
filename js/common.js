@@ -908,10 +908,14 @@ $(function() {
   }
 
   //== Слайдер Оборудования на Главной странице
+  // Получаем значение фильтра из первой кнопки
+  const firstFilterButton = document.querySelector('.equipment-filter__button');
+  const defaultFilterValue = firstFilterButton?.dataset.filter;
+
   createFilteredSlider({
     sliderSelector: '.equipment-slider-content__items',
     buttonGroupSelector: '.equipment .equipment-filter__button',
-    defaultFilter: 'alexandrite',
+    defaultFilter: defaultFilterValue,
     slidesToShow: 2,
     responsive: [
       { breakpoint: 1100, settings: { slidesToShow: 1 } }

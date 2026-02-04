@@ -1004,6 +1004,10 @@ main {
 		gap: 16px;
 		margin-top: 15px;
 		padding-left: 18px;
+
+		& + p {
+			margin-top: 15px;
+		}
 	}
 
 	li {
@@ -1024,6 +1028,12 @@ main {
 			top: 50%;
 			left: -20px;
 			transform: translateY(-50%);
+		}
+	}
+
+	p {
+		& + & {
+			margin-top: 15px;
 		}
 	}
 }
@@ -2027,7 +2037,7 @@ section {
 			overflow: hidden;
 			border-radius: 16px;
 			width: 472px;
-			height: 100%;
+			height: auto;
     		object-fit: cover;
 		}
 	}
@@ -2307,7 +2317,7 @@ section {
 	&__image {
 		img {
 			border-radius: 16px;
-			height: 100%;
+			height: auto;
     		object-fit: cover;
 		}
 	}
@@ -2963,7 +2973,7 @@ section {
 		
 		img {
 			border-radius: 20px;
-			height: 100%;
+			height: auto;
     		object-fit: cover;
 		}
 	}
@@ -2984,6 +2994,16 @@ section {
 	gap: 10px;
 	padding-left: 0;
 	margin-top: 0;
+
+	li {
+		&:before {
+			display: none;
+		}
+	}
+
+	p {
+		margin: 10px 0 10px 10px;
+	}
 
 	&--more {
 		.offers-accordion {
@@ -3089,6 +3109,10 @@ section {
 		border-radius: 20px;
 		height: 300px;
     	object-fit: cover;
+	}
+
+	&__address {
+		margin-bottom: 20px;
 	}
 
 	&__buttons {
@@ -4217,6 +4241,13 @@ section {
 		}
 	}
 
+	.slick-dots {
+		max-width: 360px;
+		width: 100%;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
 	.header-button-menu {
         display: block;
 
@@ -4719,7 +4750,6 @@ section {
 		}
 	}
 
-
 	.two-level-slider {
 		&__image {
 			grid-auto-rows: auto;
@@ -4764,7 +4794,6 @@ section {
 			font-size: 18px;
 		}
 	}
-
 
 	.clinics-slider-content {
 		&__column {
