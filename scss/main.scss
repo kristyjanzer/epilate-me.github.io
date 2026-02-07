@@ -861,7 +861,7 @@ button {
 		min-height: 637px;
 		padding: 225px 0 60px;
 		position: relative;
-		cursor: pointer;
+		cursor: grab;
 	}
 
 	&__image {
@@ -1091,6 +1091,7 @@ section {
 		border-radius: 12px;
 		overflow: hidden;
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__col {
@@ -1187,6 +1188,11 @@ section {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		grid-auto-rows: minmax(300px, auto);
+	}
+
+	&__item {
+		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -1344,6 +1350,7 @@ section {
 		// min-height: auto !important;
 		min-height: 330px;
 		cursor: pointer;
+  		cursor: grab;
 
 		&:before {
 			display: none;
@@ -1487,6 +1494,7 @@ section {
 		overflow: hidden;
 		min-height: 320px;
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -1580,6 +1588,7 @@ section {
 .experts-slider {
 	&__item {
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -1601,9 +1610,12 @@ section {
 	}
 
 	&__subway {
-		font-size: 16px;
-		color: $accent;
 		margin-top: 20px;
+
+		a {
+			font-size: 16px;
+    		color: #f6d75a;
+		}
 	}
 }
 
@@ -1630,6 +1642,7 @@ section {
     	border-radius: 24px;
 		padding: 32px;
 		cursor: pointer;
+  		cursor: grab;
 	}
 	
 	&__wrap {
@@ -1659,8 +1672,11 @@ section {
 	}
 
 	&__subway {
-		font-size: 16px;
-		color: $primary;
+		a {
+			font-size: 16px;
+			color: $primary;
+			
+		}
 	}
 
 	&__stars {
@@ -1785,6 +1801,7 @@ section {
 .licenses-slider {
 	&__item {
 		cursor: pointer;
+  		cursor: grab;
 	}
 }
 
@@ -2097,6 +2114,7 @@ section {
 		overflow: hidden;
 		max-width: 280px;
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__col {
@@ -2205,6 +2223,8 @@ section {
 .areas-slider {
 	&__item {
 		position: relative;
+		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -2282,6 +2302,7 @@ section {
 .popular-slider {
 	&__item {
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -2434,6 +2455,7 @@ section {
 		height: auto !important;
 		min-height: auto !important;
 		cursor: pointer;
+  		cursor: grab;
 
 		&:before {
 			display: none;
@@ -2848,6 +2870,7 @@ section {
 .process-slider {
 	&__item {
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -3177,6 +3200,11 @@ section {
     	object-fit: cover;
 	}
 
+	&__link,
+	a {
+		color: $white;
+	}
+
 	&__text {
 		font-size: 26px;
 		margin-top: 20px;
@@ -3391,6 +3419,7 @@ section {
 		background-position: center center;
 		background-size: cover;
 		cursor: pointer;
+  		cursor: grab;
 		height: 100%;
 		// max-width: 300px;
 	}
@@ -3518,6 +3547,7 @@ section {
 		padding: 64px 70px;
 		position: relative;
 		cursor: pointer;
+  		cursor: grab;
 	}
 	
 	&__image {
@@ -4162,6 +4192,7 @@ section {
 .information-slider {
 	&__item {
 		cursor: pointer;
+  		cursor: grab;
 	}
 
 	&__image {
@@ -4179,7 +4210,8 @@ section {
 
 .cosmetology-info-slider {
 	&__item {
-		cursor: pointer;	
+		cursor: pointer;
+  		cursor: grab;
 	}
 	
 	&__row {

@@ -555,11 +555,24 @@ $(function() {
 
     let isShowingAll = false;
 
+    // Функция для проверки количества элементов в галерее
+    const shouldShowToggleBtn = (gallery) => {
+      if (!toggleBtn) return;
+      
+      // Находим элементы с классом .gallery__col
+      const items = gallery.querySelectorAll('.gallery__col');
+      const itemsCount = items.length;
+      
+      // Показываем кнопку только если элементов больше 8
+      toggleBtn.style.display = itemsCount > 8 ? '' : 'none';
+    };
+
     const setActiveGallery = (category) => {
       galleries.forEach(gal => gal.classList.remove('is-active', 'show-all'));
       const targetGallery = section.querySelector(`.gallery[data-category="${category}"]`);
       if (targetGallery) {
         targetGallery.classList.add('is-active');
+        shouldShowToggleBtn(targetGallery); // Проверяем количество элементов
         toggleItemsList(section, targetGallery, toggleBtn, isShowingAll, false);
       }
     };
@@ -600,6 +613,16 @@ $(function() {
     const toggleBtn = section.querySelector('.toggle-all-button');
 
     if (!list || !toggleBtn) return;
+
+    // Проверяем количество элементов в списке
+    const items = list.querySelectorAll('.clinic-services__item');
+    const itemsCount = items.length;
+
+    // Если элементов <= 8, скрываем кнопку
+    if (itemsCount <= 8) {
+      toggleBtn.style.display = 'none';
+      return;
+    }
 
     let isShowingAll = false;
 
