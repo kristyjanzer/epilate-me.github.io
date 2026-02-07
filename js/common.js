@@ -546,7 +546,7 @@ $(function() {
     }
   }
 
-  // === 1. Обработка блоков С фильтрами (как раньше) ===
+  // === 1. Обработка блоков С фильтрами ===
   document.querySelectorAll('.filter-section').forEach(section => {
     const defaultFilter = section.dataset.defaultFilter;
     const buttons = section.querySelectorAll('.main-filter__button');
@@ -1038,61 +1038,61 @@ $(function() {
 
   //=== Фильтрация для раздела Цена на ЛЭ ===//
   document.querySelectorAll('.price-box').forEach(section => {
-  const genderButtons = section.querySelectorAll('.main-filter__button[data-filter="woman"], .main-filter__button[data-filter="man"]');
-  const laserButtons = section.querySelectorAll('.main-filter__button[data-filter="alexandrite"], .main-filter__button[data-filter="diode"]');
-  const priceBlocks = section.querySelectorAll('.price-content');
+    const genderButtons = section.querySelectorAll('.main-filter__button[data-filter="woman"], .main-filter__button[data-filter="man"]');
+    const laserButtons = section.querySelectorAll('.main-filter__button[data-filter="alexandrite"], .main-filter__button[data-filter="diode"], .main-filter__button[data-filter="other"]');
+    const priceBlocks = section.querySelectorAll('.price-content');
 
-  // Определяем, какие фильтры вообще существуют в этом блоке
-  const hasGenderFilter = genderButtons.length > 0;
-  const hasLaserFilter = laserButtons.length > 0;
+    // Определяем, какие фильтры вообще существуют в этом блоке
+    const hasGenderFilter = genderButtons.length > 0;
+    const hasLaserFilter = laserButtons.length > 0;
 
-  // Инициализируем текущие значения с учётом наличия фильтров
-  let currentGender = hasGenderFilter ? (section.dataset.defaultGender || 'woman') : null;
-  let currentLaser = hasLaserFilter ? (section.dataset.defaultLaser || 'alexandrite') : null;
+    // Инициализируем текущие значения с учётом наличия фильтров
+    let currentGender = hasGenderFilter ? (section.dataset.defaultGender || 'woman') : null;
+    let currentLaser = hasLaserFilter ? (section.dataset.defaultLaser || 'alexandrite') : null;
 
-  const showMatchingBlock = () => {
-    priceBlocks.forEach(block => {
-      const genderMatch = !hasGenderFilter || block.dataset.gender === currentGender;
-      const laserMatch = !hasLaserFilter || block.dataset.laser === currentLaser;
-      block.classList.toggle('is-active', genderMatch && laserMatch);
-    });
-  };
-
-  // Обработчики для кнопок пола
-  if (hasGenderFilter) {
-    genderButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        genderButtons.forEach(b => b.classList.remove('main-filter__button--active'));
-        btn.classList.add('main-filter__button--active');
-        currentGender = btn.dataset.filter;
-        showMatchingBlock();
+    const showMatchingBlock = () => {
+      priceBlocks.forEach(block => {
+        const genderMatch = !hasGenderFilter || block.dataset.gender === currentGender;
+        const laserMatch = !hasLaserFilter || block.dataset.laser === currentLaser;
+        block.classList.toggle('is-active', genderMatch && laserMatch);
       });
-    });
+    };
 
-    // Активируем кнопку по умолчанию
-    const defaultGenderBtn = section.querySelector(`.main-filter__button[data-filter="${currentGender}"]`);
-    if (defaultGenderBtn) defaultGenderBtn.classList.add('main-filter__button--active');
-  }
-
-  // Обработчики для кнопок лазера
-  if (hasLaserFilter) {
-    laserButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        laserButtons.forEach(b => b.classList.remove('main-filter__button--active'));
-        btn.classList.add('main-filter__button--active');
-        currentLaser = btn.dataset.filter;
-        showMatchingBlock();
+    // Обработчики для кнопок пола
+    if (hasGenderFilter) {
+      genderButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          genderButtons.forEach(b => b.classList.remove('main-filter__button--active'));
+          btn.classList.add('main-filter__button--active');
+          currentGender = btn.dataset.filter;
+          showMatchingBlock();
+        });
       });
-    });
 
-    // Активируем кнопку по умолчанию
-    const defaultLaserBtn = section.querySelector(`.main-filter__button[data-filter="${currentLaser}"]`);
-    if (defaultLaserBtn) defaultLaserBtn.classList.add('main-filter__button--active');
-  }
+      // Активируем кнопку по умолчанию
+      const defaultGenderBtn = section.querySelector(`.main-filter__button[data-filter="${currentGender}"]`);
+      if (defaultGenderBtn) defaultGenderBtn.classList.add('main-filter__button--active');
+    }
 
-  // Показываем нужный блок при инициализации
-  showMatchingBlock();
-});
+    // Обработчики для кнопок лазера
+    if (hasLaserFilter) {
+      laserButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          laserButtons.forEach(b => b.classList.remove('main-filter__button--active'));
+          btn.classList.add('main-filter__button--active');
+          currentLaser = btn.dataset.filter;
+          showMatchingBlock();
+        });
+      });
+
+      // Активируем кнопку по умолчанию
+      const defaultLaserBtn = section.querySelector(`.main-filter__button[data-filter="${currentLaser}"]`);
+      if (defaultLaserBtn) defaultLaserBtn.classList.add('main-filter__button--active');
+    }
+
+    // Показываем нужный блок при инициализации
+    showMatchingBlock();
+  });
   
 
   // Слайдер Отзывов
