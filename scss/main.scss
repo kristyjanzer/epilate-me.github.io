@@ -1015,6 +1015,7 @@ main {
 
 	li {
 		position: relative;
+		font-size: 22px;
 
 		&:not(:last-child) {
 			margin-bottom: 15px;
@@ -2093,6 +2094,10 @@ section {
 
 	ul + p {
 		margin-top: 20px;
+	}
+
+	p {
+		font-size: 22px;
 	}
 
 	p + p {
@@ -3174,7 +3179,7 @@ section {
 		&__tel {
 			font-size: 24px;
 			font-weight: 600;
-			font-family: 'Montserrat';
+			// font-family: 'Montserrat';
 		}
 
 		&__icon {
@@ -4768,6 +4773,10 @@ section {
 
 	main {
 		padding: 40px 0;
+
+		li {
+			font-size: 16px;
+		}
 	}
 
 	section {
@@ -5052,6 +5061,10 @@ section {
 		&__accent {
 			font-size: 22px;
 			margin-top: 32px;
+		}
+
+		p {
+			font-size: 16px;
 		}
 	}
 
