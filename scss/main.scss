@@ -3888,7 +3888,7 @@ section {
   	visibility: hidden;
 	z-index: 10;
 	transition: opacity 0.2s ease, visibility 0.2s ease;
-	box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.25);
+	// box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.25);
 
 	&.active {
 		opacity: 1;
@@ -4298,7 +4298,7 @@ section {
 
 .cookies {
 	background: #ededed;
-	z-index: 9;
+	z-index: 10;
 	border-radius: 25px;
 	bottom: 20px;
 	position: fixed;
