@@ -3886,7 +3886,7 @@ section {
 	display: flex;
 	opacity: 0;
   	visibility: hidden;
-	z-index: 10;
+	z-index: 11;
 	transition: opacity 0.2s ease, visibility 0.2s ease;
 	// box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.25);
 
@@ -3920,7 +3920,7 @@ section {
 		border-top-left-radius: 24px;
 		border-top-right-radius: 24px;
 		overflow: hidden;
-		min-height: 255px;
+		min-height: 248px;
 		position: relative;
 		padding: 35px 48px;
 	}
@@ -3954,10 +3954,10 @@ section {
 }
 
 .form-block {
-	padding: 35px 45px;
+	padding: 32px 45px;
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 16px;
 	background-color: $white;
 
 	&__button {
@@ -4048,7 +4048,7 @@ section {
 }
 
 .overlay {
-	z-index: 3;
+	z-index: 10;
 	position: fixed;
 	background-color: $text;
 	opacity: 0;
@@ -4298,7 +4298,7 @@ section {
 
 .cookies {
 	background: #ededed;
-	z-index: 10;
+	z-index: 12;
 	border-radius: 25px;
 	bottom: 20px;
 	position: fixed;
@@ -5941,7 +5941,6 @@ section {
 	}
 
 	.modal-block {
-		overflow: auto;
 		height: 86vh;
 
 		&__top {
@@ -5962,6 +5961,10 @@ section {
 
 		&__image {
 			object-position: 0% center;
+		}
+
+		&__content {
+			overflow-y: auto;
 		}
 	}
 
