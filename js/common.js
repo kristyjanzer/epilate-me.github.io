@@ -1330,7 +1330,8 @@ $(function() {
       rules: {
         name: { required: true, minlength: 2 },
         phone: { required: true, phoneRU: true },
-        email: { required: true, email: true }
+        email: { required: true, email: true },
+        city: { required: true }
       },
       messages: {
         name: {
@@ -1343,6 +1344,9 @@ $(function() {
         email: {
           required: "Пожалуйста, заполните поле",
           email: "Пожалуйста, введите корректный email"
+        },
+        city: {
+          required: "Пожалуйста, выберите клинику"
         }
       }
     });
