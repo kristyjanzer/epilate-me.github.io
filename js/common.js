@@ -1331,7 +1331,7 @@ $(function() {
         name: { required: true, minlength: 2 },
         phone: { required: true, phoneRU: true },
         email: { required: true, email: true },
-        city: { required: true }
+        clinic: { required: true }
       },
       messages: {
         name: {
@@ -1345,7 +1345,7 @@ $(function() {
           required: "Пожалуйста, заполните поле",
           email: "Пожалуйста, введите корректный email"
         },
-        city: {
+        clinic: {
           required: "Пожалуйста, выберите клинику"
         }
       }
